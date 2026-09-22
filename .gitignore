@@ -1,0 +1,10 @@
+# modelli e build locali
+*.gguf
+*.safetensors
+*.bin
+modelli/
+build/
+llama.cpp/
+.venv/
+__pycache__/
+.DS_Store
