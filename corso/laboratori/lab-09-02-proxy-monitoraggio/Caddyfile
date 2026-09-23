@@ -1,0 +1,32 @@
+# Caddyfile del lab 09-02.
+# In locale usiamo "localhost" con certificato interno (tls internal): il browser mostrerà un avviso, curl vuole -k.
+# In produzione sostituisci "localhost" con il tuo nome DNS (es. llm.esempio.it), togli "tls internal"
+# e pubblica anche la porta 80: Caddy ottiene il certificato Let's Encrypt da solo.
+localhost {
+	tls internal
+
+	# /health resta pubblico: lo usano healthcheck e monitor esterni
+	@noauth path /health /v1/health
+	handle @noauth {
+		reverse_proxy llama:8080
+	}
+
+	# Tutto il resto: Caddy inoltra l'header Authorization così com'è e llama serve
+	# verifica il Bearer con --api-key-file. Per proteggere anche la web UI con
+	# utente/password, decommenta basic_auth (hash da `caddy hash-password`).
+	handle {
+		# basic_auth {
+		#     studente <HASH-DA-caddy-hash-password>
+		# }
+		reverse_proxy llama:8080 {
+			flush_interval -1                  # streaming SSE senza buffer
+			transport http {
+				response_header_timeout 600s   # prompt lunghi su CPU: il primo byte può tardare
+			}
+		}
+	}
+
+	log {
+		output stdout
+	}
+}

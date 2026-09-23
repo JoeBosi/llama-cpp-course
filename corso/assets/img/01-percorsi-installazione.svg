@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" width="900" height="500" font-family="sans-serif" font-size="13">
+  <defs>
+    <marker id="fp" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#64748b"/>
+    </marker>
+  </defs>
+  <g stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#fp)">
+    <!-- radice -> compilare? -->
+    <path d="M450,62 L450,90"/>
+    <!-- compilare: sì -> sorgenti -->
+    <path d="M540,110 L770,110 L770,142"/>
+    <!-- compilare: no -> GPU? -->
+    <path d="M450,130 L450,160"/>
+    <!-- GPU? -> 5 rami -->
+    <path d="M450,200 L450,222 L100,222 L100,250"/>
+    <path d="M450,200 L450,222 L275,222 L275,250"/>
+    <path d="M450,200 L450,250"/>
+    <path d="M450,200 L450,222 L625,222 L625,250"/>
+    <path d="M450,200 L450,222 L800,222 L800,250"/>
+  </g>
+
+  <!-- radice -->
+  <rect x="300" y="14" width="300" height="48" rx="10" fill="#f3f4f6" stroke="#6b7280" stroke-width="1.5"/>
+  <text x="450" y="34" text-anchor="middle" fill="#111827" font-weight="bold" font-size="15">Come installo llama.cpp?</text>
+  <text x="450" y="52" text-anchor="middle" fill="#111827" font-size="12">tutti i metodi danno gli stessi comandi: llama cli / llama serve</text>
+
+  <!-- compilare? -->
+  <rect x="360" y="90" width="180" height="40" rx="20" fill="#ffedd5" stroke="#c2410c" stroke-width="1.5"/>
+  <text x="450" y="115" text-anchor="middle" fill="#7c2d12" font-weight="bold">Devo compilare?</text>
+  <text x="560" y="104" fill="#64748b" font-size="12">sì: backend esotico,</text>
+  <text x="560" y="118" fill="#64748b" font-size="12">patch, ARM, Android NDK</text>
+  <text x="462" y="150" fill="#64748b" font-size="12">no (quasi sempre)</text>
+
+  <!-- sorgenti -->
+  <rect x="660" y="142" width="220" height="62" rx="10" fill="#ffedd5" stroke="#c2410c" stroke-width="1.5"/>
+  <g fill="#7c2d12" text-anchor="middle">
+    <text x="770" y="162" font-weight="bold">Sorgenti + CMake</text>
+    <text x="770" y="179" font-size="12">cmake -B build -DGGML_CUDA=ON …</text>
+    <text x="770" y="195" font-size="12">Lab 01-02 (CPU) · Lab 01-03 (GPU)</text>
+  </g>
+
+  <!-- GPU? -->
+  <rect x="345" y="160" width="210" height="40" rx="20" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+  <text x="450" y="185" text-anchor="middle" fill="#312e81" font-weight="bold">Che hardware ho?</text>
+
+  <!-- 5 rami -->
+  <!-- 1 nessuna GPU -->
+  <rect x="15" y="250" width="170" height="120" rx="10" fill="#ccfbf1" stroke="#0f766e" stroke-width="1.5"/>
+  <g fill="#134e4a">
+    <text x="100" y="272" text-anchor="middle" font-weight="bold">Solo CPU</text>
+    <text x="100" y="290" text-anchor="middle" font-size="12">(portatile, VPS, Pi)</text>
+    <text x="24" y="314" font-size="12">1. installer llama.app</text>
+    <text x="24" y="331" font-size="12">2. brew / winget / conda</text>
+    <text x="24" y="348" font-size="12">3. tarball -ubuntu-x64 /</text>
+    <text x="24" y="363" font-size="12">   -arm64, zip win-cpu</text>
+  </g>
+
+  <!-- 2 NVIDIA -->
+  <rect x="190" y="250" width="170" height="120" rx="10" fill="#ccfbf1" stroke="#0f766e" stroke-width="1.5"/>
+  <g fill="#134e4a">
+    <text x="275" y="272" text-anchor="middle" font-weight="bold">GPU NVIDIA</text>
+    <text x="275" y="290" text-anchor="middle" font-size="12">backend CUDA</text>
+    <text x="199" y="314" font-size="12">Linux: installer (rileva CUDA)</text>
+    <text x="199" y="331" font-size="12">  o Docker server-cuda</text>
+    <text x="199" y="348" font-size="12">Win: zip win-cuda-12.4 +</text>
+    <text x="199" y="363" font-size="12">  cudart-…zip nella stessa dir</text>
+  </g>
+
+  <!-- 3 Apple -->
+  <rect x="365" y="250" width="170" height="120" rx="10" fill="#ccfbf1" stroke="#0f766e" stroke-width="1.5"/>
+  <g fill="#134e4a">
+    <text x="450" y="272" text-anchor="middle" font-weight="bold">Mac Apple Silicon</text>
+    <text x="450" y="290" text-anchor="middle" font-size="12">backend Metal</text>
+    <text x="374" y="314" font-size="12">1. installer llama.app</text>
+    <text x="374" y="331" font-size="12">2. brew install llama.cpp</text>
+    <text x="374" y="348" font-size="12">3. tarball -macos-arm64</text>
+    <text x="374" y="363" font-size="12">(Metal è già dentro)</text>
+  </g>
+
+  <!-- 4 AMD -->
+  <rect x="540" y="250" width="170" height="120" rx="10" fill="#ccfbf1" stroke="#0f766e" stroke-width="1.5"/>
+  <g fill="#134e4a">
+    <text x="625" y="272" text-anchor="middle" font-weight="bold">GPU AMD</text>
+    <text x="625" y="290" text-anchor="middle" font-size="12">HIP (ROCm) o Vulkan</text>
+    <text x="549" y="314" font-size="12">Linux: installer (ROCm →</text>
+    <text x="549" y="331" font-size="12">  Vulkan) o -ubuntu-rocm-10.0</text>
+    <text x="549" y="348" font-size="12">Win: zip win-rocm-10.0 o</text>
+    <text x="549" y="363" font-size="12">  win-vulkan (più semplice)</text>
+  </g>
+
+  <!-- 5 Intel / altro -->
+  <rect x="715" y="250" width="170" height="120" rx="10" fill="#ccfbf1" stroke="#0f766e" stroke-width="1.5"/>
+  <g fill="#134e4a">
+    <text x="800" y="272" text-anchor="middle" font-weight="bold">Intel Arc / iGPU, altro</text>
+    <text x="800" y="290" text-anchor="middle" font-size="12">Vulkan (universale) o SYCL</text>
+    <text x="724" y="314" font-size="12">tarball/zip -vulkan-x64</text>
+    <text x="724" y="331" font-size="12">-sycl-fp16 (serve oneAPI)</text>
+    <text x="724" y="348" font-size="12">Snapdragon: win-opencl-</text>
+    <text x="724" y="363" font-size="12">  adreno-arm64 · Android: Termux</text>
+  </g>
+
+  <!-- riga finale: verifica -->
+  <g stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#fp)">
+    <path d="M100,370 L100,395 L450,395 L450,412"/>
+    <path d="M275,370 L275,395"/>
+    <path d="M450,370 L450,412"/>
+    <path d="M625,370 L625,395"/>
+    <path d="M800,370 L800,395 L450,395"/>
+    <path d="M770,204 L770,230 L890,230 L890,395 L450,395"/>
+  </g>
+  <rect x="200" y="414" width="500" height="70" rx="10" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+  <g fill="#312e81" text-anchor="middle">
+    <text x="450" y="436" font-weight="bold">Verifica sempre allo stesso modo</text>
+    <text x="450" y="456" font-size="12">llama version · llama cli --list-devices · llama cli -hf ggml-org/Qwen3.5-0.8B-GGUF</text>
+    <text x="450" y="474" font-size="12">Linux + installer: export SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt se il download fallisce</text>
+  </g>
+</svg>

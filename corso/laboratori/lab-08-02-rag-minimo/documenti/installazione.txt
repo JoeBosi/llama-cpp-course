@@ -1,0 +1,7 @@
+Installazione di llama.cpp
+
+Il modo consigliato da llama.app per installare llama.cpp è l'installer ufficiale: il comando "curl -LsSf https://llama.app/install.sh | sh" rileva sistema operativo e architettura, scarica il binario adatto (CUDA, ROCm, Vulkan o CPU su Linux; Metal su macOS) e lo copia in ~/.local/bin/llama. Non serve essere root. Con "llama update" si aggiorna alla release più recente.
+
+Esistono anche i gestori di pacchetti: "winget install llama.cpp" su Windows, "brew install llama.cpp" su macOS e Linux, "conda install -c conda-forge llama.cpp" ovunque, "nix profile install nixpkgs#llama-cpp" su Nix.
+
+Su Ubuntu 24.04 il binario statico dell'installer può non trovare i certificati TLS e fallire con "SSL connection failed": la soluzione è esportare SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt.

@@ -1,0 +1,19 @@
+# Prometheus del lab 09-02: raccoglie /metrics di llama serve ogni 15 secondi.
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: llamacpp
+    metrics_path: /metrics
+    static_configs:
+      - targets: ["llama:8080"]      # nome del servizio nella rete di Compose
+    # /metrics non e' pubblico come /health: serve la stessa chiave dei client.
+    # Deve coincidere con la prima riga non commentata di api-keys.txt
+    authorization:
+      type: Bearer
+      credentials: "chiave-di-prova-cambiami"
+
+  - job_name: prometheus
+    static_configs:
+      - targets: ["localhost:9090"]

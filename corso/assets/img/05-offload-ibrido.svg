@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 490" width="900" height="490" font-family="sans-serif">
+  <title>Inferenza ibrida: layer su GPU e su CPU con -ngl</title>
+  <rect x="0" y="0" width="900" height="490" rx="12" fill="#f3f4f6"/>
+  <text x="450" y="32" text-anchor="middle" font-size="20" font-weight="bold" fill="#111827">Inferenza ibrida: modello da 32 layer con -ngl 20</text>
+
+  <!-- GPU -->
+  <rect x="40" y="60" width="400" height="300" rx="10" fill="#ccfbf1" stroke="#134e4a" stroke-width="2"/>
+  <text x="240" y="88" text-anchor="middle" font-size="16" font-weight="bold" fill="#134e4a">GPU · VRAM 8 GB</text>
+  <g fill="#99f6e4" stroke="#134e4a" stroke-width="1">
+    <rect x="60" y="100" width="170" height="26" rx="4"/>
+    <rect x="60" y="130" width="170" height="26" rx="4"/>
+    <rect x="60" y="160" width="170" height="26" rx="4"/>
+    <rect x="60" y="190" width="170" height="26" rx="4"/>
+    <rect x="60" y="220" width="170" height="26" rx="4"/>
+  </g>
+  <g font-size="12" fill="#134e4a">
+    <text x="145" y="118" text-anchor="middle">layer 0</text>
+    <text x="145" y="148" text-anchor="middle">layer 1</text>
+    <text x="145" y="178" text-anchor="middle">…</text>
+    <text x="145" y="208" text-anchor="middle">layer 18</text>
+    <text x="145" y="238" text-anchor="middle">layer 19</text>
+  </g>
+  <text x="145" y="266" text-anchor="middle" font-size="12" font-weight="bold" fill="#134e4a">20 layer di pesi</text>
+  <rect x="250" y="100" width="170" height="146" rx="6" fill="#e0e7ff" stroke="#312e81" stroke-width="1.5"/>
+  <text x="335" y="124" text-anchor="middle" font-size="13" font-weight="bold" fill="#312e81">KV cache</text>
+  <text x="335" y="144" text-anchor="middle" font-size="11" fill="#312e81">dei layer 0-19</text>
+  <text x="335" y="164" text-anchor="middle" font-size="11" fill="#312e81">(segue il layer)</text>
+  <text x="335" y="190" text-anchor="middle" font-size="11" fill="#312e81">cresce con -c</text>
+  <text x="335" y="206" text-anchor="middle" font-size="11" fill="#312e81">-ctk/-ctv q8_0</text>
+  <text x="335" y="222" text-anchor="middle" font-size="11" fill="#312e81">la dimezza</text>
+  <text x="240" y="300" text-anchor="middle" font-size="12" fill="#134e4a">buffer di calcolo + margine --fit-target 1024 MiB</text>
+  <text x="240" y="330" text-anchor="middle" font-size="13" font-weight="bold" fill="#134e4a">veloce: ~1 TB/s di banda</text>
+
+  <!-- CPU -->
+  <rect x="480" y="60" width="380" height="300" rx="10" fill="#ffedd5" stroke="#7c2d12" stroke-width="2"/>
+  <text x="670" y="88" text-anchor="middle" font-size="16" font-weight="bold" fill="#7c2d12">CPU · RAM di sistema</text>
+  <g fill="#fed7aa" stroke="#7c2d12" stroke-width="1">
+    <rect x="500" y="100" width="170" height="26" rx="4"/>
+    <rect x="500" y="130" width="170" height="26" rx="4"/>
+    <rect x="500" y="160" width="170" height="26" rx="4"/>
+    <rect x="500" y="190" width="170" height="26" rx="4"/>
+    <rect x="500" y="220" width="170" height="26" rx="4"/>
+  </g>
+  <g font-size="12" fill="#7c2d12">
+    <text x="585" y="118" text-anchor="middle">layer 20</text>
+    <text x="585" y="148" text-anchor="middle">layer 21</text>
+    <text x="585" y="178" text-anchor="middle">…</text>
+    <text x="585" y="208" text-anchor="middle">layer 31</text>
+    <text x="585" y="238" text-anchor="middle">output + embedding</text>
+  </g>
+  <text x="585" y="266" text-anchor="middle" font-size="12" font-weight="bold" fill="#7c2d12">12 layer di pesi</text>
+  <rect x="690" y="100" width="150" height="146" rx="6" fill="#e0e7ff" stroke="#312e81" stroke-width="1.5"/>
+  <text x="765" y="124" text-anchor="middle" font-size="13" font-weight="bold" fill="#312e81">KV cache</text>
+  <text x="765" y="144" text-anchor="middle" font-size="11" fill="#312e81">dei layer 20-31</text>
+  <text x="765" y="170" text-anchor="middle" font-size="11" fill="#312e81">esperti MoE</text>
+  <text x="765" y="186" text-anchor="middle" font-size="11" fill="#312e81">(-cmoe / -ot)</text>
+  <text x="765" y="206" text-anchor="middle" font-size="11" fill="#312e81">restano qui</text>
+  <text x="670" y="300" text-anchor="middle" font-size="12" fill="#7c2d12">thread -t = core fisici · mmap del file GGUF</text>
+  <text x="670" y="330" text-anchor="middle" font-size="13" font-weight="bold" fill="#7c2d12">lento: ~60 GB/s di banda</text>
+
+  <!-- Flusso del token (freccia esplicita) -->
+  <polygon points="440,176 462,176 462,168 478,180 462,192 462,184 440,184" fill="#111827"/>
+  <text x="459" y="162" text-anchor="middle" font-size="10" fill="#111827">PCIe</text>
+
+  <!-- Legenda tempo -->
+  <rect x="40" y="380" width="820" height="98" rx="10" fill="#e0e7ff" stroke="#312e81" stroke-width="1.5"/>
+  <text x="450" y="404" text-anchor="middle" font-size="14" font-weight="bold" fill="#312e81">Tempo per token ≈ tempo GPU (20 layer) + tempo CPU (12 layer): comanda la parte lenta</text>
+  <text x="450" y="426" text-anchor="middle" font-size="12" fill="#312e81">Ogni layer spostato su GPU con -ngl toglie lavoro alla CPU; l'ultimo layer che entra in VRAM fa il salto più grande</text>
+  <text x="450" y="444" text-anchor="middle" font-size="12" fill="#312e81">(vedi la tabella ngl 34 → 35 nel README di llama-bench: da 72 a 132 t/s).</text>
+  <text x="450" y="466" text-anchor="middle" font-size="12" fill="#312e81">Se la VRAM è satura: -ngl più basso, contesto più piccolo, KV cache quantizzata, o esperti MoE su CPU con -cmoe/-ncmoe.</text>
+</svg>

@@ -1,0 +1,26 @@
+# Stessa idea, ma l'output è un array JSON di comandi:
+#   [{"azione":"accendi","dispositivo":"luce","stanza":"cucina"},
+#    {"azione":"termostato","stanza":"camera","gradi":21}]
+# Nota: gli spazi sono ammessi solo dove li dichiara `ws`.
+# Nota 2: una regola può andare a capo SOLO dentro parentesi (o dopo un `|`):
+#         senza le parentesi tonde qui sotto il parser risponde
+#         `parse: error parsing grammar: expecting ::= at ...`.
+
+root     ::= "[" ws comando (ws "," ws comando)* ws "]"
+
+comando  ::= onoff | termo
+
+onoff    ::= ( "{" ws "\"azione\"" ws ":" ws ("\"accendi\"" | "\"spegni\"") ws ","
+               ws "\"dispositivo\"" ws ":" ws dispositivo ws ","
+               ws "\"stanza\"" ws ":" ws stanza ws "}" )
+
+termo    ::= ( "{" ws "\"azione\"" ws ":" ws "\"termostato\"" ws ","
+               ws "\"stanza\"" ws ":" ws stanza ws ","
+               ws "\"gradi\"" ws ":" ws gradi ws "}" )
+
+dispositivo ::= "\"luce\"" | "\"presa\"" | "\"tapparella\"" | "\"ventola\""
+stanza      ::= "\"cucina\"" | "\"soggiorno\"" | "\"camera\"" | "\"bagno\"" | "\"ingresso\""
+gradi       ::= "1" [5-9] | "2" [0-9] | "30"
+
+# spazi opzionali (limitati, per non rallentare il campionamento)
+ws       ::= [ \n]{0,4}

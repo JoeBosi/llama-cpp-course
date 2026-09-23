@@ -1,0 +1,13 @@
+:root { --md-primary-fg-color: #0f766e; --md-accent-fg-color: #ea580c; }
+.md-typeset h1 { font-weight: 700; }
+.md-typeset .mermaid { display: flex; justify-content: center; }
+.md-typeset figure.schema { margin: 1.5em auto; text-align: center; }
+.md-typeset figure.schema svg { max-width: 100%; height: auto; }
+.md-typeset figure.schema figcaption { font-size: .8rem; color: var(--md-default-fg-color--light); margin-top: .4em; }
+/* Badge di stato pagina */
+.stato { display: inline-block; padding: .1em .6em; border-radius: 1em; font-size: .75em; font-weight: 600; }
+.stato-verificato { background: #dcfce7; color: #166534; }
+.stato-bozza { background: #fef3c7; color: #92400e; }
+[data-md-color-scheme="slate"] .stato-verificato { background: #14532d; color: #dcfce7; }
+[data-md-color-scheme="slate"] .stato-bozza { background: #78350f; color: #fef3c7; }
+.md-typeset table:not([class]) { font-size: .75rem; }

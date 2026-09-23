@@ -1,0 +1,50 @@
+[Unit]
+Description=llama.cpp - server di inferenza (llama serve)
+Documentation=https://github.com/ggml-org/llama.cpp/tree/master/tools/server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=llama
+Group=llama
+WorkingDirectory=/home/llama
+# Il binario dell'installer e' statico: su alcune distro non trova i certificati TLS senza questa variabile
+Environment=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+# Configurazione del server: ogni flag ha la sua variabile LLAMA_ARG_* (vedi `llama serve --help`)
+Environment=LLAMA_ARG_HOST=127.0.0.1
+Environment=LLAMA_ARG_PORT=8080
+Environment=LLAMA_ARG_CTX_SIZE=8192
+Environment=LLAMA_ARG_N_PARALLEL=2
+Environment=LLAMA_ARG_THREADS=4
+Environment=LLAMA_ARG_ALIAS=qwen-0.8b
+Environment=LLAMA_ARG_ENDPOINT_METRICS=1
+Environment=LLAMA_ARG_API_KEY_FILE=/etc/llama/api-keys.txt
+# Il modello e' gia' in cache (llama download): non toccare la rete all'avvio
+Environment=LLAMA_ARG_OFFLINE=1
+ExecStart=/home/llama/.local/bin/llama serve -hf ggml-org/Qwen3.5-0.8B-GGUF --no-webui
+Restart=on-failure
+RestartSec=5
+# Un modello grande su disco lento puo' impiegare minuti a caricarsi
+TimeoutStartSec=300
+TimeoutStopSec=30
+KillSignal=SIGINT
+# Limiti: se il processo supera la memoria viene terminato e riavviato, invece di mandare in swap la macchina
+MemoryMax=6G
+LimitNOFILE=65536
+# Hardening: filesystem in sola lettura tranne la cache dei modelli
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/home/llama/.cache
+PrivateTmp=true
+ProtectKernelTunables=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+RestrictRealtime=true
+LockPersonality=true
+SystemCallArchitectures=native
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target

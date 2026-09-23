@@ -1,0 +1,30 @@
+# Lab 01-04: llama-server in Docker Compose con le variabili LLAMA_ARG_*
+# Avvio:  docker compose up -d      Log: docker compose logs -f      Stop: docker compose down
+#
+# Il volume monta la cartella blobs/ della cache Hugging Face: i file in snapshots/ sono link
+# simbolici e dentro il container non funzionerebbero. Sostituisci lo sha256 con quello del tuo
+# modello (ls ~/.cache/huggingface/hub/models--ggml-org--Qwen3.5-0.8B-GGUF/blobs/).
+services:
+  llama:
+    image: ghcr.io/ggml-org/llama.cpp:server          # fissa la build con :server-b11046
+    ports:
+      - "127.0.0.1:18101:8080"                        # solo localhost; togli 127.0.0.1: per esporlo in rete
+    volumes:
+      - "${HOME}/.cache/huggingface/hub/models--ggml-org--Qwen3.5-0.8B-GGUF/blobs:/models:ro"
+    environment:
+      LLAMA_ARG_HOST: 0.0.0.0                         # obbligatorio dentro il container
+      LLAMA_ARG_PORT: 8080
+      LLAMA_ARG_MODEL: /models/37ae482d336108d23516fa35e8e0c4126688d81018b87178a18d752a1357814f
+      LLAMA_ARG_ALIAS: qwen3.5-0.8b                   # nome che compare in /v1/models
+      LLAMA_ARG_CTX_SIZE: 4096                        # contesto totale, diviso tra gli slot
+      LLAMA_ARG_N_PARALLEL: 2                         # 2 slot da 2048 token
+      LLAMA_ARG_THREADS: 3
+    restart: unless-stopped
+    # GPU NVIDIA: usa image ...:server-cuda, aggiungi LLAMA_ARG_N_GPU_LAYERS: 99 e
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]

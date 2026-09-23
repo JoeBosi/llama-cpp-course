@@ -1,0 +1,7 @@
+Modelli multimodali
+
+llama.cpp gestisce immagini, audio e video con la libreria libmtmd. Un modello multimodale è composto da due file GGUF: il modello di linguaggio e il proiettore multimodale, chiamato mmproj, che codifica l'immagine in embedding e li proietta nello spazio del modello di linguaggio.
+
+Scaricando un modello con -hf il file mmproj viene scaricato automaticamente se esiste; con --no-mmproj si disattiva la parte multimodale. Nella chat di "llama cli" i comandi /image e /audio aggiungono un file al prompt; via API si usa il contenuto di tipo image_url con un data URI base64.
+
+Gemma 4 E4B è un modello che accetta testo, immagini e audio; SmolVLM-256M è un modello di visione piccolissimo, meno di 300 MB in tutto, utile per fare prove su CPU.

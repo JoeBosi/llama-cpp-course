@@ -8,3 +8,5 @@ llama.cpp/
 .venv/
 __pycache__/
 .DS_Store
+redazione/upstream/
+site/

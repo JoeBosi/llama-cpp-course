@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" width="900" height="500" font-family="sans-serif">
+  <title>Campionamento vincolato da grammatica</title>
+  <rect x="0" y="0" width="900" height="500" rx="12" fill="#f3f4f6"/>
+  <text x="450" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#111827">Campionamento vincolato: la grammatica maschera i token prima della scelta</text>
+
+  <!-- stato della grammatica -->
+  <rect x="30" y="60" width="840" height="58" rx="8" fill="#e0e7ff" stroke="#3730a3" stroke-width="2"/>
+  <text x="50" y="84" font-size="14" font-weight="700" fill="#312e81">Grammatica:  root ::= "{" ws "\"eta\"" ws ":" ws [0-9]+ ws "}"</text>
+  <text x="50" y="106" font-size="14" fill="#312e81">Testo già generato:  {"eta":     →  lo stato della grammatica ammette solo cifre 0-9 (o spazio)</text>
+
+  <!-- colonna 1: logits -->
+  <text x="150" y="150" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">1. Logit del modello</text>
+  <g font-size="14">
+    <rect x="40" y="165" width="220" height="30" rx="4" fill="#ffedd5" stroke="#c2410c"/><text x="52" y="185" fill="#7c2d12">"trentaquattro"   0,31</text>
+    <rect x="40" y="200" width="220" height="30" rx="4" fill="#ffedd5" stroke="#c2410c"/><text x="52" y="220" fill="#7c2d12">"3"                       0,27</text>
+    <rect x="40" y="235" width="220" height="30" rx="4" fill="#ffedd5" stroke="#c2410c"/><text x="52" y="255" fill="#7c2d12">" \"34\""                 0,18</text>
+    <rect x="40" y="270" width="220" height="30" rx="4" fill="#ffedd5" stroke="#c2410c"/><text x="52" y="290" fill="#7c2d12">"34"                     0,12</text>
+    <rect x="40" y="305" width="220" height="30" rx="4" fill="#ffedd5" stroke="#c2410c"/><text x="52" y="325" fill="#7c2d12">"null"                  0,07</text>
+    <rect x="40" y="340" width="220" height="30" rx="4" fill="#ffedd5" stroke="#c2410c"/><text x="52" y="360" fill="#7c2d12">…                            …</text>
+  </g>
+
+  <!-- freccia -->
+  <path d="M270 265 L330 265" stroke="#374151" stroke-width="3" marker-end="url(#a)"/>
+  <defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#374151"/></marker></defs>
+
+  <!-- colonna 2: maschera -->
+  <text x="450" y="150" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">2. Maschera della grammatica</text>
+  <g font-size="14">
+    <rect x="340" y="165" width="220" height="30" rx="4" fill="#d1d5db" stroke="#6b7280"/><text x="352" y="185" fill="#374151" text-decoration="line-through">"trentaquattro"   −∞</text>
+    <rect x="340" y="200" width="220" height="30" rx="4" fill="#ccfbf1" stroke="#0f766e"/><text x="352" y="220" fill="#134e4a">"3"                       ✓</text>
+    <rect x="340" y="235" width="220" height="30" rx="4" fill="#d1d5db" stroke="#6b7280"/><text x="352" y="255" fill="#374151" text-decoration="line-through">" \"34\""                 −∞</text>
+    <rect x="340" y="270" width="220" height="30" rx="4" fill="#ccfbf1" stroke="#0f766e"/><text x="352" y="290" fill="#134e4a">"34"                     ✓</text>
+    <rect x="340" y="305" width="220" height="30" rx="4" fill="#d1d5db" stroke="#6b7280"/><text x="352" y="325" fill="#374151" text-decoration="line-through">"null"                  −∞</text>
+    <rect x="340" y="340" width="220" height="30" rx="4" fill="#d1d5db" stroke="#6b7280"/><text x="352" y="360" fill="#374151">… (tutti gli altri) −∞</text>
+  </g>
+
+  <path d="M570 265 L630 265" stroke="#374151" stroke-width="3" marker-end="url(#a)"/>
+
+  <!-- colonna 3: sampler -->
+  <text x="750" y="150" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">3. Sampler (temp, top-k…)</text>
+  <g font-size="14">
+    <rect x="640" y="200" width="220" height="30" rx="4" fill="#ccfbf1" stroke="#0f766e"/><text x="652" y="220" fill="#134e4a">"3"      → rinormalizzato 0,69</text>
+    <rect x="640" y="270" width="220" height="30" rx="4" fill="#ccfbf1" stroke="#0f766e"/><text x="652" y="290" fill="#134e4a">"34"    → rinormalizzato 0,31</text>
+  </g>
+  <rect x="640" y="330" width="220" height="40" rx="6" fill="#fef3c7" stroke="#b45309" stroke-width="2"/>
+  <text x="750" y="355" text-anchor="middle" font-size="14" font-weight="700" fill="#78350f">token scelto: "34"</text>
+
+  <!-- ciclo -->
+  <path d="M750 375 L750 410 L150 410 L150 380" fill="none" stroke="#374151" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#a)"/>
+  <text x="450" y="404" text-anchor="middle" font-size="13" fill="#374151">il token accettato fa avanzare lo stato della grammatica; si ripete per il token successivo</text>
+
+  <text x="450" y="450" text-anchor="middle" font-size="13" fill="#374151">La grammatica garantisce la forma (solo cifre qui), non la verità: se il modello "vuole" scrivere 3 invece di 34, lo può ancora fare.</text>
+  <text x="450" y="472" text-anchor="middle" font-size="13" fill="#374151">Costo: a ogni passo si valuta quali token del vocabolario sono compatibili con lo stato corrente (più lento con grammatiche molto ambigue).</text>
+</svg>

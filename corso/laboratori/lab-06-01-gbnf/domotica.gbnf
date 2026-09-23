@@ -1,0 +1,20 @@
+# Grammatica GBNF per comandi domotici in forma testuale.
+# Ogni riga di output deve essere un comando valido, es.:
+#   accendi luce cucina
+#   imposta termostato soggiorno 21
+#   spegni tapparella camera
+# `root` è il punto di partenza: uno o più comandi, uno per riga.
+
+root      ::= comando ("\n" comando)*
+
+comando   ::= onoff | termo
+
+# accendi/spegni <dispositivo> <stanza>
+onoff     ::= ("accendi" | "spegni") " " dispositivo " " stanza
+
+# imposta termostato <stanza> <gradi>   (gradi da 15 a 30)
+termo     ::= "imposta termostato " stanza " " gradi
+
+dispositivo ::= "luce" | "presa" | "tapparella" | "ventola"
+stanza      ::= "cucina" | "soggiorno" | "camera" | "bagno" | "ingresso"
+gradi       ::= "1" [5-9] | "2" [0-9] | "30"

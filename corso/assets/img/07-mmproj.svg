@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 430" width="900" height="430" font-family="sans-serif" font-size="14">
+  <title>Pipeline multimodale di llama.cpp: immagine, encoder, proiettore, LLM</title>
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#6b7280"/>
+    </marker>
+  </defs>
+
+  <!-- File mmproj -->
+  <rect x="150" y="40" width="360" height="200" rx="12" fill="#ffedd5" stroke="#f97316" stroke-width="2" stroke-dasharray="8 5"/>
+  <text x="330" y="66" text-anchor="middle" font-weight="700" fill="#7c2d12">mmproj-*.gguf (libmtmd)</text>
+  <text x="330" y="84" text-anchor="middle" font-size="12" fill="#7c2d12">proiettore multimodale: un secondo file GGUF</text>
+
+  <!-- File modello -->
+  <rect x="560" y="40" width="310" height="200" rx="12" fill="#e0e7ff" stroke="#6366f1" stroke-width="2" stroke-dasharray="8 5"/>
+  <text x="715" y="66" text-anchor="middle" font-weight="700" fill="#312e81">modello.gguf (libllama)</text>
+  <text x="715" y="84" text-anchor="middle" font-size="12" fill="#312e81">il modello di linguaggio, invariato</text>
+
+  <!-- Immagine / audio -->
+  <rect x="20" y="120" width="110" height="80" rx="10" fill="#f3f4f6" stroke="#9ca3af" stroke-width="1.5"/>
+  <text x="75" y="150" text-anchor="middle" font-weight="700" fill="#111827">immagine</text>
+  <text x="75" y="170" text-anchor="middle" fill="#111827">audio · video</text>
+  <text x="75" y="188" text-anchor="middle" font-size="11" fill="#374151">(pixel, campioni)</text>
+
+  <!-- Encoder -->
+  <rect x="170" y="120" width="150" height="80" rx="10" fill="#fed7aa" stroke="#ea580c" stroke-width="1.5"/>
+  <text x="245" y="150" text-anchor="middle" font-weight="700" fill="#7c2d12">encoder</text>
+  <text x="245" y="170" text-anchor="middle" fill="#7c2d12">ViT / Whisper</text>
+  <text x="245" y="188" text-anchor="middle" font-size="11" fill="#7c2d12">(clip.cpp)</text>
+
+  <!-- Proiettore -->
+  <rect x="345" y="120" width="145" height="80" rx="10" fill="#fed7aa" stroke="#ea580c" stroke-width="1.5"/>
+  <text x="417" y="150" text-anchor="middle" font-weight="700" fill="#7c2d12">proiettore</text>
+  <text x="417" y="170" text-anchor="middle" fill="#7c2d12">MLP / resampler</text>
+  <text x="417" y="188" text-anchor="middle" font-size="11" fill="#7c2d12">→ dimensione n_embd</text>
+
+  <!-- LLM -->
+  <rect x="580" y="120" width="270" height="80" rx="10" fill="#c7d2fe" stroke="#4f46e5" stroke-width="1.5"/>
+  <text x="715" y="150" text-anchor="middle" font-weight="700" fill="#312e81">LLM (decoder)</text>
+  <text x="715" y="170" text-anchor="middle" fill="#312e81">attenzione su testo + embedding media</text>
+  <text x="715" y="188" text-anchor="middle" font-size="11" fill="#312e81">KV cache: i token immagine occupano contesto</text>
+
+  <!-- Frecce -->
+  <line x1="130" y1="160" x2="168" y2="160" stroke="#6b7280" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="320" y1="160" x2="343" y2="160" stroke="#6b7280" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="490" y1="160" x2="578" y2="160" stroke="#6b7280" stroke-width="2" marker-end="url(#ar)"/>
+  <text x="534" y="150" text-anchor="middle" font-size="11" fill="#374151">embedding</text>
+
+  <!-- Sequenza di token nel contesto -->
+  <text x="20" y="290" font-weight="700" fill="#111827">Che cosa vede il modello nel contesto</text>
+  <g font-size="12">
+    <rect x="20" y="305" width="70" height="34" rx="6" fill="#ccfbf1" stroke="#0d9488"/>
+    <text x="55" y="327" text-anchor="middle" fill="#134e4a">&lt;bos&gt;</text>
+    <rect x="96" y="305" width="80" height="34" rx="6" fill="#ccfbf1" stroke="#0d9488"/>
+    <text x="136" y="327" text-anchor="middle" fill="#134e4a">user:</text>
+    <rect x="182" y="305" width="250" height="34" rx="6" fill="#fed7aa" stroke="#ea580c"/>
+    <text x="307" y="327" text-anchor="middle" fill="#7c2d12">N embedding immagine (es. 64…1024+)</text>
+    <rect x="438" y="305" width="150" height="34" rx="6" fill="#ccfbf1" stroke="#0d9488"/>
+    <text x="513" y="327" text-anchor="middle" fill="#134e4a">"Descrivi l'immagine"</text>
+    <rect x="594" y="305" width="110" height="34" rx="6" fill="#ccfbf1" stroke="#0d9488"/>
+    <text x="649" y="327" text-anchor="middle" fill="#134e4a">assistant:</text>
+    <rect x="710" y="305" width="160" height="34" rx="6" fill="#c7d2fe" stroke="#4f46e5"/>
+    <text x="790" y="327" text-anchor="middle" fill="#312e81">risposta generata →</text>
+  </g>
+  <text x="20" y="365" font-size="12" fill="#374151">Nel prompt il media è un segnaposto (marker &lt;__media__&gt;); libmtmd lo sostituisce con gli embedding prodotti dal proiettore.</text>
+  <text x="20" y="385" font-size="12" fill="#374151">Il mmproj viene scaricato con -hf (se esiste), indicato con --mmproj FILE, escluso con --no-mmproj; sta sulla GPU salvo --no-mmproj-offload.</text>
+  <text x="20" y="410" font-size="12" fill="#374151">Verificato su b11046: SmolVLM-256M, immagine 320×240 → ~134 token di prompt in più rispetto al solo testo.</text>
+</svg>

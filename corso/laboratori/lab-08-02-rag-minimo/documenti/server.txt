@@ -1,0 +1,7 @@
+Il server HTTP di llama.cpp
+
+Il comando "llama serve" avvia un server HTTP con un'API compatibile OpenAI. Per impostazione predefinita ascolta su 127.0.0.1 alla porta 8080 e serve una web UI all'indirizzo radice. Gli endpoint principali sono /v1/chat/completions, /v1/completions, /v1/embeddings (serve un modello di embedding) e /v1/rerank (serve un modello reranker). /health risponde {"status":"ok"} quando il modello è caricato.
+
+Con "-np N" il server crea N slot per servire N richieste in parallelo; il contesto totale indicato con "-c" viene diviso tra gli slot, quindi con -c 4096 e -np 2 ogni slot ha 2048 token.
+
+Avviato senza modello, "llama serve" entra in modalità router: carica e scarica i modelli su richiesta dalla cache di Hugging Face e la richiesta deve indicare il campo "model". Le chiavi API si impostano con --api-key.

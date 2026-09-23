@@ -1,0 +1,10 @@
+# Navigazione del sito (plugin awesome-nav).
+# I titoli vengono dall'H1 di ogni pagina; l'ordine è quello dei nomi di file/cartella.
+# Per aggiungere una pagina basta creare il file .md nella cartella giusta.
+nav:
+  - index.md
+  - versione.md
+  - Moduli: moduli
+  - Laboratori: laboratori
+  - Progetti finali: progetti-finali
+  - Risorse: risorse

@@ -1,0 +1,7 @@
+Quantizzazione e formato GGUF
+
+GGUF è il formato di file di llama.cpp: un unico file contiene i metadati del modello (architettura, vocabolario, chat template) e i tensori dei pesi, in modo da poter essere caricato con mmap. I nomi dei file indicano la quantizzazione, per esempio Q4_K_M o Q8_0.
+
+La quantizzazione riduce la precisione dei pesi da 16 bit a un numero minore di bit per peso. Q8_0 usa circa 8,5 bit per peso e ha una perdita di qualità trascurabile; Q4_K_M usa circa 4,8 bit per peso ed è il compromesso più usato tra dimensione e qualità. Con la quantizzazione un modello da 8 miliardi di parametri passa da circa 16 GB (F16) a circa 4,9 GB (Q4_K_M).
+
+Il comando "llama quantize modello-f16.gguf modello-q4.gguf Q4_K_M" produce il file quantizzato. Con una matrice di importanza (imatrix) calcolata da "llama-imatrix" la qualità delle quantizzazioni a pochi bit migliora.

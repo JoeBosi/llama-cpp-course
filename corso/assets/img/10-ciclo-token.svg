@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" width="900" height="500" font-family="sans-serif">
+  <title>Il ciclo di un token in llama.cpp</title>
+  <rect x="0" y="0" width="900" height="500" rx="12" fill="#f3f4f6"/>
+  <text x="450" y="32" text-anchor="middle" font-size="20" font-weight="bold" fill="#111827">Il ciclo di un token: da "Ciao, come" al token successivo</text>
+
+  <!-- Riga 1: tokenizzazione, embedding, layer -->
+  <g stroke-width="2">
+    <rect x="30" y="66" width="210" height="124" rx="10" fill="#e0e7ff" stroke="#312e81"/>
+    <rect x="270" y="66" width="210" height="124" rx="10" fill="#ffedd5" stroke="#7c2d12"/>
+    <rect x="510" y="66" width="360" height="124" rx="10" fill="#ccfbf1" stroke="#134e4a"/>
+  </g>
+  <text x="135" y="92" text-anchor="middle" font-size="14" font-weight="bold" fill="#312e81">1 · Tokenizzazione</text>
+  <text x="135" y="112" text-anchor="middle" font-size="10.5" fill="#312e81">llama_tokenize(vocab, testo)</text>
+  <text x="135" y="134" text-anchor="middle" font-size="12" font-weight="bold" fill="#312e81">→ [151644, 3457, 11, 1878]</text>
+  <text x="135" y="156" text-anchor="middle" font-size="10.5" fill="#312e81">BPE/SPM dal GGUF (tokenizer.ggml.*)</text>
+  <text x="135" y="174" text-anchor="middle" font-size="10.5" fill="#312e81">prima: chat template (Jinja)</text>
+
+  <text x="375" y="92" text-anchor="middle" font-size="14" font-weight="bold" fill="#7c2d12">2 · Embedding</text>
+  <text x="375" y="112" text-anchor="middle" font-size="10.5" fill="#7c2d12">token_embd.weight [n_embd, n_vocab]</text>
+  <text x="375" y="134" text-anchor="middle" font-size="12" font-weight="bold" fill="#7c2d12">id → vettore di n_embd float</text>
+  <text x="375" y="156" text-anchor="middle" font-size="10.5" fill="#7c2d12">ggml_get_rows</text>
+  <text x="375" y="174" text-anchor="middle" font-size="10.5" fill="#7c2d12">batch di N token → [n_embd, N]</text>
+
+  <text x="690" y="92" text-anchor="middle" font-size="14" font-weight="bold" fill="#134e4a">3 · N layer transformer (blk.0 … blk.N-1)</text>
+  <g fill="#99f6e4" stroke="#134e4a" stroke-width="1">
+    <rect x="525" y="104" width="105" height="34" rx="6"/>
+    <rect x="638" y="104" width="105" height="34" rx="6"/>
+    <rect x="751" y="104" width="105" height="34" rx="6"/>
+  </g>
+  <text x="577" y="118" text-anchor="middle" font-size="10" fill="#134e4a">attn_norm</text>
+  <text x="577" y="131" text-anchor="middle" font-size="10" fill="#134e4a">Q·K·V + RoPE</text>
+  <text x="690" y="118" text-anchor="middle" font-size="10" fill="#134e4a">attention</text>
+  <text x="690" y="131" text-anchor="middle" font-size="9.5" fill="#134e4a">legge/scrive KV cache</text>
+  <text x="803" y="118" text-anchor="middle" font-size="10" fill="#134e4a">ffn_norm</text>
+  <text x="803" y="131" text-anchor="middle" font-size="10" fill="#134e4a">FFN (o esperti MoE)</text>
+  <text x="690" y="158" text-anchor="middle" font-size="10.5" fill="#134e4a">ogni layer legge tutti i suoi pesi: qui si consuma la banda</text>
+  <text x="690" y="176" text-anchor="middle" font-size="10.5" fill="#134e4a">grafo ggml da build_arch_graph, eseguito dallo scheduler</text>
+
+  <polygon points="242,123 256,123 256,115 268,128 256,141 256,133 242,133" fill="#111827"/>
+  <polygon points="482,123 496,123 496,115 508,128 496,141 496,133 482,133" fill="#111827"/>
+
+  <!-- freccia in giù verso i logits -->
+  <polygon points="685,192 695,192 695,214 703,214 690,230 677,214 685,214" fill="#111827"/>
+
+  <!-- Riga 2: logits, sampler, detokenizzazione -->
+  <g stroke-width="2">
+    <rect x="510" y="234" width="360" height="110" rx="10" fill="#e0e7ff" stroke="#312e81"/>
+    <rect x="270" y="234" width="210" height="110" rx="10" fill="#ffedd5" stroke="#7c2d12"/>
+    <rect x="30" y="234" width="210" height="110" rx="10" fill="#ccfbf1" stroke="#134e4a"/>
+  </g>
+  <text x="690" y="260" text-anchor="middle" font-size="14" font-weight="bold" fill="#312e81">4 · Logits</text>
+  <text x="690" y="280" text-anchor="middle" font-size="10.5" fill="#312e81">output_norm → output.weight (lm_head) [n_embd, n_vocab]</text>
+  <text x="690" y="302" text-anchor="middle" font-size="12" font-weight="bold" fill="#312e81">un punteggio per ognuno dei ~150k token</text>
+  <text x="690" y="324" text-anchor="middle" font-size="10.5" fill="#312e81">llama_decode(ctx, batch) → llama_get_logits_ith(ctx, -1)</text>
+
+  <text x="375" y="260" text-anchor="middle" font-size="14" font-weight="bold" fill="#7c2d12">5 · Sampler</text>
+  <text x="375" y="280" text-anchor="middle" font-size="10.5" fill="#7c2d12">catena: penalties → top_k → top_p</text>
+  <text x="375" y="296" text-anchor="middle" font-size="10.5" fill="#7c2d12">→ min_p → temperature → dist</text>
+  <text x="375" y="318" text-anchor="middle" font-size="11" font-weight="bold" fill="#7c2d12">llama_sampler_sample → id 3021</text>
+  <text x="375" y="336" text-anchor="middle" font-size="10.5" fill="#7c2d12">una grammatica GBNF filtra qui</text>
+
+  <text x="135" y="260" text-anchor="middle" font-size="14" font-weight="bold" fill="#134e4a">6 · Detokenizzazione</text>
+  <text x="135" y="280" text-anchor="middle" font-size="10.5" fill="#134e4a">llama_token_to_piece(vocab, 3021)</text>
+  <text x="135" y="302" text-anchor="middle" font-size="12" font-weight="bold" fill="#134e4a">→ " stai"</text>
+  <text x="135" y="324" text-anchor="middle" font-size="10.5" fill="#134e4a">stampa / stream al client</text>
+
+  <polygon points="508,284 494,284 494,276 482,289 494,302 494,294 508,294" fill="#111827"/>
+  <polygon points="268,284 254,284 254,276 242,289 254,302 254,294 268,294" fill="#111827"/>
+
+  <!-- Loop: dal sampler di nuovo ai layer, girando all'esterno -->
+  <path d="M 375 344 L 375 412 L 885 412 L 885 128 L 874 128" fill="none" stroke="#7c2d12" stroke-width="3" stroke-dasharray="8 5"/>
+  <polygon points="884,120 870,128 884,136" fill="#7c2d12"/>
+  <rect x="400" y="368" width="340" height="28" rx="6" fill="#ffedd5" stroke="#7c2d12" stroke-width="1.5"/>
+  <text x="570" y="387" text-anchor="middle" font-size="12" font-weight="bold" fill="#7c2d12">7 · il token scelto rientra come batch di 1 token</text>
+
+  <text x="450" y="446" text-anchor="middle" font-size="12" fill="#111827">Prompt processing (pp): passi 1-4 su tutto il prompt in un solo batch (parallelo, limitato dal calcolo).</text>
+  <text x="450" y="466" text-anchor="middle" font-size="12" fill="#111827">Token generation (tg): passi 3-7 ripetuti un token alla volta (seriale, limitato dalla banda di memoria).</text>
+  <text x="450" y="486" text-anchor="middle" font-size="12" fill="#111827">Si ferma quando llama_vocab_is_eog è vero o si raggiunge -n.</text>
+</svg>
