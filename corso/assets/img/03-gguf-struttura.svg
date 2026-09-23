@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" width="900" height="460" font-family="sans-serif">
+  <title>Struttura di un file GGUF: header, metadati, indice dei tensori, dati allineati</title>
+  <rect x="0" y="0" width="900" height="460" rx="12" fill="#f3f4f6"/>
+  <text x="450" y="30" text-anchor="middle" font-size="19" font-weight="700" fill="#111827">Un file GGUF dall'inizio alla fine (Qwen3.5-0.8B-Q8_0.gguf, 785 MiB)</text>
+
+  <!-- barra del file -->
+  <text x="30" y="62" font-size="12" fill="#374151">offset 0</text>
+  <text x="870" y="62" font-size="12" fill="#374151" text-anchor="end">fine file</text>
+
+  <!-- 1. header -->
+  <rect x="30" y="70" width="90" height="70" rx="6" fill="#e0e7ff" stroke="#3730a3" stroke-width="2"/>
+  <text x="75" y="98" text-anchor="middle" font-size="13" font-weight="700" fill="#312e81">Header</text>
+  <text x="75" y="116" text-anchor="middle" font-size="11" fill="#312e81">24 byte</text>
+
+  <!-- 2. KV -->
+  <rect x="124" y="70" width="230" height="70" rx="6" fill="#ccfbf1" stroke="#0f766e" stroke-width="2"/>
+  <text x="239" y="98" text-anchor="middle" font-size="13" font-weight="700" fill="#134e4a">Metadati chiave → valore</text>
+  <text x="239" y="116" text-anchor="middle" font-size="11" fill="#134e4a">41 coppie · ~10,5 MiB (tokenizer)</text>
+
+  <!-- 3. tensor info -->
+  <rect x="358" y="70" width="140" height="70" rx="6" fill="#ffedd5" stroke="#c2410c" stroke-width="2"/>
+  <text x="428" y="98" text-anchor="middle" font-size="13" font-weight="700" fill="#7c2d12">Indice tensori</text>
+  <text x="428" y="116" text-anchor="middle" font-size="11" fill="#7c2d12">335 voci · ~25 KiB</text>
+
+  <!-- padding -->
+  <rect x="502" y="70" width="14" height="70" fill="#9ca3af"/>
+
+  <!-- 4. data -->
+  <rect x="520" y="70" width="350" height="70" rx="6" fill="#fef3c7" stroke="#b45309" stroke-width="2"/>
+  <text x="695" y="98" text-anchor="middle" font-size="13" font-weight="700" fill="#78350f">Dati dei tensori</text>
+  <text x="695" y="116" text-anchor="middle" font-size="11" fill="#78350f">~770 MiB · ogni tensore allineato a 32 byte</text>
+
+  <!-- dettagli -->
+  <!-- header -->
+  <rect x="30" y="170" width="200" height="120" rx="6" fill="#e0e7ff" stroke="#3730a3" stroke-width="1"/>
+  <g font-size="11" fill="#312e81">
+    <text x="40" y="190" font-weight="700">Header (little-endian)</text>
+    <text x="40" y="210" font-family="monospace">magic    "GGUF"  4 byte</text>
+    <text x="40" y="228" font-family="monospace">version  3       u32</text>
+    <text x="40" y="246" font-family="monospace">n_tensors 335    u64</text>
+    <text x="40" y="264" font-family="monospace">n_kv     41      u64</text>
+  </g>
+
+  <!-- KV -->
+  <rect x="244" y="170" width="290" height="120" rx="6" fill="#ccfbf1" stroke="#0f766e" stroke-width="1"/>
+  <g font-size="11" fill="#134e4a">
+    <text x="254" y="190" font-weight="700">Ogni coppia: chiave (stringa) · tipo · valore</text>
+    <text x="254" y="210" font-family="monospace">general.architecture   str  "qwen35"</text>
+    <text x="254" y="228" font-family="monospace">general.file_type      u32  7 (=Q8_0)</text>
+    <text x="254" y="246" font-family="monospace">qwen35.block_count     u32  25</text>
+    <text x="254" y="264" font-family="monospace">tokenizer.ggml.tokens  arr[str] 248320</text>
+    <text x="254" y="282" font-family="monospace">tokenizer.chat_template str  "{%- set …"</text>
+  </g>
+
+  <!-- tensor info -->
+  <rect x="548" y="170" width="322" height="120" rx="6" fill="#ffedd5" stroke="#c2410c" stroke-width="1"/>
+  <g font-size="11" fill="#7c2d12">
+    <text x="558" y="190" font-weight="700">Ogni voce: nome · n_dim · forma · tipo · offset</text>
+    <text x="558" y="210" font-family="monospace">token_embd.weight  [1024,248320] Q8_0 @0</text>
+    <text x="558" y="228" font-family="monospace">blk.0.attn_qkv.weight [1024,6144] Q8_0 @…</text>
+    <text x="558" y="246" font-family="monospace">blk.0.attn_norm.weight [1024]     F32  @…</text>
+    <text x="558" y="264" font-family="monospace">output_norm.weight      [1024]     F32  @…</text>
+    <text x="558" y="282">l'offset è relativo all'inizio della sezione dati</text>
+  </g>
+
+  <!-- frecce -->
+  <path d="M75 140 L75 168" stroke="#3730a3" stroke-width="1.5" marker-end="url(#a)"/>
+  <path d="M239 140 L300 168" stroke="#0f766e" stroke-width="1.5" marker-end="url(#a)"/>
+  <path d="M428 140 L600 168" stroke="#c2410c" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- blocco q8_0 -->
+  <rect x="30" y="316" width="840" height="60" rx="6" fill="#fef3c7" stroke="#b45309" stroke-width="1"/>
+  <text x="40" y="336" font-size="11" font-weight="700" fill="#78350f">Dentro un tensore Q8_0: blocchi da 32 pesi = 2 byte di scala (F16) + 32 byte (int8) = 34 byte → 8,5 bit per peso</text>
+  <g font-size="10" fill="#78350f" font-family="monospace">
+    <rect x="40" y="346" width="40" height="20" fill="#fbbf24" stroke="#b45309"/>
+    <text x="60" y="360" text-anchor="middle">d(F16)</text>
+    <rect x="80" y="346" width="320" height="20" fill="#fde68a" stroke="#b45309"/>
+    <text x="240" y="360" text-anchor="middle">q0 q1 q2 … q31 (int8: peso ≈ d × q)</text>
+    <rect x="410" y="346" width="40" height="20" fill="#fbbf24" stroke="#b45309"/>
+    <text x="430" y="360" text-anchor="middle">d(F16)</text>
+    <rect x="450" y="346" width="320" height="20" fill="#fde68a" stroke="#b45309"/>
+    <text x="610" y="360" text-anchor="middle">q0 … q31</text>
+    <text x="778" y="360">… (Q4_K: blocchi 256)</text>
+  </g>
+
+  <rect x="30" y="392" width="840" height="52" rx="6" fill="#e5e7eb" stroke="#6b7280"/>
+  <text x="40" y="412" font-size="12" fill="#111827">Perché l'allineamento (general.alignment, default 32): la sezione dati si può mappare in memoria con mmap e ogni tensore</text>
+  <text x="40" y="430" font-size="12" fill="#111827">inizia a un indirizzo allineato, come vuole il backend. Il file è il modello: niente config.json, tokenizer.json o template a parte.</text>
+
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 z" fill="#374151"/>
+    </marker>
+  </defs>
+</svg>

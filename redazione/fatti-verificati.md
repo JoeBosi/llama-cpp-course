@@ -197,3 +197,13 @@ Maple 20B-A1B (MoE ternario), Tencent Hy 4, Spark2.5; `--fuse-qkv` in conversion
 ## Questo VPS
 Linux x86_64 Ubuntu 24.04, 6 vCPU AMD EPYC (AVX2, no AVX-512), 11 GB RAM (spesso ~4 liberi), nessuna GPU,
 Docker presente. `llama` in `~/.local/bin`, tarball release in `~/llama-lab/rel/llama-b11046/`, cache modelli HF.
+
+## Aggiunte del 23/09/2026 (dagli scrittori)
+- `llama cli -j/--json-schema` su b11046 fallisce con `Error: Failed to initialize samplers: std::exception` con qualsiasi
+  schema (anche `llama-cli` del tarball); `llama completion -j` e `response_format` sul server funzionano.
+- Con `-np N` il contesto si divide per N (`-c 2048 -np 4` → 512 per slot → `400 exceed_context_size_error`);
+  `--kv-unified` lo evita. Throughput su 4 richieste parallele: -np 1/2/4 → 6,3 / 5,6 / 12,4 t/s (VPS, CPU).
+- Tool calling con Qwen3.5-0.8B: un prompt di sistema troppo "direttivo" fa saltare la chiamata al tool; `tool_choice=required` ignorato.
+- Modello embedding in cache: `ggml-org/embeddinggemma-300M-GGUF:Q8_0` (334 MB); router mode con `--models-preset modelli.ini` verificato.
+- Qwen3.5-0.8B: arch `qwen35`, n_embd 1024, n_layer 24, n_vocab 248320, n_head 8 / n_head_kv 2, tokenizer gpt2/pre qwen35.
+- `llama quantize` da un GGUF già quantizzato (es. Q8_0) richiede `--allow-requantize`. Misure reali: Q4_K_M 506 MiB PPL 12,5; Q2_K 399 MiB PPL 154,9 → con imatrix 34,1.

@@ -73,7 +73,9 @@ int main(int argc, char ** argv) {
 
     // 5. La catena di campionamento: stessi valori di default di `llama cli`
     //    (top-k 40, top-p 0.95, temp 0.8) e infine l'estrazione casuale.
-    llama_sampler * smpl = llama_sampler_chain_init(llama_sampler_chain_default_params());
+    llama_sampler_chain_params sparams = llama_sampler_chain_default_params();
+    sparams.no_perf = false;   // altrimenti llama_perf_sampler_print stampa zeri
+    llama_sampler * smpl = llama_sampler_chain_init(sparams);
     llama_sampler_chain_add(smpl, llama_sampler_init_top_k(40));
     llama_sampler_chain_add(smpl, llama_sampler_init_top_p(0.95f, 1));
     llama_sampler_chain_add(smpl, llama_sampler_init_temp(0.8f));

@@ -74,10 +74,11 @@ def esegui_tool(nome: str, argomenti: dict, reale: bool) -> dict:
 
 
 def agente(domanda: str, reale: bool, forza: bool, max_giri: int = 4) -> str:
-    # Con modelli piccoli il prompt di sistema conta molto: uno troppo "narrativo" ("Sei un assistente meteo…")
-    # può spingere il modello a INVENTARE i dati invece di chiamare lo strumento. Questo è sobrio e funziona.
+    # Con modelli piccoli il prompt di sistema conta molto: uno troppo "narrativo" ("Sei un assistente meteo…"),
+    # o anche solo più lungo ("… Rispondi in italiano, in breve." - provato!), può spingere il modello a
+    # INVENTARE i dati invece di chiamare lo strumento. Questo è sobrio e funziona con Qwen3.5-0.8B.
     messaggi = [
-        {"role": "system", "content": "Usa gli strumenti quando servono. Rispondi in italiano, in breve."},
+        {"role": "system", "content": "Usa gli strumenti quando servono."},
         {"role": "user", "content": domanda},
     ]
     for giro in range(max_giri):

@@ -1,0 +1,13 @@
+La bicicletta è un veicolo a due ruote mosso dalla forza muscolare delle gambe attraverso i pedali. La prima bicicletta con pedali fu costruita a metà dell'Ottocento, ma il modello moderno con catena, ruote uguali e pneumatici gonfiabili si affermò solo verso la fine del secolo. In Italia il ciclismo divenne presto uno sport popolare: il Giro d'Italia si corre dal 1909 e attraversa ogni anno le città e le montagne del paese.
+
+Per mantenere una bicicletta in buono stato bastano poche attenzioni. Controlla la pressione delle gomme almeno una volta alla settimana, lubrifica la catena quando comincia a cigolare e verifica che i freni rispondano subito. Se cambi marcia e la catena salta, probabilmente il cambio va registrato: basta ruotare di poco la vite di regolazione del cavo.
+
+Il computer è una macchina che elabora informazioni seguendo le istruzioni di un programma. Le sue parti principali sono il processore, che esegue i calcoli, la memoria, che conserva i dati mentre vengono usati, e il disco, che li conserva anche a macchina spenta. I programmi sono scritti in linguaggi di programmazione come Python, C o JavaScript e poi tradotti in istruzioni che il processore capisce.
+
+Scrivere un programma significa descrivere passo per passo cosa deve fare la macchina. Per esempio, per sommare i numeri da uno a cento si usa un ciclo che ripete la stessa operazione aggiornando un totale. Gli errori nel codice si chiamano bug e la ricerca degli errori si chiama debug. Un buon programmatore prova il codice spesso e scrive test automatici.
+
+La cucina italiana è famosa per la pasta, la pizza e l'olio d'oliva. Ogni regione ha piatti propri: il pesto in Liguria, il ragù in Emilia, la carbonara nel Lazio, la pizza a Napoli, gli arancini in Sicilia. La dieta mediterranea, basata su cereali, verdure, legumi, pesce e olio d'oliva, è considerata una delle più sane al mondo.
+
+Per cucinare un buon piatto di pasta porta a ebollizione abbondante acqua salata, aggiungi la pasta e mescola subito. Scola la pasta un minuto prima del tempo indicato sulla confezione e finisci la cottura nel sugo, aggiungendo un po' di acqua di cottura per legare. Servi subito, perché la pasta scotta non piace a nessuno.
+
+Il clima della Terra sta cambiando a causa delle emissioni di gas serra prodotte dalle attività umane. La temperatura media è aumentata di oltre un grado rispetto all'epoca preindustriale e gli eventi estremi come ondate di calore, siccità e alluvioni sono più frequenti. Ridurre le emissioni richiede energia rinnovabile, trasporti elettrici, edifici efficienti e cambiamenti nelle abitudini quotidiane.

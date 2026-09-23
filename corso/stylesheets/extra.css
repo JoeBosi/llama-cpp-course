@@ -11,3 +11,6 @@
 [data-md-color-scheme="slate"] .stato-verificato { background: #14532d; color: #dcfce7; }
 [data-md-color-scheme="slate"] .stato-bozza { background: #78350f; color: #fef3c7; }
 .md-typeset table:not([class]) { font-size: .75rem; }
+/* Gli schemi SVG sono disegnati per sfondo chiaro: in tema scuro gli diamo comunque un fondo chiaro */
+.md-typeset figure.schema img { background: #f8fafc; border-radius: 10px; padding: 8px; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-md-color-scheme="slate"] .md-typeset figure.schema img { background: #e5e7eb; }

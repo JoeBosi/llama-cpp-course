@@ -5,7 +5,7 @@
 - [x] Framework: MkDocs Material + awesome-nav + glightbox (tema chiaro default, switch scuro, Mermaid, schede, SVG)
 - [x] Pubblicazione: Caddy `corso-llamacpp.giuseppebosi.com` (HTTPS + basic auth) → `/srv/llamacorso`, `scripts/pubblica.sh`
 - [x] llama.cpp b11046 installato sul VPS, comandi base verificati (cli, serve, bench, API) → `fatti-verificati.md`
-- [x] Prima stesura completa di moduli, laboratori, progetti e risorse (scrittori A1–A6)
+- [x] Prima stesura completa di moduli, laboratori, progetti e risorse (23/09/2026)
 
 ## Da fare
 - [ ] Rilettura incrociata: coerenza fra moduli (stessi nomi di modelli, stessi flag), link, badge di stato

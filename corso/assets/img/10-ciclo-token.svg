@@ -11,7 +11,7 @@
   </g>
   <text x="135" y="92" text-anchor="middle" font-size="14" font-weight="bold" fill="#312e81">1 · Tokenizzazione</text>
   <text x="135" y="112" text-anchor="middle" font-size="10.5" fill="#312e81">llama_tokenize(vocab, testo)</text>
-  <text x="135" y="134" text-anchor="middle" font-size="12" font-weight="bold" fill="#312e81">→ [151644, 3457, 11, 1878]</text>
+  <text x="135" y="134" text-anchor="middle" font-size="12" font-weight="bold" fill="#312e81">→ [34, 21817, 11, 2445]</text>
   <text x="135" y="156" text-anchor="middle" font-size="10.5" fill="#312e81">BPE/SPM dal GGUF (tokenizer.ggml.*)</text>
   <text x="135" y="174" text-anchor="middle" font-size="10.5" fill="#312e81">prima: chat template (Jinja)</text>
 
@@ -50,17 +50,17 @@
   </g>
   <text x="690" y="260" text-anchor="middle" font-size="14" font-weight="bold" fill="#312e81">4 · Logits</text>
   <text x="690" y="280" text-anchor="middle" font-size="10.5" fill="#312e81">output_norm → output.weight (lm_head) [n_embd, n_vocab]</text>
-  <text x="690" y="302" text-anchor="middle" font-size="12" font-weight="bold" fill="#312e81">un punteggio per ognuno dei ~150k token</text>
+  <text x="690" y="302" text-anchor="middle" font-size="12" font-weight="bold" fill="#312e81">un punteggio per ognuno dei 248 320 token (Qwen3.5)</text>
   <text x="690" y="324" text-anchor="middle" font-size="10.5" fill="#312e81">llama_decode(ctx, batch) → llama_get_logits_ith(ctx, -1)</text>
 
   <text x="375" y="260" text-anchor="middle" font-size="14" font-weight="bold" fill="#7c2d12">5 · Sampler</text>
   <text x="375" y="280" text-anchor="middle" font-size="10.5" fill="#7c2d12">catena: penalties → top_k → top_p</text>
   <text x="375" y="296" text-anchor="middle" font-size="10.5" fill="#7c2d12">→ min_p → temperature → dist</text>
-  <text x="375" y="318" text-anchor="middle" font-size="11" font-weight="bold" fill="#7c2d12">llama_sampler_sample → id 3021</text>
+  <text x="375" y="318" text-anchor="middle" font-size="11" font-weight="bold" fill="#7c2d12">llama_sampler_sample → id 200684</text>
   <text x="375" y="336" text-anchor="middle" font-size="10.5" fill="#7c2d12">una grammatica GBNF filtra qui</text>
 
   <text x="135" y="260" text-anchor="middle" font-size="14" font-weight="bold" fill="#134e4a">6 · Detokenizzazione</text>
-  <text x="135" y="280" text-anchor="middle" font-size="10.5" fill="#134e4a">llama_token_to_piece(vocab, 3021)</text>
+  <text x="135" y="280" text-anchor="middle" font-size="10.5" fill="#134e4a">llama_token_to_piece(vocab, 200684)</text>
   <text x="135" y="302" text-anchor="middle" font-size="12" font-weight="bold" fill="#134e4a">→ " stai"</text>
   <text x="135" y="324" text-anchor="middle" font-size="10.5" fill="#134e4a">stampa / stream al client</text>
 
