@@ -71,3 +71,4 @@
 .md-typeset .mermaid svg { max-width: 100%; height: auto; }
 /* Home: due schede per riga (quattro schede → 2×2, mai una orfana) */
 @media screen and (min-width: 45em) { .md-typeset .grid.cards > ul { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
+@media screen and (min-width: 45em) { .md-typeset .grid.cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
