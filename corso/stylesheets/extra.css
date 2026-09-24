@@ -120,11 +120,18 @@
 .mermaid-modal__close:focus-visible { background: var(--md-primary-fg-color); color: var(--md-primary-bg-color); }
 .mermaid-modal__scroll {
   flex: 1; overflow: auto; padding: 3.2rem 2rem 2rem;
-  display: flex; align-items: flex-start; justify-content: center;
+  display: flex; align-items: safe center; justify-content: safe center;
   touch-action: pan-x pan-y pinch-zoom;
   overscroll-behavior: contain;
 }
-.mermaid-modal__diagram svg { display: block; margin: auto; }
+.mermaid-modal__diagram { position: relative; }
+.mermaid-modal__diagram svg { display: block; margin: auto; cursor: zoom-in; }
+.mermaid-modal__diagram.is-natural-size svg { cursor: zoom-out; }
+.mermaid-modal__diagram[data-hint]::before {
+  content: attr(data-hint);
+  position: absolute; left: 50%; bottom: -1.8rem; transform: translateX(-50%);
+  white-space: nowrap; font-size: .72rem; color: var(--md-default-fg-color--light);
+}
 html.mermaid-modal-open { overflow: hidden; }
 @media screen and (max-width: 44.9375em) {
   .mermaid-modal__panel { inset: 0; border-radius: 0; }
