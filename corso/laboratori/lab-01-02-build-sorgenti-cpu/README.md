@@ -31,7 +31,7 @@ al binario dell'installer, e sai ricompilare in un minuto dopo una modifica.
 | Modello di prova | `ggml-org/Qwen3.5-0.8B-GGUF`, già in cache se hai fatto il lab 01-01 |
 
 ```mermaid
-flowchart LR
+flowchart TB
     G[git clone<br/>git checkout b11046] --> C1["cmake -B build<br/>(configura: rileva CPU, curl, OpenSSL)"]
     C1 --> B1["cmake --build build<br/>(compila ggml, llama, common, tools)"]
     B1 --> T[build/bin/llama version]

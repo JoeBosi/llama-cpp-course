@@ -53,8 +53,16 @@ Aggiornato a settembre 2026 su [llama.cpp](https://github.com/ggml-org/llama.cpp
 ```mermaid
 flowchart TB
     subgraph base["Base (tutti)"]
-        direction LR
-        A[00 Introduzione] --> B[01 Installazione] --> C[02 Primi passi] --> C2[02b Quale modello] --> D[03 Modelli] --> E[04 Server e API]
+        direction TB
+        subgraph base1[" "]
+            direction LR
+            A[00 Introduzione] --> B[01 Installazione] --> C[02 Primi passi]
+        end
+        subgraph base2[" "]
+            direction LR
+            C2[02b Quale modello] --> D[03 Modelli] --> E[04 Server e API]
+        end
+        base1 --> base2
     end
     subgraph spec["Specializzazioni"]
         direction LR

@@ -415,7 +415,7 @@ slot e quanto contesto ciascuno) e `llama_server: listening on http://127.0.0.1:
 ### 4.1 Memoria: pesi + KV cache
 
 ```mermaid
-flowchart LR
+flowchart TB
     P[Pesi del modello<br/>= dimensione del GGUF] --> RAM[RAM o VRAM necessaria]
     KV[KV cache<br/>= contesto totale × byte per token] --> RAM
     B[Buffer di calcolo<br/>~ centinaia di MB] --> RAM

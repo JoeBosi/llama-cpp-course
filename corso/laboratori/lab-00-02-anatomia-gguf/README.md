@@ -29,7 +29,7 @@ memoria del lab precedente.
 | `ggml-org/Qwen3.5-0.8B-GGUF` | `Qwen3.5-0.8B-Q8_0.gguf`, 785 MiB, Apache-2.0 | in cache: `~/.cache/huggingface/hub/models--ggml-org--Qwen3.5-0.8B-GGUF/snapshots/<hash>/` |
 
 ```mermaid
-flowchart LR
+flowchart TB
     F[(file .gguf)] -->|mmap, solo header e metadati| R[GGUFReader]
     R --> M["reader.fields<br/>dict chiave → ReaderField"]
     R --> T["reader.tensors<br/>lista di ReaderTensor"]

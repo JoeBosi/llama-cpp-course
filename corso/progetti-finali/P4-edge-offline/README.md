@@ -17,7 +17,7 @@ compromesso tra **qualità, velocità, memoria e consumo**: scegli e giustifichi
 ## Architettura
 
 ```mermaid
-flowchart LR
+flowchart TB
     subgraph PC["PC di sviluppo"]
         HF[Modello HF o GGUF] --> Q[llama quantize<br/>Q4_K_M · Q4_0 · IQ4_XS…]
         Q --> B[llama bench<br/>su PC: riferimento]

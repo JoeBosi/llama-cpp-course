@@ -17,7 +17,7 @@ cloud: l'immagine entra nel modello e il JSON esce vincolato dallo schema. Il pr
 ## Architettura
 
 ```mermaid
-flowchart LR
+flowchart TB
     IN[Immagine · PDF<br/>foto da telefono] --> PRE[Pre-elaborazione<br/>ridimensiona · raddrizza · PDF→PNG]
     PRE --> S[llama serve<br/>modello VLM + mmproj<br/>/v1/chat/completions con image_url]
     SCH[JSON Schema<br/>dei campi] --> S

@@ -17,7 +17,7 @@ molte misure.
 ## Architettura
 
 ```mermaid
-flowchart LR
+flowchart TB
     U[Utenti / applicazioni] -->|HTTPS 443<br/>Bearer| C[Caddy o Nginx]
     C -->|127.0.0.1:8080| S[llama serve<br/>systemd o Compose<br/>-np N · -c C · --metrics]
     S --> M[(Modello GGUF<br/>+ KV cache)]

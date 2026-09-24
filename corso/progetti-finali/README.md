@@ -19,8 +19,9 @@ estensioni sono il tetto.
 | [P6](P6-estrazione-documenti-multimodale/README.md) | Estrazione dati da documenti e immagini | 06, 07 | ●●○ | CPU, 8-16 GB |
 
 ```mermaid
-flowchart LR
+flowchart TB
     subgraph Moduli
+        direction LR
         M02[02 Primi passi] --- M03[03 GGUF e quantizzazione] --- M04[04 Server e API]
         M05[05 Prestazioni] --- M06[06 Output strutturato] --- M07[07 Multimodale]
         M08[08 Integrazione] --- M09[09 Produzione]

@@ -22,7 +22,7 @@ quel mondo.
 ## 1. Dove si prendono i modelli
 
 ```mermaid
-flowchart LR
+flowchart TB
     HF[("Hugging Face<br/>huggingface.co")] -->|"-hf user/repo:quant"| L[llama cli / serve]
     HF --> O1["ggml-org<br/>GGUF ufficiali di llama.cpp"]
     HF --> O2["unsloth, bartowski, lmstudio-community<br/>quantizzatori affidabili"]

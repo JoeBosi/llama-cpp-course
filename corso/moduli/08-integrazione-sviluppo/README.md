@@ -303,7 +303,7 @@ Verificato: `embeddinggemma-300M-Q8_0.gguf` (334 MB) risponde con vettori di **7
 Per il **reranking** c'è `/v1/rerank` con un modello reranker e `--rerank` (es. `ggml-org/Qwen3-reranker-0.6B-Q8_0-GGUF`).
 
 ```mermaid
-flowchart LR
+flowchart TB
     D[documenti .txt] --> C[chunk<br/>~500 caratteri]
     C -->|/v1/embeddings| E[vettori 768-d]
     E --> I[(indice<br/>matrice numpy)]

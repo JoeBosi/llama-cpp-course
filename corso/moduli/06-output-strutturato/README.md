@@ -170,7 +170,7 @@ intero diventano un'alternanza di cifre (`item-age`: da 0 a 150), `minLength/max
 `minItems/maxItems` diventano `{9,99}` ripetizioni dopo il primo elemento.
 
 ```mermaid
-flowchart LR
+flowchart TB
     A["JSON Schema<br/>(response_format / json_schema / -j)"] --> B["convertitore<br/>common_schema"]
     B --> C["grammatica GBNF"]
     C --> D["sampler: maschera<br/>a ogni token"]

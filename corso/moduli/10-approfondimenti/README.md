@@ -70,7 +70,7 @@ punto qualcuno esegue il grafo: `ggml_graph_compute_with_ctx(ctx, gf, n_threads)
 oppure lo scheduler dei backend.
 
 ```mermaid
-flowchart LR
+flowchart TB
     A[ggml_init<br/>contesto] --> B[ggml_new_tensor_2d<br/>a, b]
     B --> C[ggml_mul_mat<br/>nodo MUL_MAT]
     C --> D[ggml_build_forward_expand<br/>grafo]
@@ -300,7 +300,7 @@ llama.cpp riceve decine di PR al giorno e `CONTRIBUTING.md` è severo. In sintes
   `CODEOWNERS`. I maintainer fanno squash-merge con titolo `<modulo> : <titolo> (#numero)` e aspettano la CI.
 
 ```mermaid
-flowchart LR
+flowchart TB
     I[issue esistente<br/>o nuova] --> B[branch + codice<br/>solo CPU, stile del repo]
     B --> T[ctest · test-backend-ops<br/>llama-perplexity · llama-bench<br/>ci/run.sh in locale]
     T --> P[PR: una cosa sola,<br/>uso dell'IA dichiarato]

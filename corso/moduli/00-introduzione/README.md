@@ -72,7 +72,7 @@ pesi, tokenizer, chat template, parametri architetturali. Niente `config.json` a
 `safetensors` da tenere allineate.
 
 ```mermaid
-flowchart LR
+flowchart TB
     H["Header<br/>magic GGUF · versione 3<br/>n_tensori · n_metadati"] --> K["Metadati chiave → valore<br/>general.architecture = qwen35<br/>qwen35.block_count = 25<br/>tokenizer.ggml.tokens = [248 320]<br/>tokenizer.chat_template = …"]
     K --> T["Indice dei tensori<br/>nome · forma · tipo · offset<br/>blk.0.attn_qkv.weight 1024×6144 Q8_0"]
     T --> D["Dati dei tensori<br/>allineati a 32 byte<br/>(mappabili in memoria con mmap)"]

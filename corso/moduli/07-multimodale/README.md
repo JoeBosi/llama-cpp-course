@@ -267,7 +267,7 @@ Per convertire Pocket TTS da HF: `convert_hf_to_gguf.py path/languages/english -
 ## 8. Memoria e prestazioni
 
 ```mermaid
-flowchart LR
+flowchart TB
     A[modello.gguf] -->|pesi LLM| M[(RAM / VRAM)]
     B[mmproj.gguf] -->|encoder + proiettore| M
     C[immagine] -->|N token nel contesto| K[(KV cache)]

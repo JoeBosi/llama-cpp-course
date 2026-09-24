@@ -344,7 +344,7 @@ I pesi e la KV cache vengono distribuiti tra dispositivi locali e remoti in prop
 (modificabile con `-ts`).
 
 ```mermaid
-flowchart LR
+flowchart TB
     subgraph principale[Macchina principale]
         cli[llama serve / llama cli] <--> rpcb[backend RPC]
         cli <--> loc[dispositivi locali]

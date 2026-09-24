@@ -27,7 +27,7 @@ Alla fine hai `llama` nel `PATH` e una cartella `llama-bNNNNN/` con tutti gli st
 | Modello di prova | `ggml-org/Qwen3.5-0.8B-GGUF` (`Qwen3.5-0.8B-Q8_0.gguf`, Apache-2.0) | 785 MiB |
 
 ```mermaid
-flowchart LR
+flowchart TB
     A[1 · installer o pacchetto] --> B[2 · llama version<br/>--list-devices]
     B --> C[3 · primo modello<br/>llama cli -hf …]
     C --> D[4 · tarball release<br/>strumenti extra]

@@ -376,7 +376,7 @@ di chiamata del modello e **analizza** la risposta restituendo `tool_calls` inve
 esegue** nulla: sei tu a eseguire la funzione e a rimandare il risultato con `role: "tool"`.
 
 ```mermaid
-flowchart LR
+flowchart TB
     A[Client: messages + tools] --> B[llama serve<br/>template + grammatica]
     B --> C{Il modello<br/>chiama un tool?}
     C -- no --> D[Risposta finale<br/>finish_reason: stop]

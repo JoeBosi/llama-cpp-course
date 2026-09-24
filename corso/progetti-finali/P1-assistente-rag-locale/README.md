@@ -17,7 +17,7 @@ costruisci con `llama serve` per gli embedding e per la chat, e con un indice ve
 ## Architettura
 
 ```mermaid
-flowchart LR
+flowchart TB
     subgraph Indicizzazione["Indicizzazione (una tantum)"]
         D[Documenti<br/>PDF · MD · HTML] --> E[Estrazione testo<br/>+ chunking]
         E --> EMB1[llama serve --embedding<br/>/v1/embeddings]

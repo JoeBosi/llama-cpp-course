@@ -26,7 +26,7 @@ Va benissimo: quasi tutto funziona uguale. Le cose che cambiano più spesso sono
 - **modelli supportati**: ogni build aggiunge architetture; un GGUF nuovo può richiedere una build nuova.
 
 ```mermaid
-flowchart LR
+flowchart TB
     M[master: commit continui] --> B["build bNNNNN<br/>(più al giorno, binari per tutte le piattaforme)"]
     B -->|ogni ~2 settimane| V["release vX.Y.Z<br/>(stabile, con note di rilascio)"]
     B -->|installer llama.app| I[~/.local/bin/llama]

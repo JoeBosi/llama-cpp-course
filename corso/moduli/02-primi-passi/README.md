@@ -334,7 +334,7 @@ Le famiglie usano formati diversi: Llama 3 (`<|start_header_id|>user<|end_header
 `<think>` e le convenzioni per i tool.
 
 ```mermaid
-flowchart LR
+flowchart TB
     M["messages<br/>system: Sei un assistente.<br/>user: Ciao"] --> T["chat template (Jinja)<br/>tokenizer.chat_template<br/>oppure --chat-template / --chat-template-file"]
     T --> P["prompt<br/>&lt;|im_start|&gt;system …<br/>&lt;|im_start|&gt;assistant"]
     P --> K["tokenizer → token id"]

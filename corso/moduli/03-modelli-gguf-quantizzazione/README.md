@@ -131,7 +131,7 @@ perplexity rispetto a F16):
 ## 4. La pipeline: da Hugging Face a un GGUF quantizzato
 
 ```mermaid
-flowchart LR
+flowchart TB
     HF["Repo Hugging Face<br/>config.json · tokenizer.json<br/>model-*.safetensors (BF16)"]
     C["convert_hf_to_gguf.py<br/>--outtype f16 | bf16 | q8_0<br/>(sorgenti o Docker :full)"]
     G16["GGUF F16/BF16<br/>2 byte/peso"]

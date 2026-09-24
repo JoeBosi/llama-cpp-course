@@ -67,8 +67,72 @@
 /* Briciole di pane: solo su schermi larghi (sul telefono rubano spazio e vanno a capo) */
 @media screen and (max-width: 59.9375em) { .md-content .md-path { display: none; } }
 .md-typeset .meta-icon { color: var(--md-primary-fg-color); vertical-align: -.15em; }
-/* Diagrammi Mermaid: mai più larghi della colonna */
-.md-typeset .mermaid svg { max-width: 100%; height: auto; }
+
+/* ===== Diagrammi Mermaid: cliccabili, mai schiacciati, apribili a schermo intero =====
+   corso/assets/javascripts/mermaid-lightbox.js gestisce il clic; scripts/mermaid_fence.py
+   scrive il codice sorgente in data-mermaid-src a tempo di build. */
+.md-typeset .mermaid-figure {
+  position: relative;
+  margin: 1.5em 0;
+  cursor: zoom-in;
+  border-radius: .4rem;
+}
+.md-typeset .mermaid-figure:hover,
+.md-typeset .mermaid-figure:focus-visible {
+  outline: 2px solid var(--md-primary-fg-color);
+  outline-offset: 4px;
+}
+.md-typeset .mermaid-figure::after {
+  content: "⤢ Clic per ingrandire";
+  position: absolute; top: .5rem; right: .5rem;
+  background: var(--md-default-bg-color); color: var(--md-default-fg-color--light);
+  font-size: .68rem; line-height: 1; padding: .35em .6em; border-radius: 1em;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  opacity: 0; transition: opacity .15s;
+  pointer-events: none;
+}
+.md-typeset .mermaid-figure:hover::after,
+.md-typeset .mermaid-figure:focus-visible::after { opacity: 1; }
+/* rete di sicurezza: se un diagramma resta comunque più largo della colonna, scorre
+   invece di rimpicciolirsi fino a diventare illeggibile (era: max-width:100%) */
+.md-typeset .mermaid-figure pre.mermaid { overflow-x: auto; margin: 0; }
+.md-typeset .mermaid-figure .mermaid svg { max-width: none; }
+
+/* Finestra a schermo intero per il diagramma cliccato */
+.mermaid-modal { display: none; position: fixed; inset: 0; z-index: 10000; }
+.mermaid-modal.is-open { display: block; }
+.mermaid-modal__backdrop { position: absolute; inset: 0; background: rgba(0, 0, 0, .72); }
+.mermaid-modal__panel {
+  position: absolute; inset: 2vh 2vw;
+  background: var(--md-default-bg-color);
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: .6rem;
+  display: flex; flex-direction: column;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, .4);
+}
+.mermaid-modal__close {
+  position: absolute; top: .6rem; right: .6rem; z-index: 1;
+  width: 2.3rem; height: 2.3rem; border-radius: 50%; border: none;
+  background: var(--md-default-fg-color--lightest); color: var(--md-default-fg-color);
+  font-size: 1.1rem; line-height: 1; cursor: pointer;
+}
+.mermaid-modal__close:hover,
+.mermaid-modal__close:focus-visible { background: var(--md-primary-fg-color); color: var(--md-primary-bg-color); }
+.mermaid-modal__scroll {
+  flex: 1; overflow: auto; padding: 3.2rem 2rem 2rem;
+  display: flex; align-items: flex-start; justify-content: center;
+  touch-action: pan-x pan-y pinch-zoom;
+  overscroll-behavior: contain;
+}
+.mermaid-modal__diagram svg { display: block; margin: auto; }
+html.mermaid-modal-open { overflow: hidden; }
+@media screen and (max-width: 44.9375em) {
+  .mermaid-modal__panel { inset: 0; border-radius: 0; }
+  .md-typeset .mermaid-figure::after { content: "⤢"; padding: .35em .5em; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .md-typeset .mermaid-figure::after { transition: none; }
+}
 /* Home: due schede per riga (quattro schede → 2×2, mai una orfana) */
 @media screen and (min-width: 45em) { .md-typeset .grid.cards > ul { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
 @media screen and (min-width: 45em) { .md-typeset .grid.cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

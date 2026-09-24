@@ -31,7 +31,7 @@ La navigazione è **automatica** (plugin `awesome-nav`): titolo = primo `#` dell
 ## Anteprima e pubblicazione
 
 ```bash
-.venv/bin/mkdocs serve -a 127.0.0.1:8000   # anteprima con ricarica automatica
+PYTHONPATH=$PWD .venv/bin/mkdocs serve -a 127.0.0.1:8000   # anteprima con ricarica automatica
 ./scripts/pubblica.sh                     # build --strict → /srv/llamacorso (servito da Caddy su https://corso-llamacpp.giuseppebosi.com/)
 ```
 

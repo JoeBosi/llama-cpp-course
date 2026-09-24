@@ -73,7 +73,7 @@ CPU** scaricando un piccolo eseguibile "probe" per ciascuno; su macOS prende dir
 Il binario finisce in `~/.llama-app/llama` e viene copiato in `~/.local/bin/llama`. Non serve root.
 
 ```mermaid
-flowchart LR
+flowchart TB
     S[install.sh] --> V["versione: latest<br/>o LLAMA_VERSION=bNNNNN"]
     V --> C{probe CUDA?}
     C -- ok --> BC[llama CUDA]

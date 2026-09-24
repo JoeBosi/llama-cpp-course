@@ -14,7 +14,7 @@ laboratori, progetti finali). Pubblicato su https://corso-llamacpp.giuseppebosi.
 ## Struttura e navigazione
 - `corso/` è la docs_dir. Nav automatica (awesome-nav): titolo = H1, ordine = nome file; `.nav.yml` solo se serve.
 - Pagine indice = `README.md`. Link interni relativi ai file `.md`. `mkdocs build --strict` deve passare.
-- Pubblicare: `./scripts/pubblica.sh` (build strict → `/srv/llamacorso`). Anteprima: `.venv/bin/mkdocs serve`.
+- Pubblicare: `./scripts/pubblica.sh` (build strict → `/srv/llamacorso`). Anteprima: `PYTHONPATH=$PWD .venv/bin/mkdocs serve` (il PYTHONPATH serve a `scripts/mermaid_fence.py`).
 
 ## Ambiente di prova (questo VPS)
 - Ubuntu 24.04 x86_64, 6 vCPU AMD EPYC (AVX2), 11 GB RAM ma ~4 liberi, **nessuna GPU**, Docker, cmake/ninja/ccache.

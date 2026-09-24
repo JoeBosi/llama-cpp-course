@@ -17,7 +17,7 @@ usa X, per la massima qualità Y"). È il progetto per chi vuole capire cosa c'�
 ## Architettura
 
 ```mermaid
-flowchart LR
+flowchart TB
     HF[Modello HF<br/>safetensors] -->|convert_hf_to_gguf.py| F16[GGUF F16 / BF16]
     F16 -->|llama imatrix<br/>testo di calibrazione| IM[imatrix.gguf]
     F16 --> Q1[Q8_0]

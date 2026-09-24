@@ -49,6 +49,9 @@ theme:
 extra_css:
   - stylesheets/extra.css
 
+extra_javascript:
+  - assets/javascripts/mermaid-lightbox.js
+
 plugins:
   - search:
       lang: it
@@ -82,7 +85,7 @@ markdown_extensions:
       custom_fences:
         - name: mermaid
           class: mermaid
-          format: !!python/name:pymdownx.superfences.fence_code_format
+          format: !!python/name:scripts.mermaid_fence.format_mermaid
 
 extra:
   generator: false
