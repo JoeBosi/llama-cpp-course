@@ -1,6 +1,10 @@
 # P2: Server di inferenza in produzione
 
-> Moduli di riferimento: [04](../../moduli/04-server-api/README.md), [05](../../moduli/05-prestazioni/README.md), [09](../../moduli/09-deploy-produzione/README.md) · Difficoltà ●●○ · <span class="stato stato-verificato">traccia completa</span>
+<div class="meta" markdown>
+<span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Moduli [04](../../moduli/04-server-api/README.md), [05](../../moduli/05-prestazioni/README.md), [09](../../moduli/09-deploy-produzione/README.md)</span>
+<span class="meta-item">:material-target:{ .meta-icon } Difficoltà ●●○</span>
+<span class="stato stato-verificato">traccia completa</span>
+</div>
 
 ## Descrizione
 

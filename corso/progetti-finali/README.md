@@ -1,6 +1,8 @@
 # Progetti di fine corso
 
+<div class="meta" markdown>
 <span class="stato stato-verificato">tracce complete · settembre 2026</span>
+</div>
 
 Lo studente (o un gruppo di 2-3 persone) sceglie **un** progetto e lo porta a termine in **tre settimane**.
 Ogni progetto combina più moduli, produce qualcosa di usabile e va documentato in modo che un compagno possa

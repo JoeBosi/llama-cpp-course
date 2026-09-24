@@ -1,6 +1,10 @@
 # Lab 05-01 · Benchmark riproducibili
 
-> Modulo: [05: Prestazioni e ottimizzazione](../../moduli/05-prestazioni/README.md) · <span class="stato stato-verificato">verificato su b11046 (CPU)</span> · Durata stimata: 45 minuti
+<div class="meta" markdown>
+<span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/05-prestazioni/README.md">05: Prestazioni e ottimizzazione</a></span>
+<span class="meta-item">:material-clock-outline:{ .meta-icon } 45 minuti</span>
+<span class="stato stato-verificato">verificato su b11046 (CPU)</span>
+</div>
 
 ## Obiettivo
 

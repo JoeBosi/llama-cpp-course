@@ -1,6 +1,8 @@
 # Modulo 01: Installazione su varie piattaforme
 
+<div class="meta" markdown>
 <span class="stato stato-verificato">verificato su b11046 · Linux x86_64</span> <span class="stato stato-bozza">macOS, Windows, GPU, ARM, Android: dalla documentazione ufficiale, non verificati</span>
+</div>
 
 Ci sono cinque modi per avere llama.cpp: l'installer di llama.app, un gestore di pacchetti, i binari
 precompilati della pagina release, Docker, la compilazione. Tutti danno gli stessi comandi (`llama cli`,

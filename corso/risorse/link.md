@@ -1,6 +1,8 @@
 # Link utili
 
+<div class="meta" markdown>
 <span class="stato stato-verificato">aggiornato a settembre 2026</span>
+</div>
 
 ## Documentazione ufficiale
 

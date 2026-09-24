@@ -1,6 +1,10 @@
-# RAG minimo
+# Lab 08-02: RAG minimo
 
-> Modulo: [08: Integrare llama.cpp nelle applicazioni](../../moduli/08-integrazione-sviluppo/README.md) · <span class="stato stato-verificato">verificato su b11046 (CPU, router + preset, 23/09/2026)</span> · Durata stimata: 45 min
+<div class="meta" markdown>
+<span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/08-integrazione-sviluppo/README.md">08: Integrare llama.cpp nelle applicazioni</a></span>
+<span class="meta-item">:material-clock-outline:{ .meta-icon } 45 min</span>
+<span class="stato stato-verificato">verificato su b11046 (CPU, router + preset, 23/09/2026)</span>
+</div>
 
 ## Obiettivo
 

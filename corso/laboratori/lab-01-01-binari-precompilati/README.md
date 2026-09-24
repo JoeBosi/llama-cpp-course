@@ -1,6 +1,10 @@
 # Lab 01-01: Installazione da binari/pacchetti
 
-> Modulo: [01: Installazione su varie piattaforme](../../moduli/01-installazione/README.md) · <span class="stato stato-verificato">verificato su b11046 · Linux x86_64</span> <span class="stato stato-bozza">macOS / Windows non verificati</span> · Durata stimata: 30 minuti
+<div class="meta" markdown>
+<span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/01-installazione/README.md">01: Installazione su varie piattaforme</a></span>
+<span class="meta-item">:material-clock-outline:{ .meta-icon } 30 minuti</span>
+<span class="stato stato-verificato">verificato su b11046 · Linux x86_64</span> <span class="stato stato-bozza">macOS / Windows non verificati</span>
+</div>
 
 ## Obiettivo
 

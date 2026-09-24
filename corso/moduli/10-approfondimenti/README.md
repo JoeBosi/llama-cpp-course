@@ -1,6 +1,8 @@
 # Modulo 10: Approfondimenti: dentro ggml e llama.cpp
 
+<div class="meta" markdown>
 <span class="stato stato-verificato">verificato su b11046 (CPU): tokenizzazione, iperparametri, catena di sampler, flag</span> <span class="stato stato-bozza">bozza: compilazione dei programmi ggml, generazione del control vector e contributi: dalla documentazione e dai sorgenti ufficiali, non eseguiti su questa macchina</span>
+</div>
 
 Nei moduli precedenti hai usato llama.cpp come uno strumento. In questo lo apri: vedi come **ggml** rappresenta
 tensori e calcoli, come un grafo passa dallo scheduler ai backend, che cosa succede davvero tra il testo che

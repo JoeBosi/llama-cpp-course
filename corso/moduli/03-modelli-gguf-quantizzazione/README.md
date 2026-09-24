@@ -1,6 +1,8 @@
 # Modulo 03: Modelli, GGUF e quantizzazione
 
+<div class="meta" markdown>
 <span class="stato stato-verificato">verificato su b11046 (conversione da sorgenti e LoRA: dalla documentazione ufficiale)</span>
+</div>
 
 Nel [modulo 00](../00-introduzione/README.md) hai visto che cos'è un GGUF e che cosa significa quantizzare;
 nel [modulo 02](../02-primi-passi/README.md) hai scaricato un GGUF già pronto. Qui chiudi il cerchio: come si

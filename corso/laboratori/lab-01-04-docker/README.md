@@ -1,6 +1,10 @@
 # Lab 01-04: llama.cpp in Docker
 
-> Modulo: [01: Installazione su varie piattaforme](../../moduli/01-installazione/README.md) · <span class="stato stato-verificato">verificato su Linux x86_64 · immagini light/server b11096</span> <span class="stato stato-bozza">GPU passthrough non verificato</span> · Durata stimata: 40 minuti
+<div class="meta" markdown>
+<span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/01-installazione/README.md">01: Installazione su varie piattaforme</a></span>
+<span class="meta-item">:material-clock-outline:{ .meta-icon } 40 minuti</span>
+<span class="stato stato-verificato">verificato su Linux x86_64 · immagini light/server b11096</span> <span class="stato stato-bozza">GPU passthrough non verificato</span>
+</div>
 
 ## Obiettivo
 

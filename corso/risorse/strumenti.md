@@ -1,6 +1,8 @@
 # Strumenti del corso
 
+<div class="meta" markdown>
 <span class="stato stato-verificato">script provati su Ubuntu 24.04 · settembre 2026</span>
+</div>
 
 Due script bash nella cartella `scripts/` del repository del corso: uno per controllare che la macchina sia
 pronta, uno per scaricare in anticipo i modelli dei laboratori. Entrambi sono corti e leggibili: prima di

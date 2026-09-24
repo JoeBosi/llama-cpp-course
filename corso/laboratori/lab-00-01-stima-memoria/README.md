@@ -1,6 +1,10 @@
 # Lab 00-01: Stimare la memoria di un modello
 
-> Modulo: [00: Introduzione a llama.cpp](../../moduli/00-introduzione/README.md) · <span class="stato stato-verificato">verificato su b11046</span> · Durata stimata: 45 minuti
+<div class="meta" markdown>
+<span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/00-introduzione/README.md">00: Introduzione a llama.cpp</a></span>
+<span class="meta-item">:material-clock-outline:{ .meta-icon } 45 minuti</span>
+<span class="stato stato-verificato">verificato su b11046</span>
+</div>
 
 ## Obiettivo
 

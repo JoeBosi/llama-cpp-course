@@ -1,6 +1,8 @@
 # Versione di riferimento
 
+<div class="meta" markdown>
 <span class="stato stato-verificato">verificato il 22/09/2026</span>
+</div>
 
 llama.cpp pubblica **più build al giorno**. Per non inseguirle, il corso è scritto e provato su una versione precisa:
 

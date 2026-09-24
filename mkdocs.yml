@@ -12,8 +12,7 @@ theme:
   favicon: assets/img/logo.svg
   palette:
     # Chiaro (default)
-    - media: "(prefers-color-scheme)"
-      scheme: default
+    - scheme: default
       primary: teal
       accent: deep orange
       toggle:
@@ -26,7 +25,10 @@ theme:
         icon: material/weather-sunny
         name: Passa al tema chiaro
   features:
+    - navigation.tabs
+    - navigation.tabs.sticky
     - navigation.sections
+    - navigation.prune
     - navigation.indexes
     - navigation.top
     - navigation.footer
@@ -81,3 +83,7 @@ markdown_extensions:
 
 extra:
   generator: false
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/ggml-org/llama.cpp
+      name: llama.cpp su GitHub

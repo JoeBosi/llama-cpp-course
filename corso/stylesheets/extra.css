@@ -1,16 +1,73 @@
-:root { --md-primary-fg-color: #0f766e; --md-accent-fg-color: #ea580c; }
-.md-typeset h1 { font-weight: 700; }
-.md-typeset .mermaid { display: flex; justify-content: center; }
-.md-typeset figure.schema { margin: 1.5em auto; text-align: center; }
-.md-typeset figure.schema svg { max-width: 100%; height: auto; }
-.md-typeset figure.schema figcaption { font-size: .8rem; color: var(--md-default-fg-color--light); margin-top: .4em; }
-/* Badge di stato pagina */
-.stato { display: inline-block; padding: .1em .6em; border-radius: 1em; font-size: .75em; font-weight: 600; }
+/* ===== Corso pratico di llama.cpp: stile del sito =====
+   Un solo posto per colori, intestazioni di pagina, schemi e piccoli ritocchi di leggibilità. */
+
+:root {
+  --md-primary-fg-color: #0f766e;
+  --md-primary-fg-color--dark: #115e59;
+  --md-accent-fg-color: #ea580c;
+}
+
+/* --- Tipografia --- */
+.md-typeset h1 { font-weight: 700; text-wrap: balance; }
+.md-typeset h2, .md-typeset h3 { text-wrap: balance; }
+.md-typeset h1, .md-typeset h2, .md-typeset h3, .md-typeset h4 { scroll-margin-top: 5rem; }
+.md-typeset table:not([class]) { font-size: .74rem; font-variant-numeric: tabular-nums; }
+.md-typeset table:not([class]) td, .md-typeset table:not([class]) th { vertical-align: top; }
+.md-typeset code { word-break: break-word; }
+
+/* --- Blocco meta sotto il titolo (stesso aspetto in moduli, laboratori, progetti, risorse) --- */
+.md-typeset .meta {
+  display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .6rem;
+  margin: -.4rem 0 1.4rem; padding: .55rem .8rem;
+  border-left: .2rem solid var(--md-primary-fg-color);
+  background: var(--md-code-bg-color); border-radius: 0 .3rem .3rem 0;
+  font-size: .72rem; line-height: 1.5;
+}
+.md-typeset .meta p { margin: 0; display: contents; }
+.md-typeset .meta-item { white-space: nowrap; }
+.md-typeset .meta a { font-weight: 600; }
+
+/* --- Badge di stato --- */
+.stato { display: inline-block; padding: .1em .6em; border-radius: 1em; font-size: .68rem; font-weight: 600; white-space: normal; }
 .stato-verificato { background: #dcfce7; color: #166534; }
 .stato-bozza { background: #fef3c7; color: #92400e; }
 [data-md-color-scheme="slate"] .stato-verificato { background: #14532d; color: #dcfce7; }
 [data-md-color-scheme="slate"] .stato-bozza { background: #78350f; color: #fef3c7; }
-.md-typeset table:not([class]) { font-size: .75rem; }
-/* Gli schemi SVG sono disegnati per sfondo chiaro: in tema scuro gli diamo comunque un fondo chiaro */
-.md-typeset figure.schema img { background: #f8fafc; border-radius: 10px; padding: 8px; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+
+/* --- Schemi (SVG e Mermaid) --- */
+.md-typeset .mermaid { display: flex; justify-content: center; }
+.md-typeset figure.schema { margin: 1.5em auto; text-align: center; }
+.md-typeset figure.schema img {
+  max-width: 100%; height: auto; aspect-ratio: 900 / 470;   /* niente salti di layout durante il caricamento */
+  background: #f8fafc; border-radius: 10px; padding: 8px; box-shadow: 0 1px 3px rgba(0,0,0,.15);
+}
 [data-md-color-scheme="slate"] .md-typeset figure.schema img { background: #e5e7eb; }
+.md-typeset figure.schema figcaption { font-size: .74rem; color: var(--md-default-fg-color--light); margin-top: .5em; text-wrap: pretty; }
+
+/* --- Home: griglia di schede --- */
+.md-typeset .grid.cards > ul > li { border-color: var(--md-default-fg-color--lightest); }
+.md-typeset .grid.cards > ul > li:hover { border-color: var(--md-primary-fg-color); }
+.hero { margin: 0 0 1.5rem; }
+.hero p.lead { font-size: .95rem; color: var(--md-default-fg-color--light); max-width: 46rem; text-wrap: pretty; }
+
+/* --- Interazione e accessibilità --- */
+.md-typeset a, .md-nav__link, .md-tabs__link, .md-header__button { touch-action: manipulation; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
+
+/* --- Schermi piccoli --- */
+@media screen and (max-width: 44.9375em) {
+  .md-typeset .meta { font-size: .68rem; padding: .5rem .6rem; }
+  .md-typeset .meta-item { white-space: normal; }
+  .md-typeset figure.schema img { padding: 4px; border-radius: 6px; }
+  .md-typeset table:not([class]) { font-size: .68rem; }
+}
+
+/* Briciole di pane: solo su schermi larghi (sul telefono rubano spazio e vanno a capo) */
+@media screen and (max-width: 59.9375em) { .md-content .md-path { display: none; } }
+.md-typeset .meta-icon { color: var(--md-primary-fg-color); vertical-align: -.15em; }
+/* Diagrammi Mermaid: mai più larghi della colonna */
+.md-typeset .mermaid svg { max-width: 100%; height: auto; }
+/* Home: due schede per riga (quattro schede → 2×2, mai una orfana) */
+@media screen and (min-width: 45em) { .md-typeset .grid.cards > ul { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }

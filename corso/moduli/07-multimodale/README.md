@@ -1,6 +1,8 @@
 # Modulo 07: Multimodalità: visione, audio, voce
 
+<div class="meta" markdown>
 <span class="stato stato-verificato">verificato su b11046 (visione, CPU)</span> <span class="stato stato-bozza">audio e TTS: da verificare</span>
+</div>
 
 Fino a qui i modelli hanno letto e scritto solo testo. In questo modulo apri il modello anche a immagini, audio e video
 con il sottosistema **mtmd** di llama.cpp, e lo fai parlare con `llama-tts`. La parte "visione" è stata provata sul

@@ -1,33 +1,75 @@
+---
+hide:
+  - toc
+  - navigation
+---
+
 # Corso pratico di llama.cpp
 
-Benvenuto. Questo è un corso **pratico** su [llama.cpp](https://github.com/ggml-org/llama.cpp), il motore di
-inferenza in C/C++ che fa girare modelli linguistici (e visivi) in locale: sul tuo portatile, su un server,
-su un Raspberry Pi. Parti dall'installazione, arrivi a metterlo in produzione, e lungo la strada fai
-esperimenti veri con i tuoi modelli.
+<div class="hero" markdown>
+<p class="lead" markdown>Fai girare modelli linguistici (e visivi) **sul tuo computer**: portatile, PC, Mac, Raspberry Pi.
+Dall'installazione alla messa in produzione, con laboratori guidati, comandi verificati e un progetto finale.
+Aggiornato a settembre 2026 su [llama.cpp](https://github.com/ggml-org/llama.cpp) build b11046.</p>
+</div>
 
-!!! info "Aggiornato a settembre 2026"
-    Tutti i comandi sono verificati sulla versione indicata in [Versione di riferimento](versione.md).
-    llama.cpp cambia ogni giorno: se qualcosa non torna, controlla prima lì.
+<div class="grid cards" markdown>
 
-## Come è organizzato
+-   :material-download:{ .lg .middle } **Parti da zero**
+
+    ---
+
+    Installa llama.cpp sulla tua macchina e fai girare il primo modello in 10 minuti.
+
+    [:octicons-arrow-right-24: Modulo 01 · Installazione](moduli/01-installazione/README.md)
+
+-   :material-cpu-64-bit:{ .lg .middle } **Il modello giusto per te**
+
+    ---
+
+    Raspberry Pi, portatile senza GPU, Mac, GPU da 8 GB: quale modello scegliere e cosa aspettarsi.
+
+    [:octicons-arrow-right-24: Modulo 02b · Scegliere il modello](moduli/02b-scegliere-modello/README.md)
+
+-   :material-flask-outline:{ .lg .middle } **30 laboratori**
+
+    ---
+
+    Esperienze pratiche con procedura, risultato atteso e consegna. Ogni lab è sotto il suo modulo.
+
+    [:octicons-arrow-right-24: Lab 02-01 · Il primo modello](laboratori/lab-02-01-primo-modello/README.md)
+
+-   :material-trophy-outline:{ .lg .middle } **6 progetti finali**
+
+    ---
+
+    Assistente RAG, server in produzione, agente con strumenti, edge, quantizzazione, documenti.
+
+    [:octicons-arrow-right-24: Progetti finali](progetti-finali/README.md)
+
+</div>
+
+## Come è organizzato il corso
 
 ```mermaid
-flowchart LR
-    A[00 Introduzione] --> B[01 Installazione] --> C[02 Primi passi] --> C2[02b Quale modello] --> D[03 Modelli e quantizzazione] --> E[04 Server e API]
-    E --> F[05 Prestazioni]
-    E --> G[06 Output strutturato]
-    E --> H[07 Multimodale]
-    F --> I[08 Integrazione]
-    F --> J[09 Produzione]
-    I --> K[10 Dentro ggml]
-    J --> P((Progetto finale))
-    I --> P
-    G --> P
-    H --> P
+flowchart TB
+    subgraph base["Base (tutti)"]
+        direction LR
+        A[00 Introduzione] --> B[01 Installazione] --> C[02 Primi passi] --> C2[02b Quale modello] --> D[03 Modelli] --> E[04 Server e API]
+    end
+    subgraph spec["Specializzazioni"]
+        direction LR
+        F[05 Prestazioni] ~~~ G[06 Output strutturato] ~~~ H[07 Multimodale]
+    end
+    subgraph adv["Avanzato"]
+        direction LR
+        I[08 Integrazione] ~~~ J[09 Produzione] ~~~ K[10 Dentro ggml]
+    end
+    base --> spec --> adv --> P((Progetto finale))
 ```
 
-Ogni **modulo** spiega la teoria con schemi e comandi verificati; ogni **laboratorio** è un'esperienza pratica
+Ogni **modulo** spiega la teoria con schemi e comandi verificati; i **laboratori** sono esperienze pratiche
 con procedura, risultato atteso e consegna; i **progetti finali** combinano più moduli in qualcosa di utile.
+Il menu a sinistra mostra sempre tutti i moduli con i loro laboratori; il menu a destra, i paragrafi della pagina.
 
 ## Percorsi consigliati
 
@@ -51,17 +93,9 @@ con procedura, risultato atteso e consegna; i **progetti finali** combinano più
 
     **Moduli:** tutti, incluso 10 · **Progetti:** P4 o P5
 
-## Cosa ti serve
-
-- Un computer con almeno **8 GB di RAM** (16 consigliati). GPU facoltativa: il corso gira anche solo su CPU.
-- Linux, macOS o Windows; un po' di dimestichezza con il terminale.
-- Per i moduli 08–10: basi di Python e/o C++.
-
-Verifica rapida del tuo ambiente: [script `verifica-ambiente.sh`](risorse/strumenti.md).
-
 ## Programma
 
-| # | Modulo | Lab |
+| # | Modulo | Laboratori |
 |---|---|---|
 | 00 | [Introduzione a llama.cpp](moduli/00-introduzione/README.md) | 2 |
 | 01 | [Installazione su varie piattaforme](moduli/01-installazione/README.md) | 4 |
@@ -76,3 +110,12 @@ Verifica rapida del tuo ambiente: [script `verifica-ambiente.sh`](risorse/strume
 | 09 | [Messa in produzione](moduli/09-deploy-produzione/README.md) | 2 |
 | 10 | [Approfondimenti: dentro ggml e llama.cpp](moduli/10-approfondimenti/README.md) | 2 |
 | — | [Progetti di fine corso](progetti-finali/README.md) | 6 tracce |
+
+## Cosa ti serve
+
+- Un computer con almeno **8 GB di RAM** (16 consigliati). GPU facoltativa: il corso gira anche solo su CPU.
+- Linux, macOS o Windows; un po' di dimestichezza con il terminale.
+- Per i moduli 08–10: basi di Python e/o C++.
+
+Verifica rapida del tuo ambiente: [`verifica-ambiente.sh`](risorse/strumenti.md). Versione di llama.cpp usata
+nel corso: [b11046](versione.md).

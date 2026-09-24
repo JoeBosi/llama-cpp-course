@@ -1,6 +1,10 @@
-# Quantizzazione con imatrix
+# Lab 03-03: Quantizzazione con imatrix
 
-> Modulo: [03: Modelli, GGUF e quantizzazione](../../moduli/03-modelli-gguf-quantizzazione/README.md) · <span class="stato stato-verificato">verificato su b11046</span> · Durata stimata: 45 minuti
+<div class="meta" markdown>
+<span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/03-modelli-gguf-quantizzazione/README.md">03: Modelli, GGUF e quantizzazione</a></span>
+<span class="meta-item">:material-clock-outline:{ .meta-icon } 45 minuti</span>
+<span class="stato stato-verificato">verificato su b11046</span>
+</div>
 
 ## Obiettivo
 

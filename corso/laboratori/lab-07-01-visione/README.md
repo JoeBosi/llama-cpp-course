@@ -1,6 +1,10 @@
-# Descrivere e interrogare immagini
+# Lab 07-01: Descrivere e interrogare immagini
 
-> Modulo: [07: Multimodalità: visione, audio, voce](../../moduli/07-multimodale/README.md) · <span class="stato stato-verificato">verificato su b11046 (CPU)</span> · Durata stimata: 45 min
+<div class="meta" markdown>
+<span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/07-multimodale/README.md">07: Multimodalità: visione, audio, voce</a></span>
+<span class="meta-item">:material-clock-outline:{ .meta-icon } 45 min</span>
+<span class="stato stato-verificato">verificato su b11046 (CPU)</span>
+</div>
 
 ## Obiettivo
 

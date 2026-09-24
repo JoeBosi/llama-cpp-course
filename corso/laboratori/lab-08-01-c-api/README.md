@@ -1,6 +1,10 @@
-# Un programma C++ con libllama
+# Lab 08-01: Un programma C++ con libllama
 
-> Modulo: [08: Integrare llama.cpp nelle applicazioni](../../moduli/08-integrazione-sviluppo/README.md) · <span class="stato stato-verificato">API confrontate con `llama.h` e `examples/simple/simple.cpp` (b11046)</span> <span class="stato stato-bozza">build CMake (add_subdirectory / find_package): da verificare</span> · Durata stimata: 60 min
+<div class="meta" markdown>
+<span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/08-integrazione-sviluppo/README.md">08: Integrare llama.cpp nelle applicazioni</a></span>
+<span class="meta-item">:material-clock-outline:{ .meta-icon } 60 min</span>
+<span class="stato stato-verificato">API confrontate con `llama.h` e `examples/simple/simple.cpp` (b11046)</span> <span class="stato stato-bozza">build CMake (add_subdirectory / find_package): da verificare</span>
+</div>
 
 ## Obiettivo
 

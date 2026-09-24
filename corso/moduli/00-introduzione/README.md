@@ -1,6 +1,8 @@
 # Modulo 00: Introduzione a llama.cpp
 
+<div class="meta" markdown>
 <span class="stato stato-verificato">verificato su b11046</span>
+</div>
 
 Questo modulo ti dà la mappa: cos'è llama.cpp, com'è fatto dentro, che cosa c'è in un file GGUF e come
 capire **prima di scaricare** se un modello sta nella memoria del tuo computer. Non serve ancora installare

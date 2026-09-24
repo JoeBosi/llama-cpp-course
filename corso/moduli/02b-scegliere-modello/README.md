@@ -1,6 +1,8 @@
 # Modulo 02b: Scegliere il modello per la tua macchina
 
+<div class="meta" markdown>
 <span class="stato stato-verificato">repository e dimensioni verificati su Hugging Face il 24/09/2026 · velocità CPU misurate sul VPS del corso</span> <span class="stato stato-bozza">velocità su GPU, Mac e Raspberry Pi: stime da esperienza e documentazione, da confermare sul tuo hardware</span>
+</div>
 
 Hai fatto girare il primo modello (modulo 02) e ti stai chiedendo: **quale modello scarico adesso?** Questo
 modulo risponde con una regola semplice, una tabella per tipo di macchina e, per ogni macchina, il modello

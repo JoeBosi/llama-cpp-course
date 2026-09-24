@@ -1,6 +1,10 @@
-# Esperimenti di campionamento
+# Lab 02-02: Esperimenti di campionamento
 
-> Modulo: [02: Primi passi: `llama cli`](../../moduli/02-primi-passi/README.md) · <span class="stato stato-verificato">verificato su b11046</span> · Durata stimata: 45 minuti
+<div class="meta" markdown>
+<span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/02-primi-passi/README.md">02: Primi passi: `llama cli`</a></span>
+<span class="meta-item">:material-clock-outline:{ .meta-icon } 45 minuti</span>
+<span class="stato stato-verificato">verificato su b11046</span>
+</div>
 
 ## Obiettivo
 

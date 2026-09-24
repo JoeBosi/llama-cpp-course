@@ -3,6 +3,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 DEST=${1:-/srv/llamacorso}
+python3 scripts/genera-nav.py
 .venv/bin/mkdocs build --strict -d "$DEST.tmp"
 rm -rf "$DEST" && mv "$DEST.tmp" "$DEST"
 chmod -R a+rX "$DEST"

@@ -1,6 +1,8 @@
 # Modulo 06: Output strutturato: grammatiche GBNF e JSON Schema
 
+<div class="meta" markdown>
 <span class="stato stato-verificato">verificato su b11046</span>
+</div>
 
 Un modello di linguaggio produce testo libero. Quando quel testo deve essere letto da un programma (un JSON da
 decodificare, un comando da eseguire, un "sì/no" da confrontare) il testo libero è un problema: un ` ```json `

@@ -1,6 +1,10 @@
 # P1: Assistente documentale locale (RAG)
 
-> Moduli di riferimento: [02](../../moduli/02-primi-passi/README.md), [04](../../moduli/04-server-api/README.md), [08](../../moduli/08-integrazione-sviluppo/README.md) · Difficoltà ●●○ · <span class="stato stato-verificato">traccia completa</span>
+<div class="meta" markdown>
+<span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Moduli [02](../../moduli/02-primi-passi/README.md), [04](../../moduli/04-server-api/README.md), [08](../../moduli/08-integrazione-sviluppo/README.md)</span>
+<span class="meta-item">:material-target:{ .meta-icon } Difficoltà ●●○</span>
+<span class="stato stato-verificato">traccia completa</span>
+</div>
 
 ## Descrizione
 

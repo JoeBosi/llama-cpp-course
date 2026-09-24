@@ -1,6 +1,10 @@
-# Il primo modello
+# Lab 02-01: Il primo modello
 
-> Modulo: [02: Primi passi: `llama cli`](../../moduli/02-primi-passi/README.md) · <span class="stato stato-verificato">verificato su b11046</span> · Durata stimata: 40 minuti
+<div class="meta" markdown>
+<span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/02-primi-passi/README.md">02: Primi passi: `llama cli`</a></span>
+<span class="meta-item">:material-clock-outline:{ .meta-icon } 40 minuti</span>
+<span class="stato stato-verificato">verificato su b11046</span>
+</div>
 
 ## Obiettivo
 

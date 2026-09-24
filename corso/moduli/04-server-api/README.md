@@ -1,6 +1,8 @@
 # Modulo 04: `llama serve`: server e API
 
+<div class="meta" markdown>
 <span class="stato stato-verificato">verificato su b11046</span>
+</div>
 
 `llama serve` (il vecchio `llama-server`, ancora presente nei tarball e nelle immagini Docker) trasforma un
 modello GGUF in un **servizio HTTP**: una web UI per chattare dal browser, un'API compatibile OpenAI a cui

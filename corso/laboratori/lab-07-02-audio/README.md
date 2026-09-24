@@ -1,6 +1,10 @@
-# Audio e voce
+# Lab 07-02: Audio e voce
 
-> Modulo: [07: Multimodalità: visione, audio, voce](../../moduli/07-multimodale/README.md) · <span class="stato stato-bozza">bozza · comandi dalla documentazione ufficiale, da verificare (i modelli audio superano 1 GB e non sono stati provati sul VPS del corso)</span> · Durata stimata: 45 min
+<div class="meta" markdown>
+<span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/07-multimodale/README.md">07: Multimodalità: visione, audio, voce</a></span>
+<span class="meta-item">:material-clock-outline:{ .meta-icon } 45 min</span>
+<span class="stato stato-bozza">bozza · comandi dalla documentazione ufficiale, da verificare (i modelli audio superano 1 GB e non sono stati provati sul VPS del corso)</span>
+</div>
 
 ## Obiettivo
 

@@ -1,6 +1,10 @@
-# Scrivere una grammatica
+# Lab 06-01: Scrivere una grammatica
 
-> Modulo: [06: Output strutturato: grammatiche GBNF e JSON Schema](../../moduli/06-output-strutturato/README.md) · <span class="stato stato-verificato">verificato su b11046</span> · Durata stimata: 60 minuti
+<div class="meta" markdown>
+<span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/06-output-strutturato/README.md">06: Output strutturato: grammatiche GBNF e JSON Schema</a></span>
+<span class="meta-item">:material-clock-outline:{ .meta-icon } 60 minuti</span>
+<span class="stato stato-verificato">verificato su b11046</span>
+</div>
 
 ## Obiettivo
 

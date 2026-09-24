@@ -1,6 +1,10 @@
 # Lab 10-02 · Control vector
 
-> Modulo: [10: Approfondimenti: dentro ggml e llama.cpp](../../moduli/10-approfondimenti/README.md) · <span class="stato stato-bozza">da verificare · la generazione richiede `llama-cvector-generator` compilato dai sorgenti (non eseguito sul VPS del corso); opzioni lette dai sorgenti e da `--help`</span> · Durata stimata: 60 minuti (+ build dai sorgenti)
+<div class="meta" markdown>
+<span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/10-approfondimenti/README.md">10: Approfondimenti: dentro ggml e llama.cpp</a></span>
+<span class="meta-item">:material-clock-outline:{ .meta-icon } 60 minuti (+ build dai sorgenti)</span>
+<span class="stato stato-bozza">da verificare · la generazione richiede `llama-cvector-generator` compilato dai sorgenti (non eseguito sul VPS del corso); opzioni lette dai sorgenti e da `--help`</span>
+</div>
 
 ## Obiettivo
 

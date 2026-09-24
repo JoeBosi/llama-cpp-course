@@ -1,6 +1,10 @@
-# Il server come servizio
+# Lab 09-01: Il server come servizio
 
-> Modulo: [09: Messa in produzione](../../moduli/09-deploy-produzione/README.md) · <span class="stato stato-verificato">verificato su b11046</span> (unità validata con `systemd-analyze`; su una VM Ubuntu 24.04) · Durata stimata: 60-90 minuti
+<div class="meta" markdown>
+<span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/09-deploy-produzione/README.md">09: Messa in produzione</a></span>
+<span class="meta-item">:material-clock-outline:{ .meta-icon } 60-90 minuti</span>
+<span class="stato stato-verificato">verificato su b11046</span> (unità validata con `systemd-analyze`; su una VM Ubuntu 24.04)
+</div>
 
 ## Obiettivo
 

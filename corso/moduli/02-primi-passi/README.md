@@ -1,6 +1,8 @@
 # Modulo 02: Primi passi: `llama cli`
 
+<div class="meta" markdown>
 <span class="stato stato-verificato">verificato su b11046</span>
+</div>
 
 `llama cli` (il vecchio `llama-cli`, ancora presente nei tarball e nelle immagini Docker) è il terminale di
 llama.cpp: scarica un modello da Hugging Face, ci chatta, e ti lascia toccare con mano tutto ciò che il server

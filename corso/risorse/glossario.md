@@ -1,6 +1,8 @@
 # Glossario
 
+<div class="meta" markdown>
 <span class="stato stato-verificato">54 voci · settembre 2026</span>
+</div>
 
 I termini che incontri nei log, nella documentazione e in questo corso, in ordine alfabetico. Le voci in
 inglese restano in inglese perché è così che le troverai in `--help` e nei messaggi del programma.

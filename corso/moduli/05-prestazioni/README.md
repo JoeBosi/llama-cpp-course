@@ -1,6 +1,8 @@
 # Modulo 05: Prestazioni e ottimizzazione
 
+<div class="meta" markdown>
 <span class="stato stato-verificato">verificato su b11046 (CPU)</span> <span class="stato stato-bozza">parti GPU, multi-GPU e NUMA: dalla documentazione ufficiale, non verificate su questa macchina</span>
+</div>
 
 Un modello che "gira" non basta: deve girare **abbastanza in fretta** per l'uso che ne fai. In questo modulo impari a
 misurare le prestazioni in modo riproducibile, a capire **quale risorsa fa da collo di bottiglia** (calcolo, banda di

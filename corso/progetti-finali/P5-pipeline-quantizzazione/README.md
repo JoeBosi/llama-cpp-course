@@ -1,6 +1,10 @@
 # P5: Pipeline di conversione e valutazione
 
-> Moduli di riferimento: [03](../../moduli/03-modelli-gguf-quantizzazione/README.md), [05](../../moduli/05-prestazioni/README.md) · Difficoltà ●●● · <span class="stato stato-verificato">traccia completa</span>
+<div class="meta" markdown>
+<span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Moduli [03](../../moduli/03-modelli-gguf-quantizzazione/README.md), [05](../../moduli/05-prestazioni/README.md)</span>
+<span class="meta-item">:material-target:{ .meta-icon } Difficoltà ●●●</span>
+<span class="stato stato-verificato">traccia completa</span>
+</div>
 
 ## Descrizione
 

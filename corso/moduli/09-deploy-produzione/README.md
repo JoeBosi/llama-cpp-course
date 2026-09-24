@@ -1,6 +1,8 @@
 # Modulo 09: Messa in produzione
 
+<div class="meta" markdown>
 <span class="stato stato-verificato">verificato su b11046</span> · configurazioni Caddy, systemd e Nginx validate sul VPS del corso; Prometheus/Grafana descritti dalla documentazione ufficiale
+</div>
 
 Nei moduli precedenti hai avviato `llama serve` a mano, in un terminale, e lo hai chiuso con ++ctrl+c++.
 In produzione il server deve **partire da solo**, **ripartire se cade**, essere raggiungibile **solo da chi

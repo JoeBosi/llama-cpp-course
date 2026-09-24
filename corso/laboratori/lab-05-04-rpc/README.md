@@ -1,6 +1,10 @@
 # Lab 05-04 · Cluster RPC
 
-> Modulo: [05: Prestazioni e ottimizzazione](../../moduli/05-prestazioni/README.md) · <span class="stato stato-verificato">verificato su b11046 (server e client sulla stessa macchina, CPU)</span> <span class="stato stato-bozza">due macchine con GPU: dalla documentazione</span> · Durata stimata: 45 minuti
+<div class="meta" markdown>
+<span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/05-prestazioni/README.md">05: Prestazioni e ottimizzazione</a></span>
+<span class="meta-item">:material-clock-outline:{ .meta-icon } 45 minuti</span>
+<span class="stato stato-verificato">verificato su b11046 (server e client sulla stessa macchina, CPU)</span> <span class="stato stato-bozza">due macchine con GPU: dalla documentazione</span>
+</div>
 
 ## Obiettivo
 

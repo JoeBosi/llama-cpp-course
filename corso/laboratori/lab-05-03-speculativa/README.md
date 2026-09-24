@@ -1,6 +1,10 @@
 # Lab 05-03 · Decodifica speculativa
 
-> Modulo: [05: Prestazioni e ottimizzazione](../../moduli/05-prestazioni/README.md) · <span class="stato stato-verificato">metodi n-gram verificati su b11046 (CPU)</span> <span class="stato stato-bozza">coppie target+bozza: dalla documentazione, da verificare su GPU</span> · Durata stimata: 60 minuti
+<div class="meta" markdown>
+<span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/05-prestazioni/README.md">05: Prestazioni e ottimizzazione</a></span>
+<span class="meta-item">:material-clock-outline:{ .meta-icon } 60 minuti</span>
+<span class="stato stato-verificato">metodi n-gram verificati su b11046 (CPU)</span> <span class="stato stato-bozza">coppie target+bozza: dalla documentazione, da verificare su GPU</span>
+</div>
 
 ## Obiettivo
 

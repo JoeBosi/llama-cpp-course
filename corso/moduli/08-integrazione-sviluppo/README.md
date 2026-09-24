@@ -1,6 +1,8 @@
 # Modulo 08: Integrare llama.cpp nelle applicazioni
 
+<div class="meta" markdown>
 <span class="stato stato-verificato">verificato su b11046: C API (Linux, CPU) e RAG con /v1/embeddings</span> <span class="stato stato-bozza">binding, framework e mobile: dalla documentazione ufficiale</span>
+</div>
 
 Finora hai usato llama.cpp "da fuori": cli, server, curl. Questo modulo lo porta **dentro** la tua applicazione. Ci sono
 due strade, il server HTTP e la libreria incorporata, e una serie di ponti già pronti: binding Python, framework come

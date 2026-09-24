@@ -1,6 +1,10 @@
 # Lab 01-02: Build dai sorgenti (CPU)
 
-> Modulo: [01: Installazione su varie piattaforme](../../moduli/01-installazione/README.md) · <span class="stato stato-bozza">bozza · procedura dalla documentazione ufficiale, tempi non misurati dal corso</span> · Durata stimata: 45 minuti (+ tempo di compilazione)
+<div class="meta" markdown>
+<span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/01-installazione/README.md">01: Installazione su varie piattaforme</a></span>
+<span class="meta-item">:material-clock-outline:{ .meta-icon } 45 minuti (+ tempo di compilazione)</span>
+<span class="stato stato-bozza">bozza · procedura dalla documentazione ufficiale, tempi non misurati dal corso</span>
+</div>
 
 ## Obiettivo
 

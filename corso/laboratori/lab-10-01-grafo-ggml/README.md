@@ -1,6 +1,10 @@
 # Lab 10-01 · Un grafo ggml a mano
 
-> Modulo: [10: Approfondimenti: dentro ggml e llama.cpp](../../moduli/10-approfondimenti/README.md) · <span class="stato stato-bozza">bozza · sorgenti confrontati con examples/simple di ggml e verificati contro gli header; compilazione ed esecuzione da verificare (non eseguite sul VPS del corso)</span> · Durata stimata: 60 minuti (+ compilazione di ggml)
+<div class="meta" markdown>
+<span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/10-approfondimenti/README.md">10: Approfondimenti: dentro ggml e llama.cpp</a></span>
+<span class="meta-item">:material-clock-outline:{ .meta-icon } 60 minuti (+ compilazione di ggml)</span>
+<span class="stato stato-bozza">bozza · sorgenti confrontati con examples/simple di ggml e verificati contro gli header; compilazione ed esecuzione da verificare (non eseguite sul VPS del corso)</span>
+</div>
 
 ## Obiettivo
 

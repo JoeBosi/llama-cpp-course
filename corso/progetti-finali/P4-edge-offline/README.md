@@ -1,6 +1,10 @@
 # P4: Inferenza su dispositivo edge
 
-> Moduli di riferimento: [01](../../moduli/01-installazione/README.md), [03](../../moduli/03-modelli-gguf-quantizzazione/README.md), [05](../../moduli/05-prestazioni/README.md) · Difficoltà ●●○ · <span class="stato stato-bozza">traccia completa · da verificare sul tuo dispositivo</span>
+<div class="meta" markdown>
+<span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Moduli [01](../../moduli/01-installazione/README.md), [03](../../moduli/03-modelli-gguf-quantizzazione/README.md), [05](../../moduli/05-prestazioni/README.md)</span>
+<span class="meta-item">:material-target:{ .meta-icon } Difficoltà ●●○</span>
+<span class="stato stato-bozza">traccia completa · da verificare sul tuo dispositivo</span>
+</div>
 
 ## Descrizione
 

@@ -1,10 +1,62 @@
-# Navigazione del sito (plugin awesome-nav).
-# I titoli vengono dall'H1 di ogni pagina; l'ordine è quello dei nomi di file/cartella.
-# Per aggiungere una pagina basta creare il file .md nella cartella giusta.
+# GENERATO da scripts/genera-nav.py: non modificare a mano.
 nav:
-  - index.md
-  - versione.md
-  - Moduli: moduli
-  - Laboratori: laboratori
+  - Home: index.md
+  - Il corso:
+      - "00 · Introduzione a llama.cpp":
+          - moduli/00-introduzione/README.md
+          - laboratori/lab-00-01-stima-memoria/README.md
+          - laboratori/lab-00-02-anatomia-gguf/README.md
+      - "01 · Installazione su varie piattaforme":
+          - moduli/01-installazione/README.md
+          - laboratori/lab-01-01-binari-precompilati/README.md
+          - laboratori/lab-01-02-build-sorgenti-cpu/README.md
+          - laboratori/lab-01-03-build-gpu/README.md
+          - laboratori/lab-01-04-docker/README.md
+      - "02 · Primi passi: llama cli":
+          - moduli/02-primi-passi/README.md
+          - laboratori/lab-02-01-primo-modello/README.md
+          - laboratori/lab-02-02-campionamento/README.md
+          - laboratori/lab-02-03-chat-template/README.md
+      - "02b · Scegliere il modello per la tua macchina":
+          - moduli/02b-scegliere-modello/README.md
+      - "03 · Modelli, GGUF e quantizzazione":
+          - moduli/03-modelli-gguf-quantizzazione/README.md
+          - laboratori/lab-03-01-conversione/README.md
+          - laboratori/lab-03-02-scala-quantizzazioni/README.md
+          - laboratori/lab-03-03-imatrix/README.md
+      - "04 · llama serve: server e API":
+          - moduli/04-server-api/README.md
+          - laboratori/lab-04-01-server-e-webui/README.md
+          - laboratori/lab-04-02-client-openai/README.md
+          - laboratori/lab-04-03-parallelismo/README.md
+          - laboratori/lab-04-04-tool-calling/README.md
+      - "05 · Prestazioni e ottimizzazione":
+          - moduli/05-prestazioni/README.md
+          - laboratori/lab-05-01-benchmark/README.md
+          - laboratori/lab-05-02-offload-ibrido/README.md
+          - laboratori/lab-05-03-speculativa/README.md
+          - laboratori/lab-05-04-rpc/README.md
+      - "06 · Output strutturato: grammatiche GBNF e JSON Schema":
+          - moduli/06-output-strutturato/README.md
+          - laboratori/lab-06-01-gbnf/README.md
+          - laboratori/lab-06-02-estrazione-json/README.md
+      - "07 · Multimodalità: visione, audio, voce":
+          - moduli/07-multimodale/README.md
+          - laboratori/lab-07-01-visione/README.md
+          - laboratori/lab-07-02-audio/README.md
+      - "08 · Integrare llama.cpp nelle applicazioni":
+          - moduli/08-integrazione-sviluppo/README.md
+          - laboratori/lab-08-01-c-api/README.md
+          - laboratori/lab-08-02-rag-minimo/README.md
+      - "09 · Messa in produzione":
+          - moduli/09-deploy-produzione/README.md
+          - laboratori/lab-09-01-servizio/README.md
+          - laboratori/lab-09-02-proxy-monitoraggio/README.md
+      - "10 · Approfondimenti: dentro ggml e llama.cpp":
+          - moduli/10-approfondimenti/README.md
+          - laboratori/lab-10-01-grafo-ggml/README.md
+          - laboratori/lab-10-02-control-vector/README.md
   - Progetti finali: progetti-finali
-  - Risorse: risorse
+  - Risorse:
+      - risorse/*
+      - versione.md
