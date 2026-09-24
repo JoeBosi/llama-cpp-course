@@ -24,7 +24,7 @@ flowchart LR
         EMB1 --> IDX[(Indice vettoriale<br/>SQLite/numpy · FAISS · Chroma)]
     end
     subgraph Risposta["Risposta (per ogni domanda)"]
-        Q[Domanda] --> EMB2[/v1/embeddings]
+        Q[Domanda] --> EMB2["/v1/embeddings"]
         EMB2 --> S[Ricerca top-k]
         IDX --> S
         S --> RR[Reranker opzionale<br/>/v1/rerank]
