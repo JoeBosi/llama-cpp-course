@@ -72,3 +72,15 @@
 /* Home: due schede per riga (quattro schede → 2×2, mai una orfana) */
 @media screen and (min-width: 45em) { .md-typeset .grid.cards > ul { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
 @media screen and (min-width: 45em) { .md-typeset .grid.cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* ===== Barra superiore UNICA, identica su ogni pagina, a ogni larghezza, anche scorrendo =====
+   Riga 1: logo · nome del sito · tema · cerca.  Riga 2: Home · Il corso · Progetti finali · Risorse. */
+.md-header__topic + .md-header__topic { display: none; }                 /* mai il titolo di pagina al posto del nome del sito */
+.md-header__topic:first-child { opacity: 1 !important; transform: none !important; pointer-events: auto !important; }
+.md-tabs { display: block !important; pointer-events: auto !important; } /* la riga delle sezioni resta anche su tablet e telefono */
+.md-tabs[hidden] .md-tabs__link { opacity: 1 !important; transform: none !important; transition: none !important; }
+@media screen and (max-width: 76.1875em) {
+  .md-tabs__list { margin-left: .2rem; }
+  .md-tabs__item { height: 2.2rem; padding: 0 .55rem; }
+  .md-tabs__link { font-size: .68rem; margin-top: .6rem; }
+}
