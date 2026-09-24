@@ -1,4 +1,5 @@
 site_name: Corso pratico di llama.cpp
+site_url: https://corso-llamacpp.giuseppebosi.com/
 site_description: Guida e corso pratico su llama.cpp, dall'installazione alla produzione. Aggiornato a settembre 2026.
 site_author: Giuseppe Bosi
 docs_dir: corso
@@ -25,6 +26,8 @@ theme:
         icon: material/weather-sunny
         name: Passa al tema chiaro
   features:
+    - navigation.instant       # niente ricarica di pagina: la barra in alto resta lo stesso elemento, non può più "sfarfallare" da un clic all'altro
+    - navigation.instant.progress
     - navigation.tabs
     - navigation.tabs.sticky
     - navigation.sections
