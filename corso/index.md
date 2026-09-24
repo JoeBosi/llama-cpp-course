@@ -13,7 +13,7 @@ esperimenti veri con i tuoi modelli.
 
 ```mermaid
 flowchart LR
-    A[00 Introduzione] --> B[01 Installazione] --> C[02 Primi passi] --> D[03 Modelli e quantizzazione] --> E[04 Server e API]
+    A[00 Introduzione] --> B[01 Installazione] --> C[02 Primi passi] --> C2[02b Quale modello] --> D[03 Modelli e quantizzazione] --> E[04 Server e API]
     E --> F[05 Prestazioni]
     E --> G[06 Output strutturato]
     E --> H[07 Multimodale]
@@ -34,7 +34,7 @@ con procedura, risultato atteso e consegna; i **progetti finali** combinano più
 === "Utente"
     Vuoi usare i modelli in locale, in modo privato e gratuito.
 
-    **Moduli:** 00 → 01 → 02 → 03 → 04 → 06 · **Progetti:** P1 o P6
+    **Moduli:** 00 → 01 → 02 → 02b → 03 → 04 → 06 · **Progetti:** P1 o P6
 
 === "Sviluppatore"
     Vuoi integrare un modello locale nella tua applicazione.
@@ -66,6 +66,7 @@ Verifica rapida del tuo ambiente: [script `verifica-ambiente.sh`](risorse/strume
 | 00 | [Introduzione a llama.cpp](moduli/00-introduzione/README.md) | 2 |
 | 01 | [Installazione su varie piattaforme](moduli/01-installazione/README.md) | 4 |
 | 02 | [Primi passi: `llama cli`](moduli/02-primi-passi/README.md) | 3 |
+| 02b | [Scegliere il modello per la tua macchina](moduli/02b-scegliere-modello/README.md) | — |
 | 03 | [Modelli, GGUF e quantizzazione](moduli/03-modelli-gguf-quantizzazione/README.md) | 3 |
 | 04 | [`llama serve`: server e API](moduli/04-server-api/README.md) | 4 |
 | 05 | [Prestazioni e ottimizzazione](moduli/05-prestazioni/README.md) | 4 |

@@ -26,8 +26,6 @@ theme:
         icon: material/weather-sunny
         name: Passa al tema chiaro
   features:
-    - navigation.tabs
-    - navigation.tabs.sticky
     - navigation.sections
     - navigation.indexes
     - navigation.top

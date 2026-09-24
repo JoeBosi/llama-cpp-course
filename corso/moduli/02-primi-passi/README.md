@@ -446,3 +446,7 @@ assurdo, ripete i turni, non si ferma mai (manca l'EOS giusto) o mette tag stran
 - [Hugging Face: GGUF e llama.cpp](https://huggingface.co/docs/hub/gguf-llamacpp)
 - [Jinja: documentazione dei template](https://jinja.palletsprojects.com/en/stable/templates/)
 - [Glossario del corso](../../risorse/glossario.md) · [Modelli consigliati](../../risorse/modelli-consigliati.md)
+
+!!! tip "E adesso quale modello?"
+    Hai fatto girare il modello del corso. Per scegliere quello giusto per **la tua** macchina (Raspberry Pi,
+    portatile, PC, Mac, GPU) vai al [Modulo 02b: Scegliere il modello](../02b-scegliere-modello/README.md).
