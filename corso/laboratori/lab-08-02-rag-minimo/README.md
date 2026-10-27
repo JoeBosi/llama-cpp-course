@@ -28,7 +28,7 @@ di embedding e quello di chat.
 | `ggml-org/Qwen3.5-0.8B-GGUF:Q8_0` (chat) | Hugging Face | 785 MB | Apache 2.0 |
 | [`rag_minimo.py`](rag_minimo.py) | questa cartella | 130 righe: `indicizza`, `cerca`, `rispondi` | |
 | [`modelli.ini`](modelli.ini) | questa cartella | preset per il router (`--models-preset`) | |
-| [`documenti/`](documenti/) | questa cartella | 4 file `.txt` (installazione, server, quantizzazione, multimodale), ~850 byte l'uno | |
+| `documenti/` ([installazione](documenti/installazione.txt), [server](documenti/server.txt), [quantizzazione](documenti/quantizzazione.txt), [multimodale](documenti/multimodale.txt)) | questa cartella | 4 file `.txt` (installazione, server, quantizzazione, multimodale), ~850 byte l'uno | |
 | `indice.npz` | generato dallo script | 45 KB, matrice 9 × 768 float32 + fonti + testi | |
 
 ## Procedura

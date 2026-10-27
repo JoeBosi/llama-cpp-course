@@ -243,7 +243,7 @@ llama cli -hf ggml-org/Qwen3.5-0.8B-GGUF -c 4096 -n 200 -t 4
 |---|---|---|
 | `-c N`, `--ctx-size` | 0 = quello del modello | token totali di **prompt + risposta + cronologia**. Il modello di prova ha `n_ctx_train = 262144`: lasciarlo a 0 significa allocare una KV cache enorme, quindi `--fit` lo riduce da solo alla memoria libera (o tu lo fissi). Formula della memoria nel [modulo 00](../00-introduzione/README.md#5-stimare-la-memoria-pesi-kv-cache-overhead) |
 | `-n N`, `--predict` | -1 = finché il modello si ferma | massimo di token generati **per risposta** (ragionamento incluso!) |
-| `-t N`, `--threads` | -1 = automatico | thread per la generazione; `-tb` per il prompt processing. Regola: **core fisici**, non logici; su un portatile lasciane uno libero. Approfondimento nel [modulo 05](../05-prestazioni/README.md#3-thread-affinità-e-numa) |
+| `-t N`, `--threads` | -1 = automatico | thread per la generazione; `-tb` per il prompt processing. Regola: **core fisici**, non logici; su un portatile lasciane uno libero. Approfondimento nel [modulo 05](../05-prestazioni/README.md#3-thread-affinita-e-numa) |
 | `-ngl N\|auto\|all` | auto | strati sulla GPU, se c'è; `--list-devices` li elenca ([modulo 05](../05-prestazioni/README.md)) |
 | `-fa on\|off\|auto`, `-ctk/-ctv q8_0` | auto, f16 | flash attention e KV cache quantizzata: meno memoria a contesti lunghi |
 | `--load-mode mmap\|mlock\|dio` | auto | come leggere il file: `mlock` blocca i pesi in RAM (niente swap). I vecchi `--mmap/--mlock` non esistono più in 0.4.1 |

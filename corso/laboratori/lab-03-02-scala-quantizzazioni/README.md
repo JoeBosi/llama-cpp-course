@@ -19,7 +19,7 @@ velocità del [modulo 00](../../moduli/00-introduzione/README.md).
   `llama perplexity` funzionanti (`llama help all` li elenca).
 - ~2 GB liberi su disco per i tre file (ognuno 400-550 MB) e ~2 GB di RAM libera.
 - Aver letto le sezioni [3](../../moduli/03-modelli-gguf-quantizzazione/README.md#3-le-famiglie-di-quantizzazione) e
-  [5](../../moduli/03-modelli-gguf-quantizzazione/README.md#5-misurare-la-qualità-perplexity-e-kl-divergence) del modulo.
+  [5](../../moduli/03-modelli-gguf-quantizzazione/README.md#5-misurare-la-qualita-perplexity-e-kl-divergence) del modulo.
 
 ## Materiale
 

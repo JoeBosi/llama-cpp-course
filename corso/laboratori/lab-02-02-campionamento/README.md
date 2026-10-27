@@ -15,7 +15,7 @@ top-k, top-p, min-p e repeat penalty, e una regola personale su quali valori usa
 ## Prerequisiti
 
 - Lab [02-01](../lab-02-01-primo-modello/README.md) completato (modello in cache).
-- Aver letto la sezione [4 del modulo](../../moduli/02-primi-passi/README.md#4-il-campionamento-da-248320-logit-a-un-token) e lo schema della catena di campionamento.
+- Aver letto la sezione [4 del modulo](../../moduli/02-primi-passi/README.md#4-il-campionamento-da-248-320-logit-a-un-token) e lo schema della catena di campionamento.
 
 ## Materiale
 

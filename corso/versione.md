@@ -1,8 +1,16 @@
 # Versione di riferimento
 
 <div class="meta" markdown>
-<span class="stato stato-verificato">verificato il 22/09/2026</span>
+<span class="stato stato-verificato">verificato il 22/09/2026</span> <span class="stato stato-bozza">confronto con le versioni successive aggiornato al 28/10/2026</span>
 </div>
+
+!!! warning "Attenzione: il corso è fermo alla v0.4.1, llama.cpp è già alla v0.7.0"
+    Al 28/10/2026 l'ultima release stabile è la **v0.7.0** (15/10/2026) e l'ultima build è la `b11936`. Il cambiamento
+    che tocca il corso: **dalla v0.7.0 `llama serve` ascolta sulla porta 9931 invece di 8080** (le immagini Docker
+    restano su 8080 dentro il container). Nei comandi del corso sostituisci `8080` con `9931`, oppure aggiungi
+    `--port 8080` quando avvii il server. Novità non coperte dal corso: `--moe-cache-mib` (cache GPU per gli esperti
+    MoE tenuti in RAM), decodifica speculativa LiliCorr, ggml 0.27. L'aggiornamento del corso è previsto; fino ad allora
+    vale questa nota.
 
 llama.cpp pubblica **più build al giorno**. Per non inseguirle, il corso è scritto e provato su una versione precisa:
 
@@ -23,6 +31,7 @@ Va benissimo: quasi tutto funziona uguale. Le cose che cambiano più spesso sono
   in rete li usano: sono equivalenti;
 - **flag rimossi o rinominati**: in 0.4.1 `--mmap`, `--mlock`, `--direct-io` sono diventati `--load-mode`;
   controlla sempre `llama <comando> --help`;
+- **porta del server**: fino alla 0.6 `llama serve` usa la 8080, dalla **0.7.0 la 9931**; con `--port` scegli tu;
 - **modelli supportati**: ogni build aggiunge architetture; un GGUF nuovo può richiedere una build nuova.
 
 ```mermaid

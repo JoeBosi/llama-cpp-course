@@ -9,8 +9,19 @@ hide:
 <div class="hero" markdown>
 <p class="lead" markdown>Fai girare modelli linguistici (e visivi) **sul tuo computer**: portatile, PC, Mac, Raspberry Pi.
 Dall'installazione alla messa in produzione, con laboratori guidati, comandi verificati e un progetto finale.
-Aggiornato a settembre 2026 su [llama.cpp](https://github.com/ggml-org/llama.cpp) build b11046.</p>
+Scritto e provato su [llama.cpp](https://github.com/ggml-org/llama.cpp) v0.4.1 (build b11046, settembre 2026). Di [Giuseppe Bosi](informazioni.md), licenza CC BY-SA 4.0.</p>
 </div>
+
+!!! warning "Se installi llama.cpp oggi (v0.7.0 o successive)"
+    Dalla **v0.7.0** (15/10/2026) `llama serve` ascolta sulla **porta 9931**, non più 8080. Dove il corso scrive
+    `http://127.0.0.1:8080` o `localhost:8080`, usa `9931` **oppure** avvia il server con `--port 8080`. Tutto il resto
+    funziona uguale. Dettagli in [Versione di riferimento](versione.md).
+
+!!! info "Cosa è stato provato davvero"
+    I comandi con il badge <span class="stato stato-verificato">verificato</span> sono stati eseguiti dall'autore su
+    **Linux x86_64, solo CPU**. Le parti su **GPU, macOS, Windows, Android, audio e sintesi vocale** hanno il badge
+    <span class="stato stato-bozza">bozza</span>: vengono dalla documentazione ufficiale e non sono state eseguite.
+    I contenuti sono stati scritti con l'aiuto di un assistente IA e rivisti dall'autore ([Informazioni](informazioni.md)).
 
 <div class="grid cards" markdown>
 

@@ -11,6 +11,15 @@ laboratori, progetti finali). Pubblicato su https://corso-llamacpp.giuseppebosi.
 - `redazione/brief-scrittori.md`: struttura richiesta per moduli e lab.
 - `corso/versione.md`: build di riferimento (b11046). Cambiarla = rieseguire i lab e aggiornare la pagina.
 
+## Diciture e privacy (revisione del 28/10/2026, approvata da Giuseppe)
+- `corso/informazioni.md`: autore, licenza (testi CC BY-SA 4.0, codice MIT), marchi/non affiliazione, uso dell'IA,
+  privacy, contatti (info@giuseppebosi.com). Piè di pagina in `mkdocs.yml` (`copyright`). Tenerli coerenti.
+- Niente richieste a terzi dal browser: `font: false` (no Google Fonts) e Mermaid ospitato in
+  `corso/assets/javascripts/mermaid.min.js` (11.17.2; per aggiornarlo: scaricare da unpkg e sostituire il file).
+- Data "Ultimo aggiornamento" per pagina dal plugin `git-revision-date-localized`: le pagine vanno committate.
+- Il corso è fermo a v0.4.1 mentre llama.cpp è alla v0.7.0 (porta server 8080 → 9931): avviso in home e in
+  `versione.md`; quando si aggiorna il corso, togliere gli avvisi e aggiornare la tabella.
+
 ## Struttura e navigazione
 - `corso/` è la docs_dir. Nav automatica (awesome-nav): titolo = H1, ordine = nome file; `.nav.yml` solo se serve.
 - Pagine indice = `README.md`. Link interni relativi ai file `.md`. `mkdocs build --strict` deve passare.

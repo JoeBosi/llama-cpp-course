@@ -39,8 +39,8 @@ dello stesso modello sullo stesso input.
 
     ```bash
     python3 - <<'EOF'
-    import glob; from gguf import GGUFReader
-    f = glob.glob("/root/.cache/huggingface/hub/models--ggml-org--Qwen3.5-0.8B-GGUF/snapshots/*/*.gguf")[0]
+    import glob, os; from gguf import GGUFReader
+    f = glob.glob(os.path.expanduser("~/.cache/huggingface/hub/models--ggml-org--Qwen3.5-0.8B-GGUF/snapshots/*/*.gguf"))[0]
     r = GGUFReader(f); fld = r.fields["tokenizer.chat_template"]
     t = bytes(fld.parts[fld.data[0]]).decode()
     print(len(t)); print(t[:1500])

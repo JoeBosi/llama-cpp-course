@@ -40,6 +40,7 @@ lines += [
     "  - Risorse:",
     "      - risorse/*",
     "      - versione.md",
+    "  - Informazioni: informazioni.md",
 ]
 (ROOT / ".nav.yml").write_text("\n".join(lines) + "\n", encoding="utf-8")
 print(f"corso/.nav.yml: {len(moduli)} moduli, {len(labs)} laboratori")
