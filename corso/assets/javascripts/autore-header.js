@@ -7,7 +7,7 @@
     if (!titolo || document.querySelector(".autore-header")) return;
     var a = document.createElement("a");
     a.className = "autore-header";
-    a.href = "https://home.giuseppebosi.com";
+    a.href = "https://www.giuseppebosi.com";
     a.textContent = "Prof. Giuseppe Bosi";
     a.title = "Sito personale di Giuseppe Bosi";
     titolo.appendChild(a);
