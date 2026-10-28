@@ -3,7 +3,6 @@
 <div class="meta" markdown>
 <span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Moduli [03](../../moduli/03-modelli-gguf-quantizzazione/README.md), [05](../../moduli/05-prestazioni/README.md)</span>
 <span class="meta-item">:material-target:{ .meta-icon } Difficoltà ●●●</span>
-<span class="stato stato-verificato">traccia completa</span>
 </div>
 
 ## Descrizione
@@ -84,7 +83,7 @@ nell'immagine Docker `full`.
 - Le quantizzazioni a pochi bit **senza** imatrix possono essere pessime: è il risultato atteso, non un errore.
 - Alcuni modelli hanno il tokenizer o il template non supportati dallo script di conversione alla data della build: scegline uno tra quelli sopra prima di innamorarti di un'architettura esotica.
 - Spazio su disco: un modello da 1B in F16 + 6 quantizzazioni + logit ≈ 10 GB. Pulisci tra un modello e l'altro.
-- Il benchmark su una macchina condivisa o con throttling ha varianza alta: `-r 5` e riporta la deviazione standard che `llama bench` stampa.
+- Il benchmark su una macchina con altri processi attivi o con throttling ha varianza alta: `-r 5` e riporta la deviazione standard che `llama bench` stampa.
 
 ## Consegna
 

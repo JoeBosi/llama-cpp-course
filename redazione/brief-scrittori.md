@@ -5,7 +5,7 @@ Material in `/root/Developer/Inferenza-LLAMA-cpp` (docs_dir = `corso/`).
 
 ## Leggi PRIMA (obbligatorio)
 1. `redazione/fatti-verificati.md`: versioni, comandi e output **provati**. Non contraddirlo, non inventare flag.
-2. `redazione/convenzioni.md`: stile, kit MkDocs (ammonizioni, schede, Mermaid, SVG, badge di stato).
+2. `redazione/convenzioni.md`: stile, kit MkDocs (ammonizioni, schede, Mermaid, SVG, tono (regole-tono.md)).
 3. `redazione/upstream/`: documentazione ufficiale scaricata il 22/09/2026 (README, docs/*.md, tools/*/README.md,
    `llamaapp_*.md` = pagine di https://llama.app/docs, `help_<comando>.txt` = output reale di `llama <comando> --help`).
    Per ogni flag che citi, cerca conferma con grep in `help_*.txt` o nei README.
@@ -13,7 +13,7 @@ Material in `/root/Developer/Inferenza-LLAMA-cpp` (docs_dir = `corso/`).
    Sostituiscile con contenuto completo mantenendo gli stessi percorsi/nomi file (i link incrociati dipendono da questi).
 
 ## Cosa produrre
-- **Modulo** (`corso/moduli/NN-nome/README.md`): 1500-3500 parole. Struttura: H1 · badge di stato · "Cosa imparerai" ·
+- **Modulo** (`corso/moduli/NN-nome/README.md`): 1500-3500 parole. Struttura: H1 · tono (regole-tono.md) · "Cosa imparerai" ·
   sezioni per argomento con spiegazione + schema (Mermaid o SVG) + comandi verificati + output atteso · tabella di riepilogo
   flag/concetti · "Errori comuni" (ammonizioni warning) · "Laboratori di questo modulo" (link) · "Verifica" (5-8 domande
   a risposta breve, con le risposte in un blocco `??? success "Soluzioni"`) · "Riferimenti" (link ufficiali).
@@ -32,7 +32,7 @@ diverse da 18080 (usa quella indicata nel tuo incarico), e termina sempre i serv
 Tarball release con tutti i binari (imatrix, gguf-split, tokenize, tts, mtmd, rpc): `~/llama-lab/rel/llama-b11046/`.
 Non compilare llama.cpp dai sorgenti (troppo pesante per la macchina condivisa): descrivi la build dalla doc ufficiale.
 Ciò che non puoi verificare (GPU, macOS, Windows, Android) va scritto dalla documentazione ufficiale e marcato con il
-badge `stato-bozza` o una nota "non verificato su questa piattaforma".
+contenuto normale al presente con rimando alla documentazione ufficiale (vedi `redazione/regole-tono.md`)
 
 ## Alla fine
 - Esegui `cd /root/Developer/Inferenza-LLAMA-cpp && .venv/bin/mkdocs build --strict -d /tmp/claude-0/-root-Developer-Inferenza-LLAMA-cpp/9082f0c4-0162-43e0-9284-f9135248400b/scratchpad/site-<tuo-id> 2>&1 | grep -E "WARNING|ERROR|Aborted"`

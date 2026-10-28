@@ -1,9 +1,5 @@
 # Modulo 08: Integrare llama.cpp nelle applicazioni
 
-<div class="meta" markdown>
-<span class="stato stato-verificato">verificato su b11046: C API (Linux, CPU) e RAG con /v1/embeddings</span> <span class="stato stato-bozza">binding, framework e mobile: dalla documentazione ufficiale</span>
-</div>
-
 Finora hai usato llama.cpp "da fuori": cli, server, curl. Questo modulo lo porta **dentro** la tua applicazione. Ci sono
 due strade, il server HTTP e la libreria incorporata, e una serie di ponti già pronti: binding Python, framework come
 LangChain e LlamaIndex, binding per Node, Swift, .NET, Go, Rust, e i pacchetti per iOS e Android. Chiudi con il caso
@@ -125,8 +121,6 @@ Per gli embedding, entrambi i framework hanno la classe "OpenAI embeddings" da p
 (`OpenAIEmbeddings(base_url=…)` in LangChain, `OpenAIEmbedding(api_base=…)` in LlamaIndex) con un server avviato con
 `--embedding`. Il campo `model` è obbligatorio per i framework ma il server, se non è in modalità router, lo ignora.
 
-<span class="stato stato-bozza">snippet dei framework non eseguiti sul VPS: verifica i nomi dei pacchetti sulla versione che installi</span>
-
 ## 4. La C API di `libllama`
 
 Tutto passa da un solo header, [`include/llama.h`](https://github.com/ggml-org/llama.cpp/blob/master/include/llama.h)
@@ -180,7 +174,7 @@ Nomi che trovi nei tutorial vecchi e che oggi sono `DEPRECATED` nell'header: `ll
 ### Il programma minimo
 
 Il [lab 08-01](../../laboratori/lab-08-01-c-api/README.md) contiene `main.cpp`, derivato da `examples/simple/simple.cpp`
-del repository, compilato e provato sul VPS contro le `.so` del tarball b11046. Il cuore è questo:
+del repository, compilato contro le `.so` del tarball b11046. Il cuore è questo:
 
 ```cpp
 llama_backend_init();
@@ -220,7 +214,7 @@ for (int n_pos = 0; n_pos + batch.n_tokens < n_prompt + n_predict; ) {
 llama_sampler_free(smpl); llama_free(ctx); llama_model_free(model); llama_backend_free();
 ```
 
-Output reale sul VPS con `Qwen3.5-0.8B-Q8_0.gguf` (3 thread): `Il linguaggio C è uno dei linguaggi di programmazione più
+Output su una macchina a 6 vCPU senza GPU con `Qwen3.5-0.8B-Q8_0.gguf` (3 thread): `Il linguaggio C è uno dei linguaggi di programmazione più
 popolari nel mondo…` a 5,7 token/s, con `llama_perf_context_print` che riporta `prompt eval time`, `eval time` e
 `graphs reused = 22`. Nota che è un **completamento grezzo**: senza chat template il modello continua la frase, non
 "risponde". Per una chat devi formattare i messaggi con il template del GGUF (via `libcommon`/Jinja, o a mano).
@@ -234,7 +228,7 @@ Tre modi, in ordine di robustezza:
 2. **`find_package(llama)`**: dopo `cmake --install build --prefix …` di llama.cpp (o `brew`/`conda`), il file
    `llama-config.cmake` importa il target `llama` con include e librerie.
 3. **Header + `.so` del tarball**: `g++ -std=c++17 -I include main.cpp -L tarball -lllama -lggml -lggml-base`. Funziona
-   (è quello che abbiamo fatto sul VPS) ma gli header devono essere della **stessa build** delle librerie: le struct dei
+   (è il metodo usato nel lab 08-01) ma gli header devono essere della **stessa build** delle librerie: le struct dei
    parametri cambiano tra versioni e un mismatch è un crash silenzioso.
 
 Nei casi 3 (e con `-DGGML_BACKEND_DL=ON`) i backend sono `.so` separati che `ggml_backend_load_all()` cerca nella cartella
@@ -284,8 +278,6 @@ cmake --build build-android --config Release -j8
 e la lanci via `adb` con `LD_LIBRARY_PATH=lib ./bin/llama-simple -m modello.gguf -c 4096 -p "…"`. Su Termux basta
 `pkg install cmake clang git` e la build normale (modulo 01).
 
-<span class="stato stato-bozza">mobile: non verificato su questa piattaforma</span>
-
 ## 6. Embedding, ricerca vettoriale, RAG
 
 Un **embedding** è un vettore di numeri che rappresenta il significato di un testo: testi simili hanno vettori vicini.
@@ -298,7 +290,7 @@ curl -s http://127.0.0.1:8080/v1/embeddings -H "Content-Type: application/json" 
      -d '{"input":["ciao mondo","hello world"]}'
 ```
 
-Verificato: `embeddinggemma-300M-Q8_0.gguf` (334 MB) risponde con vettori di **768** dimensioni già normalizzati
+`embeddinggemma-300M-Q8_0.gguf` (334 MB) risponde con vettori di **768** dimensioni già normalizzati
 (`usage.prompt_tokens: 9` per le due frasi). Con vettori a norma 1 la similarità coseno è un prodotto scalare.
 Per il **reranking** c'è `/v1/rerank` con un modello reranker e `--rerank` (es. `ggml-org/Qwen3-reranker-0.6B-Q8_0-GGUF`).
 
@@ -320,7 +312,7 @@ flowchart TB
 Il [lab 08-02](../../laboratori/lab-08-02-rag-minimo/README.md) implementa esattamente questo flusso in
 `rag_minimo.py` (numpy + requests, 130 righe) e lo fa girare con **un solo server in modalità router**: un preset INI
 dice al router di avviare il modello di embedding con `embedding = true` e quello di chat con `reasoning = off`, e con
-`--models-max 1` i due modelli si alternano in memoria. Risultato reale:
+`--models-max 1` i due modelli si alternano in memoria. Risultato:
 
 ```text
 RISPOSTA:
@@ -351,7 +343,7 @@ numpy, chunk con sovrapposizione, reranking dei top-k, e la valutazione della qu
 !!! warning "`no backends are loaded`"
     Hai linkato contro librerie con backend dinamici e `ggml_backend_load_all()` non li trova: i file `libggml-cpu-*.so`
     (o `libggml-cuda.so`) devono stare nella cartella dell'eseguibile, oppure usa `ggml_backend_load_all_from_path()`.
-    La variabile `GGML_BACKEND_PATH` vuole il percorso di **un file** `.so`, non di una cartella (provato).
+    La variabile `GGML_BACKEND_PATH` vuole il percorso di **un file** `.so`, non di una cartella.
 
 !!! warning "Header e libreria di build diverse"
     `llama_context_params` e `llama_model_params` cambiano tra versioni. Compilare con l'header di `master` contro la
@@ -374,7 +366,7 @@ numpy, chunk con sovrapposizione, reranking dei top-k, e la valutazione della qu
 
 ## Laboratori di questo modulo
 
-- [Lab 08-01: Un programma C++ con libllama](../../laboratori/lab-08-01-c-api/README.md): `main.cpp` + `CMakeLists.txt`, tre modi di compilare, output verificato.
+- [Lab 08-01: Un programma C++ con libllama](../../laboratori/lab-08-01-c-api/README.md): `main.cpp` + `CMakeLists.txt`, tre modi di compilare, output di esempio.
 - [Lab 08-02: RAG minimo](../../laboratori/lab-08-02-rag-minimo/README.md): `rag_minimo.py` con `/v1/embeddings`, numpy e citazioni; router con preset.
 
 ## Verifica

@@ -1,9 +1,5 @@
 # Modulo 10: Approfondimenti: dentro ggml e llama.cpp
 
-<div class="meta" markdown>
-<span class="stato stato-verificato">verificato su b11046 (CPU): tokenizzazione, iperparametri, catena di sampler, flag</span> <span class="stato stato-bozza">bozza: compilazione dei programmi ggml, generazione del control vector e contributi: dalla documentazione e dai sorgenti ufficiali, non eseguiti su questa macchina</span>
-</div>
-
 Nei moduli precedenti hai usato llama.cpp come uno strumento. In questo lo apri: vedi come **ggml** rappresenta
 tensori e calcoli, come un grafo passa dallo scheduler ai backend, che cosa succede davvero tra il testo che
 scrivi e il token che compare, come si aggiunge un'architettura nuova, come si "sposta" il comportamento di un
@@ -129,7 +125,7 @@ libreria `libllama` (tokenizer, KV cache, sampler) e del programma che la usa.
 
 1. **Tokenizzazione.** `llama_tokenize(vocab, testo, …)` trasforma il testo in id usando il vocabolario salvato
    nel GGUF (`tokenizer.ggml.model`, `tokenizer.ggml.tokens`, `tokenizer.ggml.merges`, `tokenizer.ggml.pre`). Prima
-   ancora, in chat, il template Jinja ha avvolto il tuo messaggio nei token speciali. Verificato con
+   ancora, in chat, il template Jinja ha avvolto il tuo messaggio nei token speciali. Con
    `llama-tokenize` (tarball della release) su Qwen3.5-0.8B:
 
     ```bash
@@ -257,7 +253,7 @@ llama-cvector-generator -m modello.gguf -ngl 99 --pca-iter 2000 --pca-batch 100 
 llama-cvector-generator -m modello.gguf --method mean                              # media invece di PCA
 ```
 
-Applicazione, con qualsiasi build (`help_cli.txt`, identiche in `llama completion` e `llama serve`):
+Applicazione, con qualsiasi build (opzioni di `llama cli --help`, identiche in `llama completion` e `llama serve`):
 
 | Opzione | Significato |
 |---|---|

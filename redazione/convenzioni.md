@@ -24,7 +24,7 @@
 - Modelli scaricati e build **non** vanno nel repository (vedi `.gitignore`).
 
 ## Stato delle pagine
-In cima a ogni pagina: 🟡 scaletta / da scrivere · 🟠 bozza · 🟢 verificato (comandi provati) · 🔵 revisionato.
+Lo stato di verifica (provato / dalla documentazione) si tiene SOLO in `redazione/piattaforme.md` e `redazione/fatti-verificati.md`, mai nelle pagine del sito: vedi `redazione/regole-tono.md`.
 
 ## Kit di scrittura MkDocs Material (usarlo, non solo testo piatto)
 Il sito è generato con MkDocs Material (`mkdocs.yml`). Ogni pagina deve avere **almeno uno schema** (Mermaid o SVG)
@@ -55,8 +55,7 @@ dove aiuta a capire, e usare questi blocchi:
   ```
 - **Tabelle** per confronti (flag, formati, dimensioni). **Tasti**: `++ctrl+c++`. Liste di attività `- [ ]`.
 - **Annotazioni sul codice**: `# (1)!` nel blocco + lista `1. spiegazione` sotto.
-- Stato in cima alla pagina, subito sotto l'H1: `<span class="stato stato-verificato">verificato su b11046</span>`
-  oppure `<span class="stato stato-bozza">bozza · da verificare su GPU</span>`.
+- Niente badge o frasi di stato nelle pagine (regola del 28/10/2026, `redazione/regole-tono.md`).
 - Link interni **relativi ai file .md** (es. `../../laboratori/lab-02-01-primo-modello/README.md`): MkDocs li
   converte e `mkdocs build --strict` fallisce se sono rotti.
 - Le pagine indice delle cartelle si chiamano `README.md` (funzionano sia su GitHub sia su MkDocs).

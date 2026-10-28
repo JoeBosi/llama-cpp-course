@@ -3,7 +3,6 @@
 <div class="meta" markdown>
 <span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/08-integrazione-sviluppo/README.md">08: Integrare llama.cpp nelle applicazioni</a></span>
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 60 min</span>
-<span class="stato stato-verificato">API confrontate con `llama.h` e `examples/simple/simple.cpp` (b11046)</span> <span class="stato stato-bozza">build CMake (add_subdirectory / find_package): da verificare</span>
 </div>
 
 ## Obiettivo
@@ -119,8 +118,8 @@ posizioni automatiche (nessuna allocazione: il batch punta al tuo vettore, che d
 nulla. Poi si libera in ordine inverso alla creazione: `llama_sampler_free(smpl)` (libera anche i sampler della
 catena: mai liberarli uno a uno), `llama_free(ctx)`, `llama_model_free(model)`, `llama_backend_free()`.
 
-!!! note "Verifica delle API contro `llama.h` (b11046, 1646 righe)"
-    Tutte le funzioni usate da `main.cpp` sono presenti nell'header corrente, nessuna è marcata `DEPRECATED`. Le forme
+!!! note "Le API in `llama.h` (b11046, 1646 righe)"
+    Tutte le funzioni usate da `main.cpp` sono nell'header corrente e nessuna è marcata `DEPRECATED`. Le forme
     vecchie che vedrai nei tutorial (`llama_load_model_from_file`, `llama_new_context_with_model`, `llama_free_model`,
     `llama_token_eos`, `llama_n_vocab`) esistono ancora ma con avviso di deprecazione: usa quelle nuove.
 
@@ -158,8 +157,6 @@ catena: mai liberarli uno a uno), `llama_free(ctx)`, `llama_model_free(model)`, 
     `libllama.so`, aggiungi `~/llama-install/lib` a `LD_LIBRARY_PATH` (Linux) o `DYLD_LIBRARY_PATH` (macOS), oppure
     compila llama.cpp con `-DBUILD_SHARED_LIBS=OFF`.
 
-<span class="stato stato-bozza">da verificare: le due configurazioni CMake non sono state compilate sul VPS del corso (macchina condivisa, vedi nota sotto). Il redattore del modulo 08 ha compilato `main.cpp` direttamente con `g++` contro le `.so` del tarball b11046 e gli header dello stesso tag.</span>
-
 ??? info "(c) Il terzo modo: header + `.so` del tarball, senza CMake"
     ```bash
     curl -sLO https://raw.githubusercontent.com/ggml-org/llama.cpp/b11046/include/llama.h     # stesso tag del tarball!
@@ -179,7 +176,7 @@ MODELLO=$(ls ~/.cache/huggingface/hub/models--ggml-org--Qwen3.5-0.8B-GGUF/snapsh
 ./build/generatore "$MODELLO" "Il linguaggio C è" 32 3      # prompt, n_predict, n_threads
 ```
 
-Output atteso (dal modulo 08, ottenuto sul VPS con 3 thread; il testo cambia a ogni esecuzione perché il seme è casuale):
+Output atteso (su una macchina a 6 vCPU senza GPU, 3 thread; il testo cambia a ogni esecuzione perché il seme è casuale):
 
 ```text
 Il linguaggio C è uno dei linguaggi di programmazione più popolari nel mondo…

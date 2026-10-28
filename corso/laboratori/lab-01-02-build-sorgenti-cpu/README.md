@@ -3,7 +3,6 @@
 <div class="meta" markdown>
 <span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/01-installazione/README.md">01: Installazione su varie piattaforme</a></span>
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 45 minuti (+ tempo di compilazione)</span>
-<span class="stato stato-bozza">bozza · procedura dalla documentazione ufficiale, tempi non misurati dal corso</span>
 </div>
 
 ## Obiettivo
@@ -12,9 +11,8 @@ Clonare llama.cpp, fissare la build di riferimento del corso, compilare il backe
 quanto ci vuole e quanto risparmi con Ninja e ccache. Alla fine hai `build/bin/llama` identico per versione
 al binario dell'installer, e sai ricompilare in un minuto dopo una modifica.
 
-!!! note "Non sul VPS condiviso"
-    Questo lab si fa sul **tuo** computer: la compilazione occupa tutti i core per 5-15 minuti e 2-3 GB di RAM.
-    Sul VPS del corso i tempi indicati non sono stati misurati.
+!!! note "Risorse necessarie"
+    La compilazione occupa tutti i core per 5-15 minuti e 2-3 GB di RAM: chiudi i programmi pesanti prima di lanciarla.
 
 ## Prerequisiti
 
@@ -78,7 +76,7 @@ git log -1 --oneline                                      # 60081bb2b …
 ```
 
 1. `60081bb2b` è il commit che `llama version` riporta per la build 11046. Per seguire l'ultima release
-   stabile: `git checkout v0.4.1`. Per `master`: non fare il checkout (ma il corso non lo garantisce).
+   stabile: `git checkout v0.4.1`. Per `master`: non fare il checkout (i comandi del corso si riferiscono a `b11046`).
 
 ### 3. Configura e compila (misurando)
 

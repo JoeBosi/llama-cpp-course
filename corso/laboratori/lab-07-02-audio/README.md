@@ -3,7 +3,6 @@
 <div class="meta" markdown>
 <span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/07-multimodale/README.md">07: Multimodalità: visione, audio, voce</a></span>
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 45 min</span>
-<span class="stato stato-bozza">bozza · comandi dalla documentazione ufficiale, da verificare (i modelli audio superano 1 GB e non sono stati provati sul VPS del corso)</span>
 </div>
 
 ## Obiettivo
@@ -29,7 +28,7 @@ parlato con `llama-tts`. Il flusso è lo stesso delle immagini del lab 07-01: ca
 | `ggml-org/gemma-4-E4B-it-GGUF` (Q4_0) | Hugging Face | 4,6 GB + `mmproj` 560 MB | testo + immagini + audio |
 | `ggml-org/Qwen3-TTS-12Hz-1.7B-Base-GGUF` | Hugging Face | 1,0 GB (Q4_K_M) + `mmproj` 446 MB | sintesi vocale |
 
-Dimensioni lette dall'API di Hugging Face il 23/09/2026.
+Dimensioni al 23/09/2026.
 
 ## Procedura
 
@@ -44,7 +43,7 @@ ffmpeg -loglevel error -y -i registrazione.m4a -ac 1 -ar 16000 voce.wav
 ```
 
 Se non hai un microfono a portata, un tono sintetico serve almeno a verificare che la catena funzioni (il modello
-descriverà "un suono continuo"), comando provato sul VPS:
+descriverà "un suono continuo"):
 
 ```bash
 ffmpeg -loglevel error -y -f lavfi -i "sine=frequency=440:duration=2" -ac 1 -ar 16000 tono.wav   # 64 KB
@@ -56,8 +55,7 @@ ffmpeg -loglevel error -y -f lavfi -i "sine=frequency=440:duration=2" -ac 1 -ar 
 llama cli -hf ggml-org/Qwen3-ASR-0.6B-GGUF --audio voce.wav -p "Transcribe this audio." -st
 ```
 
-Il banner deve mostrare `modalities : text, audio`. In chat il comando è `/audio voce.wav` seguito dalla richiesta,
-esattamente come da documentazione llama.app:
+Il banner deve mostrare `modalities : text, audio`. In chat il comando è `/audio voce.wav` seguito dalla richiesta:
 
 ```text
 > /audio voce.wav
@@ -106,8 +104,7 @@ solo se il modello caricato accetta audio.
 
 ### 5. Sintesi vocale con `llama-tts`
 
-`llama-tts` usa un modello "backbone" più un `mmproj` che trasforma i token acustici in onda sonora. Comandi dal
-README ufficiale (`tools/tts/README.md`) e dall'`--help` di b11046:
+`llama-tts` usa un modello "backbone" più un `mmproj` che trasforma i token acustici in onda sonora. I comandi principali:
 
 ```bash
 # inglese, voce di default
@@ -130,8 +127,7 @@ campionamento con `ffprobe benvenuto.wav`.
 
 !!! note "OuteTTS e WavTokenizer"
     Le versioni precedenti di `llama-tts` erano la demo di OuteTTS con il vocoder WavTokenizer come secondo modello.
-    Il README corrente descrive lo strumento come indipendente dal modello (Qwen3-TTS, Pocket TTS) e l'`--help` di
-    b11046 non ha più un flag per il vocoder: se trovi guide con `-mv WavTokenizer…`, sono relative a build vecchie.
+    Oggi lo strumento è indipendente dal modello (Qwen3-TTS, Pocket TTS) e il flag del vocoder non esiste più: le guide con `-mv WavTokenizer…` si riferiscono a build vecchie.
 
 ### 6. Il giro completo (facoltativo)
 

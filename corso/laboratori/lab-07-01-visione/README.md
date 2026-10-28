@@ -3,7 +3,6 @@
 <div class="meta" markdown>
 <span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/07-multimodale/README.md">07: Multimodalità: visione, audio, voce</a></span>
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 45 min</span>
-<span class="stato stato-verificato">verificato su b11046 (CPU)</span>
 </div>
 
 ## Obiettivo
@@ -47,7 +46,7 @@ Ottieni `forme.png` (1,7 KB): sfondo bianco, un quadrato rosso a sinistra e un r
 llama cli -hf ggml-org/SmolVLM-256M-Instruct-GGUF:Q8_0 --image forme.png -p "Describe this image." -st -n 60
 ```
 
-Al primo avvio scarica modello **e** `mmproj` (280 MB in tutto). Output ottenuto sul VPS del corso (`-t 3`):
+Al primo avvio scarica modello **e** `mmproj` (280 MB in tutto). Output su una macchina a 6 vCPU senza GPU (`-t 3`):
 
 ```text
 modalities : text, vision, video
@@ -122,7 +121,7 @@ curl -s http://127.0.0.1:8080/v1/chat/completions -H "Content-Type: application/
   -d '{"messages":[{"role":"user","content":"Describe this image."}],"max_tokens":5}' | python3 -c 'import sys,json; print(json.load(sys.stdin)["usage"])'
 ```
 
-Sul VPS: **146 token** con l'immagine, **12** senza → l'immagine 320×240 vale ~134 token per SmolVLM. Prova con una
+Risultato: **146 token** con l'immagine, **12** senza → l'immagine 320×240 vale ~134 token per SmolVLM. Prova con una
 foto grande e osserva come cambia (e quanto tempo impiega il prompt processing su CPU: 150 token a ~4-13 t/s).
 
 ### 6. (Parte B, con 8 GB) Leggere un documento
@@ -146,8 +145,8 @@ Fotografa uno scontrino o un modulo (o usa l'immagine di una fattura di prova). 
 
 ## Domande e varianti
 
-1. Perché il modello da 256M descrive bene l'immagine in chat ma via API con `temperature: 0` ha risposto solo "Blue"?
-   (Sul VPS è successo davvero.) Prova a variare temperatura e formulazione della domanda.
+1. Perché il modello da 256M descrive bene l'immagine in chat ma via API con `temperature: 0` risponde solo "Blue"?
+   Prova a variare temperatura e formulazione della domanda.
 2. Manda **due** immagini nello stesso messaggio (`--image a.png,b.png` o due content parts) e chiedi le differenze.
 3. Avvia con `--no-mmproj` e ripeti lo script: che errore ottieni?
 4. Ridimensiona una foto a 512 px di lato e confronta token e tempo con l'originale.

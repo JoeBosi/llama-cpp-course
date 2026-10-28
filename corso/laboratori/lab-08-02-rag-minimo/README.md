@@ -3,7 +3,6 @@
 <div class="meta" markdown>
 <span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/08-integrazione-sviluppo/README.md">08: Integrare llama.cpp nelle applicazioni</a></span>
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 45 min</span>
-<span class="stato stato-verificato">verificato su b11046 (CPU, router + preset, 23/09/2026)</span>
 </div>
 
 ## Obiettivo
@@ -110,7 +109,7 @@ ub = 512                  ; micro-batch: l'input di embedding va elaborato in un
 reasoning = off           ; niente "thinking" (equivale a -rea off)
 ```
 
-Priorità: flag da riga di comando > sezione del modello > `[*]`. Verificato con `GET /v1/models`: il router mostra per
+Priorità: flag da riga di comando > sezione del modello > `[*]`. Con `GET /v1/models` il router mostra per
 ogni modello gli `args` con cui lo avvierà (`--hf-repo … --ctx-size 4096 --parallel 1 --reasoning off --threads 3`,
 dove `--threads 3` arriva dal `-t 3` passato al router) e il campo `"source": "preset"`.
 
@@ -144,7 +143,7 @@ export RAG_URL=http://127.0.0.1:18105
 python rag_minimo.py indicizza
 ```
 
-Output reale (VPS, 3 thread; 45 s in tutto, quasi tutti per il primo caricamento del modello):
+Output su una macchina a 6 vCPU senza GPU (3 thread; 45 s in tutto, quasi tutti per il primo caricamento del modello):
 
 ```text
 9 frammenti da …/lab-08-02-rag-minimo/documenti
@@ -174,7 +173,7 @@ I tre frammenti vengono tutti dal documento giusto e il primo contiene la rispos
 python rag_minimo.py rispondi "Quanti bit per peso usa Q4_K_M?"
 ```
 
-Output reale (1 min 13 s: scarico dell'embedding, caricamento di Qwen, 445 token di prompt a 21 t/s, 21 token generati
+Output sulla stessa macchina (1 min 13 s: scarico dell'embedding, caricamento di Qwen, 445 token di prompt a 21 t/s, 21 token generati
 a 5,4 t/s):
 
 ```text

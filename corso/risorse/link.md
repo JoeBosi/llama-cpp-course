@@ -1,9 +1,5 @@
 # Link utili
 
-<div class="meta" markdown>
-<span class="stato stato-verificato">aggiornato a settembre 2026</span>
-</div>
-
 ## Documentazione ufficiale
 
 - Repository: https://github.com/ggml-org/llama.cpp (README con l'elenco dei backend e dei modelli supportati)
@@ -31,7 +27,7 @@
 - Ricerca con filtro llama.cpp: https://huggingface.co/models?apps=llama.cpp&sort=trending
 - Quantizzatori affidabili: https://huggingface.co/unsloth · https://huggingface.co/bartowski · https://huggingface.co/LiquidAI
 - Convertire e quantizzare nel browser: GGUF-my-repo https://huggingface.co/spaces/ggml-org/gguf-my-repo · GGUF-my-LoRA https://huggingface.co/spaces/ggml-org/gguf-my-lora · editor di metadati https://huggingface.co/spaces/CISCai/gguf-editor
-- [Modelli consigliati per il corso](modelli-consigliati.md) (verificati)
+- [Modelli consigliati per il corso](modelli-consigliati.md) (repository, file, dimensioni e licenze)
 
 ## Community e discussioni
 

@@ -3,7 +3,6 @@
 <div class="meta" markdown>
 <span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Moduli [06](../../moduli/06-output-strutturato/README.md), [07](../../moduli/07-multimodale/README.md)</span>
 <span class="meta-item">:material-target:{ .meta-icon } Difficoltà ●●○</span>
-<span class="stato stato-verificato">traccia completa</span>
 </div>
 
 ## Descrizione

@@ -1,9 +1,5 @@
 # Modulo 02b: Scegliere il modello per la tua macchina
 
-<div class="meta" markdown>
-<span class="stato stato-verificato">repository e dimensioni verificati su Hugging Face il 24/09/2026 · velocità CPU misurate sul VPS del corso</span> <span class="stato stato-bozza">velocità su GPU, Mac e Raspberry Pi: stime da esperienza e documentazione, da confermare sul tuo hardware</span>
-</div>
-
 Hai fatto girare il primo modello (modulo 02) e ti stai chiedendo: **quale modello scarico adesso?** Questo
 modulo risponde con una regola semplice, una tabella per tipo di macchina e, per ogni macchina, il modello
 **minimo** che dà una soddisfazione vera — risposte sensate in italiano, a una velocità che non fa addormentare.
@@ -98,8 +94,8 @@ sistema operativo (2–3 GB). Regola pratica:
 | GPU 8–16 GB (RTX 3060–4070) | 300–500 GB/s | 60–100 t/s | 40–60 t/s | non ci sta in VRAM |
 | GPU 24 GB (RTX 3090/4090) | 900–1000 GB/s | 100+ t/s | 80+ t/s | 40–50 t/s |
 
-Valori teorici arrotondati: nella pratica si ottiene il 50–80 %. Sul VPS del corso (6 vCPU condivise, RAM
-lenta) Qwen3.5-0.8B Q8_0 fa 4–5 t/s: è il caso peggiore che vedrai.
+Valori teorici arrotondati: nella pratica si ottiene il 50–80 %. Su una macchina virtuale a 6 vCPU senza GPU
+Qwen3.5-0.8B Q8_0 fa 4–5 t/s: è il caso peggiore che vedrai.
 
 !!! tip "Cosa vuol dire 'soddisfazione'"
     Sotto i **3 token/s** leggere una risposta è una tortura; da **5–8 t/s** si segue bene; sopra i 15 t/s
@@ -113,7 +109,7 @@ scelta migliore su CPU.
 
 ## 4. Il modello giusto per la tua macchina
 
-Tutti i repository qui sotto esistono e sono stati verificati; i comandi scaricano automaticamente
+I comandi qui sotto scaricano automaticamente il modello dal repository indicato
 (`SSL_CERT_FILE` se usi l'installer su Linux, modulo 01). Legenda: **consigliato** = la scelta di qualità
 per quella macchina; **minimo** = il più piccolo con cui vale la pena, se il consigliato è lento o non ci sta.
 
@@ -279,6 +275,6 @@ Repository, file e dimensioni esatte di ogni riga: [Modelli consigliati](../../r
 
 ## Riferimenti
 
-- [Modelli consigliati per i laboratori](../../risorse/modelli-consigliati.md) (dimensioni e licenze verificate)
+- [Modelli consigliati per i laboratori](../../risorse/modelli-consigliati.md) (dimensioni e licenze di ogni file)
 - [llama.app → Models](https://llama.app) · [Hugging Face, filtro llama.cpp](https://huggingface.co/models?apps=llama.cpp&sort=trending)
 - [Modulo 00 §memoria](../00-introduzione/README.md) e [Modulo 05 §banda di memoria](../05-prestazioni/README.md)

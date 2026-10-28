@@ -1,9 +1,5 @@
 # Modulo 00: Introduzione a llama.cpp
 
-<div class="meta" markdown>
-<span class="stato stato-verificato">verificato su b11046</span>
-</div>
-
 Questo modulo ti dà la mappa: cos'è llama.cpp, com'è fatto dentro, che cosa c'è in un file GGUF e come
 capire **prima di scaricare** se un modello sta nella memoria del tuo computer. Non serve ancora installare
 niente: i due laboratori usano solo Python.
@@ -204,7 +200,7 @@ version: 0.4.1-dev (build 11046, commit 60081bb2b)
 built with Clang 22.1.8 for Linux x86_64
 ```
 
-Il suffisso `-dev` indica una build notturna successiva alla release. Il corso è verificato sulla build in
+Il suffisso `-dev` indica una build notturna successiva alla release. Il corso usa la build indicata in
 [Versione di riferimento](../../versione.md).
 
 ## Riepilogo

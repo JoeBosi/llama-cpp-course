@@ -1,9 +1,5 @@
 # Modulo 02: Primi passi: `llama cli`
 
-<div class="meta" markdown>
-<span class="stato stato-verificato">verificato su b11046</span>
-</div>
-
 `llama cli` (il vecchio `llama-cli`, ancora presente nei tarball e nelle immagini Docker) è il terminale di
 llama.cpp: scarica un modello da Hugging Face, ci chatta, e ti lascia toccare con mano tutto ciò che il server
 del [modulo 04](../04-server-api/README.md) farà poi dietro un'API. In questo modulo impari a usarlo davvero:
@@ -176,7 +172,7 @@ Quaranta token spesi e nessuna risposta. Le leve sono tre:
 | `--reasoning-budget N` | al massimo N token di pensiero, poi llama.cpp inserisce la chiusura e il modello risponde (`-1` illimitato, `0` = chiude subito) |
 | `--reasoning-effort low\|medium\|high` | per i modelli che prevedono livelli nel template (gpt-oss); `--reasoning-format` decide se il pensiero resta nel testo o viene separato |
 
-Con `--reasoning-budget 25`, stessa domanda (verificato):
+Con `--reasoning-budget 25`, stessa domanda:
 
 ```text
 [Start thinking]
@@ -223,8 +219,8 @@ Alcune regole pratiche:
   già tagliato di più. Per capire che cosa fa un parametro, spegni gli altri (`--top-k 0 --top-p 1 --min-p 0`).
 - La **temperatura** è nell'ordine di default l'ultimo passaggio (`--samplers` mostra la catena:
   `penalties;dry;top_n_sigma;top_k;typ_p;top_p;min_p;xtc;temperature`). Con `--temp 0` il seed non conta più.
-- Stesso modello, stesso prompt, stesso seed, stessi parametri → **stessa risposta** (verificato con `-s 42`
-  su due esecuzioni; con `-s 7` cambia). Vale su una singola macchina e build: su hardware diverso i numeri in
+- Stesso modello, stesso prompt, stesso seed, stessi parametri → **stessa risposta** (con `-s 42`
+  due esecuzioni danno lo stesso testo; con `-s 7` cambia). Vale su una singola macchina e build: su hardware diverso i numeri in
   virgola mobile possono differire e con essi l'estrazione.
 - Altri sampler (`--mirostat`, `--typical`, `--xtc-*`, `--top-nsigma`, `--dynatemp-*`, `--adaptive-target`)
   esistono per casi specifici; `--logit-bias TOKEN±N` spinge o vieta un token, `--grammar`/`--json-schema`
@@ -257,7 +253,7 @@ La riga finale `[ Prompt: 4.9 t/s | Generation: 3.4 t/s ]` è il tuo strumento d
 - **Generation** (`tg`): token generati al secondo. Su CPU è limitata dalla **banda di memoria**: per ogni token
   il modello rilegge tutti i pesi, quindi un GGUF più piccolo genera più in fretta (lo misurerai nel lab 03-02).
 
-Sulla macchina di prova (6 vCPU condivise, nessuna GPU) il modello Q8_0 fa 3-5 t/s in generazione; su un
+Su una macchina a 6 vCPU senza GPU il modello Q8_0 fa 3-5 t/s in generazione; su un
 portatile moderno 15-25; con una GPU oltre 100. Se i numeri ti sembrano bassi, guarda per prima cosa `-t`.
 
 Con `-v` (verbose) vedi tutto ciò che succede nel caricamento. Le righe da riconoscere (build 11046, `-c 4096 -t 3`):
@@ -353,7 +349,7 @@ Come controllarlo e cambiarlo:
 | `--chat-template-kwargs '{"enable_thinking": false}'` | variabili passate al template (è ciò che fa `-rea off`) |
 | `--no-jinja` | usa il vecchio motore a template fissi: solo per compatibilità |
 
-Che cosa succede con il template **sbagliato**? Verificato con Qwen3.5 e `--chat-template llama2`:
+Che cosa succede con il template **sbagliato**? Con Qwen3.5 e `--chat-template llama2`:
 
 ```text
 > Ciao, chi sei?

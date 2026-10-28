@@ -1,9 +1,5 @@
 # Modulo 03: Modelli, GGUF e quantizzazione
 
-<div class="meta" markdown>
-<span class="stato stato-verificato">verificato su b11046 (conversione da sorgenti e LoRA: dalla documentazione ufficiale)</span>
-</div>
-
 Nel [modulo 00](../00-introduzione/README.md) hai visto che cos'è un GGUF e che cosa significa quantizzare;
 nel [modulo 02](../02-primi-passi/README.md) hai scaricato un GGUF già pronto. Qui chiudi il cerchio: come si
 **sceglie** un modello su Hugging Face leggendo la scheda, che cosa distingue davvero `Q4_K_M` da `Q4_0` da
@@ -89,7 +85,7 @@ Il tipo di un tensore quantizzato è una struttura a **blocchi**: `Q8_0` = 32 pe
 
 Come si legge una sigla: `Q4_K_M` = 4 bit, famiglia K, mix *Medium*. La lettera finale non è la dimensione del
 modello ma **quanti tensori restano a precisione più alta**: il log di `llama quantize` lo mostra riga per riga
-(verificato sul modello di prova, `Q8_0 → Q4_K_M`):
+(modello di prova, `Q8_0 → Q4_K_M`):
 
 ```text
 [   2/ 335] token_embd.weight      - [  1024, 248320], type = q8_0, converting to q6_K .. size = 257.66 MiB -> 198.93 MiB
@@ -189,7 +185,7 @@ della documentazione, [modulo 01](../01-installazione/README.md#5-docker)).
 llama quantize [opzioni] modello-f16.gguf [modello-Q4_K_M.gguf] TIPO [nthreads]
 llama quantize modello-f16.gguf modello-Q4_K_M.gguf Q4_K_M 8
 llama quantize --imatrix imatrix.gguf modello-f16.gguf modello-IQ3_M.gguf IQ3_M
-llama quantize --dry-run modello-f16.gguf Q4_K_M         # solo la dimensione finale, in un secondo (verificato)
+llama quantize --dry-run modello-f16.gguf Q4_K_M         # solo la dimensione finale, in un secondo
 ```
 
 Il tipo si scrive in maiuscolo o minuscolo (`q4_k_m`), o come numero (`15`). Il file di uscita è facoltativo
@@ -209,7 +205,7 @@ Il tipo si scrive in maiuscolo o minuscolo (`q4_k_m`), o come numero (`15`). Il 
 
 Sul modello di prova (785 MiB `Q8_0`, 3 thread) ogni quantizzazione ha richiesto 20-60 s e circa 1,5 GB di RAM di
 picco: la quantizzazione **non** esegue il modello, scorre i tensori uno per uno. Partire da un file già
-quantizzato è rifiutato di default (verificato: `llama_model_quantize: failed to quantize: requantizing from type
+quantizzato è rifiutato di default (`llama_model_quantize: failed to quantize: requantizing from type
 q8_0 is disabled`); con `--allow-requantize` funziona, e partire da `Q8_0` (quasi lossless) è una scorciatoia
 accettabile per i laboratori. Per pubblicare un modello si parte sempre da `F16`/`BF16`.
 
@@ -235,7 +231,7 @@ compute_imatrix: computing over 4 chunks, n_ctx=128, batch_size=2048, n_seq=16
 Final estimate: PPL = 12.8878 +/- 1.90874
 ```
 
-(verificato con il modello di prova e un testo italiano di 430 parole, `-c 128`: 1,1 MB di imatrix in 20 s). Flag
+(modello di prova e un testo italiano di 430 parole, `-c 128`: 1,1 MB di imatrix in 20 s su CPU). Flag
 utili: `-o` (default `imatrix.gguf`; con estensione `.dat` il vecchio formato binario), `--chunks N` per fermarsi
 prima, `--in-file a.gguf --in-file b.gguf -o c.gguf` per **unire** matrici di corpus diversi, `--parse-special` se
 il testo contiene token speciali, `--show-statistics` (con `-m`) per una tabella per tensore (`Σ(Act²)`,
@@ -255,8 +251,7 @@ contributori è Wikitext-2 (`scripts/get-wikitext-2.sh`), spezzato in blocchi di
 llama perplexity -m modello.gguf -f testo.txt -c 512 -t 4
 ```
 
-Risultati **verificati** sul modello di prova, testo italiano di 384 parole, `-c 128` (4 blocchi: un giocattolo
-statistico, ma il segnale è chiarissimo):
+Risultati sul modello di prova, testo italiano di 384 parole, `-c 128` (4 blocchi):
 
 | File | MiB | bpw | PPL | KLD media | Same top p |
 |---|---|---|---|---|---|
@@ -305,8 +300,8 @@ Hugging Face limita i singoli file a 50 GB: i modelli grandi sono pubblicati in 
 ~/llama-lab/rel/llama-b11046/llama-gguf-split --merge q4split-00001-of-00004.gguf riunito.gguf
 ```
 
-Verificato: il `Q4_0` da 513 MB è diventato 4 file (11 + 209 + 199 + 94 MB: il primo contiene metadati e
-tokenizer) e il merge ha ricostruito un file identico nella dimensione (335 tensori). `llama quantize
+Sul modello di prova il `Q4_0` da 513 MB diventa 4 file (11 + 209 + 199 + 94 MB: il primo contiene metadati e
+tokenizer) e il merge ricostruisce un file identico nella dimensione (335 tensori). `llama quantize
 --keep-split` mantiene gli shard quantizzando.
 
 ## 7. Adattatori LoRA
@@ -324,8 +319,8 @@ llama serve -m base.gguf --lora a.gguf --lora b.gguf                     # nel s
 L'adattatore deve essere in formato GGUF: `convert_lora_to_gguf.py` (sorgenti) lo converte da PEFT
 (`adapter_config.json` + `adapter_model.safetensors`), oppure lo space **GGUF-my-LoRA**. Applicarlo a runtime
 costa un po' di velocità e funziona anche su un base quantizzato; `export-lora` va fatto sul base **F16** e poi
-si quantizza il risultato, per la qualità migliore. Nessuna prova su questo VPS (nessun LoRA disponibile per il
-modello di prova): comandi dalla documentazione ufficiale.
+si quantizza il risultato, per la qualità migliore. Opzioni e dettagli in
+[tools/export-lora/README.md](https://github.com/ggml-org/llama.cpp/blob/master/tools/export-lora/README.md).
 
 ## Riepilogo
 

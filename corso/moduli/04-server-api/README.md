@@ -1,9 +1,5 @@
 # Modulo 04: `llama serve`: server e API
 
-<div class="meta" markdown>
-<span class="stato stato-verificato">verificato su b11046</span>
-</div>
-
 `llama serve` (il vecchio `llama-server`, ancora presente nei tarball e nelle immagini Docker) trasforma un
 modello GGUF in un **servizio HTTP**: una web UI per chattare dal browser, un'API compatibile OpenAI a cui
 puntare SDK e applicazioni esistenti, un endpoint compatibile Anthropic e una serie di endpoint nativi che
@@ -32,7 +28,7 @@ llama serve -m ~/modelli/gemma-3-4b-it-Q4_K_M.gguf -c 8192 -ngl all --port 8081 
 1. Scarica (o prende dalla cache HF) il modello e ascolta su `http://127.0.0.1:8080`; web UI su `/`.
 2. File locale, contesto 8192, tutti i layer su GPU (`-ngl` è `auto` di default), porta diversa.
 
-Le righe di log che contano, prese da un avvio reale con `-c 2048 -np 2`:
+Le righe di log che contano, da un avvio con `-c 2048 -np 2`:
 
 ```
 srv    load_model: initializing, n_slots = 2, n_ctx_slot = 1024, kv_unified = 'false'
@@ -141,7 +137,7 @@ curl -s http://127.0.0.1:8080/v1/chat/completions -H "Content-Type: application/
 }'
 ```
 
-Risposta reale (b11046, `-a qwen-0.8b`):
+Risposta (b11046, `-a qwen-0.8b`):
 
 ```json
 {
@@ -167,7 +163,7 @@ Nel body puoi mettere qualunque parametro nativo di `/completion` (§ 5): `min_p
 `reasoning_format`, `parallel_tool_calls`.
 
 **Streaming**: con `"stream": true` la risposta è un flusso Server-Sent Events, una riga `data: {…}` per chunk,
-chiusa da `data: [DONE]`. Righe reali (accorciate):
+chiusa da `data: [DONE]`. Righe di esempio (accorciate):
 
 ```
 data: {"choices":[{"finish_reason":null,"index":0,"delta":{"role":"assistant","content":null}}],"created":1790114342,"id":"chatcmpl-kHR8…","model":"qwen-0.8b","object":"chat.completion.chunk"}
@@ -201,12 +197,12 @@ Il campo `model` è ignorato in modalità singolo modello (vale l'alias), **obbl
 |---|---|
 | `POST /v1/completions` | completamento di un `prompt` grezzo, senza chat template; `object: "text_completion"`, campo `text` |
 | `POST /v1/responses` | Responses API di OpenAI, tradotta internamente in chat completions (`instructions` + `input`, risposta in `output[]`) |
-| `POST /v1/embeddings` | richiede un modello con pooling e `--embedding`; altrimenti `501 "This server does not support embeddings. Start it with --embeddings"` (verificato) |
+| `POST /v1/embeddings` | richiede un modello con pooling e `--embedding`; altrimenti `501 "This server does not support embeddings. Start it with --embeddings"` |
 | `POST /v1/rerank` (alias `/rerank`, `/reranking`) | richiede un reranker avviato con `--rerank --pooling rank`; body `query`, `documents[]`, `top_n` |
 | `GET /v1/models` | un elemento (l'alias) con `meta` (`n_ctx_train`, `n_params`, `size`…); in router mode tutti i modelli |
 | `POST /v1/chat/completions/input_tokens`, `/v1/responses/input_tokens` | conteggio dei token senza generare |
 
-Esempio di embedding e reranking (dalla documentazione ufficiale, non provato su questo VPS per la RAM):
+Esempio di embedding e reranking (dalla documentazione ufficiale del server):
 
 ```bash
 llama serve -hf unsloth/embeddinggemma-300m-GGUF --embedding --port 8080
@@ -226,7 +222,7 @@ Su Hugging Face i modelli adatti si trovano con i filtri `pipeline_tag=sentence-
 
 Lo stesso server parla anche il formato Messages di Anthropic (`system`, `max_tokens` obbligatorio, `stop_sequences`,
 streaming, tool use), così gli SDK e le app scritte per Claude possono puntare a un modello locale. Chiave nell'header
-`x-api-key` (o Bearer). Risposta reale, thinking spento:
+`x-api-key` (o Bearer). Risposta con thinking spento:
 
 ```bash
 curl -s http://127.0.0.1:8080/v1/messages -H "Content-Type: application/json" -H "x-api-key: nokey" -d '{
@@ -260,7 +256,7 @@ restituisce `{"input_tokens": 13}` senza generare.
 | `POST /slots/{id}?action=save|restore|erase` | salva/ripristina la KV cache di uno slot su file (`--slot-save-path`) |
 | `GET/POST /lora-adapters` | elenco e scale degli adattatori LoRA a caldo |
 
-Prove reali:
+Esempi:
 
 ```bash
 curl -s http://127.0.0.1:8080/tokenize -H "Content-Type: application/json" -d '{"content":"Ciao mondo!","with_pieces":true}'
@@ -293,7 +289,7 @@ sono già saturi).
 </figure>
 
 !!! warning "Il contesto si divide fra gli slot"
-    Verificato: `-c 4096 -np 2` → `n_ctx_slot = 2048`; `-c 2048 -np 2` → `n_ctx_slot = 1024`; `-c 2048 -np 4` → 512.
+    `-c 4096 -np 2` → `n_ctx_slot = 2048`; `-c 2048 -np 2` → `n_ctx_slot = 1024`; `-c 2048 -np 4` → 512.
     Una richiesta che supera `n_ctx_slot` viene troncata o rifiutata (`"truncated": true`, oppure errore
     *"the request exceeds the available context size"*). Se vuoi 4 richieste da 8k token ti serve `-c 32768`,
     e la KV cache costa RAM/VRAM in proporzione (modulo 05). In alternativa `--kv-unified` (`-kvu`) usa un solo
@@ -304,7 +300,7 @@ sono già saturi).
 **Prompt cache** (`cache_prompt`, attiva di default): a ogni nuova richiesta il server sceglie lo slot il cui
 prompt precedente somiglia di più a quello nuovo (`--slot-prompt-similarity`, default 0.10) e riusa il prefisso
 comune già nella KV cache: è il `cache_n` nei `timings`. In una chat il prefisso comune è tutta la conversazione
-precedente, quindi solo l'ultimo messaggio viene elaborato. Verificato: ripetendo una richiesta identica
+precedente, quindi solo l'ultimo messaggio viene elaborato. Ripetendo una richiesta identica
 `cache_n` passa da 0 a (quasi) tutto il prompt e `prompt_ms` crolla. Gli slot inattivi vengono salvati in RAM
 (`--cache-ram`, default 8192 MiB) così la cache sopravvive anche quando lo slot serve un altro utente.
 
@@ -323,7 +319,7 @@ Altri flag legati agli slot: `--threads-http N` (thread HTTP, default automatico
 Di default il server ascolta solo su `127.0.0.1`. Per raggiungerlo da un'altra macchina serve `--host 0.0.0.0`
 (o l'IP dell'interfaccia): da quel momento chiunque nella rete può usarlo. Regole minime:
 
-- **`--api-key`**: verificato, senza chiave `GET /v1/models` risponde `401 {"error":{"code":401,"message":"Invalid API Key","type":"authentication_error"}}`;
+- **`--api-key`**: senza chiave `GET /v1/models` risponde `401 {"error":{"code":401,"message":"Invalid API Key","type":"authentication_error"}}`;
   `/health` resta pubblico. Più chiavi separate da virgola o `--api-key-file` (una per riga, `#` commenti).
 - Su internet metti sempre davanti un **reverse proxy** con TLS (Caddy, nginx: modulo 09) e limiti di
   velocità; `--ssl-key-file/--ssl-cert-file` esistono ma non sostituiscono il proxy.
@@ -386,7 +382,7 @@ flowchart TB
     G --> B
 ```
 
-Richiesta e risposta reali (Qwen3.5-0.8B, formato nativo Qwen/Hermes):
+Richiesta e risposta (Qwen3.5-0.8B, formato nativo Qwen/Hermes):
 
 ```bash
 curl -s http://127.0.0.1:8080/v1/chat/completions -H "Content-Type: application/json" -d '{
@@ -411,11 +407,11 @@ token a ogni chiamata. Secondo giro, con il risultato:
   {"role":"assistant","content":"","tool_calls":[{"id":"KS6P…","type":"function","function":{"name":"get_weather","arguments":"{\"city\":\"Bologna\"}"}}]},
   {"role":"tool","tool_call_id":"KS6P…","content":"{\"city\":\"Bologna\",\"temperatura_c\":24.5,\"condizioni\":\"sereno\"}"}], "tools":[…]}
 ```
-→ `"finish_reason":"stop"`, `"content":"A Bologna il tempo è sereno con una temperatura di 24,5°C."` (verificato).
+→ `"finish_reason":"stop"`, `"content":"A Bologna il tempo è sereno con una temperatura di 24,5°C."`.
 
 - `tool_choice`: `"auto"` (default), `"none"`, `"required"`, o `{"type":"function","function":{"name":"…"}}`.
-  Con il modello da 0,8B usato qui `"required"` non ha forzato la chiamata e `"none"` ha fatto comparire il
-  testo `<tool_call>…` grezzo in `content`: comportamenti da verificare con il tuo modello.
+  Con un modello piccolo come Qwen3.5-0.8B `"required"` può non forzare la chiamata e `"none"` può far comparire il
+  testo `<tool_call>…` grezzo in `content`: il rispetto di `tool_choice` dipende dal modello e dal suo template.
 - `"parallel_tool_calls": true` abilita più chiamate nella stessa risposta (solo se il template lo supporta:
   `chat_template_caps.supports_parallel_tool_calls` in `/props`).
 - **Formati nativi** riconosciuti (docs/function-calling.md): Llama 3.1/3.2/3.3, Functionary v3.1/v3.2, Hermes 2/3 e

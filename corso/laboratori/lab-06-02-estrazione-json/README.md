@@ -3,7 +3,6 @@
 <div class="meta" markdown>
 <span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/06-output-strutturato/README.md">06: Output strutturato: grammatiche GBNF e JSON Schema</a></span>
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 60 minuti</span>
-<span class="stato stato-verificato">verificato su b11046</span>
 </div>
 
 ## Obiettivo
@@ -50,7 +49,7 @@ e poi fare la parte che nessuna grammatica fa per te: controllare che i **valori
     python3 estrai.py
     ```
 
-    Output reale:
+    Output:
 
     ```
     server http://127.0.0.1:8080 · 3 annunci · vincolo schema: SÌ
@@ -73,7 +72,7 @@ e poi fare la parte che nessuna grammatica fa per te: controllare che i **valori
     Tre JSON su tre decodificabili, tutti i campi obbligatori presenti, tutti i tipi giusti. Ora fai quello che
     chiede l'ultima riga.
 
-5. **Caccia agli errori nei valori**. Confronta ogni oggetto con `annunci.txt`. Trovati nelle prove:
+5. **Caccia agli errori nei valori**. Confronta ogni oggetto con `annunci.txt`. Gli errori nell'output sopra:
 
     | Annuncio | Campo | Modello | Testo | Perché |
     |---|---|---|---|---|
@@ -116,7 +115,7 @@ e poi fare la parte che nessuna grammatica fa per te: controllare che i **valori
 
 8. **Correggi con il prompt, non con lo schema**. Aggiungi al prompt di sistema: «trilocale = 3 locali, bilocale = 2;
    villa → tipo "villa"; ascensore false se non citato; note solo se presenti nel testo, altrimenti ometti il campo».
-   Rilancia e conta quanti errori del punto 5 spariscono. Verificato: **tre su quattro** (`locali: 3`, `note` omesso
+   Rilancia e conta quanti errori del punto 5 spariscono: **tre su quattro** (`locali: 3`, `note` omesso
    nell'ufficio, `ascensore: false` nella villa), ma la villa resta `tipo: "appartamento"` anche con la regola scritta
    nel prompt. Il prompt aiuta, la soluzione vera è un modello più capace; la grammatica ti dà solo la certezza del formato.
 

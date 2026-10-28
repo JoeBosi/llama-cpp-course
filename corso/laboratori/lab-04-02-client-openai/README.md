@@ -3,7 +3,6 @@
 <div class="meta" markdown>
 <span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/04-server-api/README.md">04: `llama serve`: server e API</a></span>
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 40 minuti</span>
-<span class="stato stato-verificato">verificato su b11046</span>
 </div>
 
 ## Obiettivo
@@ -16,7 +15,7 @@ pensato per un altro fornitore, e sai misurare il tempo al primo token.
 ## Prerequisiti
 
 - Lab [04-01](../lab-04-01-server-e-webui/README.md) completato (sai avviare il server e leggere `timings`).
-- Python 3.10+ con `pip`; Node.js **18 o superiore** (per `fetch` e `TextDecoderStream` nativi; provato con 22).
+- Python 3.10+ con `pip`; Node.js **18 o superiore** (per `fetch` e `TextDecoderStream` nativi; gli esempi usano la 22).
 - Ubuntu con binario dell'installer: `export SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt`.
 
 ## Materiale
@@ -26,7 +25,7 @@ pensato per un altro fornitore, e sai misurare il tempo al primo token.
 | `ggml-org/Qwen3.5-0.8B-GGUF` (file `Qwen3.5-0.8B-Q8_0.gguf`, Apache 2.0) | Hugging Face, via `-hf` | 785 MiB |
 | [`chat.py`](chat.py): client Python con SDK `openai` (`--stream` per lo streaming) | cartella del lab | 3 KB |
 | [`chat.mjs`](chat.mjs): client Node.js con `fetch`, parser SSE a mano (`--stream`) | cartella del lab | 2 KB |
-| pacchetto `openai` (PyPI) | `pip install openai` (provato con 3.18.0) | ~10 MB con dipendenze |
+| pacchetto `openai` (PyPI) | `pip install openai` (versione 3.18.0) | ~10 MB con dipendenze |
 
 ## Procedura
 
@@ -66,7 +65,7 @@ pensato per un altro fornitore, e sai misurare il tempo al primo token.
     python chat.py
     ```
 
-    Output reale (b11046, VPS a 6 vCPU):
+    Output (b11046, macchina a 6 vCPU senza GPU):
 
     ```
     Llamà.cpp è una libreria C++ per la gestione di chiamate di sistema, progettata per semplificare l'uso …
@@ -76,8 +75,7 @@ pensato per un altro fornitore, e sai misurare il tempo al primo token.
     ```
 
     La seconda riga viene da `r.usage`; la terza dal campo `timings`, che **non è nel modello dati dell'SDK**:
-    Pydantic lo conserva in `r.model_extra["timings"]`. (Il contenuto è sbagliato: un modello da 0,8B non sa
-    cos'è llama.cpp. Il lab serve a provare il canale, non la conoscenza del modello.)
+    Pydantic lo conserva in `r.model_extra["timings"]`. (La risposta è inventata: un modello da 0,8 B non conosce llama.cpp; qui conta il trasporto dei dati, non il contenuto.)
 
 5. **Streaming**:
 
@@ -122,10 +120,10 @@ pensato per un altro fornitore, e sai misurare il tempo al primo token.
     ```
 
 8. **Con chiave API**. Riavvia il server con `--api-key segreta123` e rilancia `python chat.py`: ottieni
-   `openai.AuthenticationError: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'authentication_error', 'code': 401}}`
-   (verificato). Metti `API_KEY = "segreta123"` in `chat.py` e in `chat.mjs` scommenta l'header
+   `openai.AuthenticationError: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'authentication_error', 'code': 401}}`.
+   Metti `API_KEY = "segreta123"` in `chat.py` e in `chat.mjs` scommenta l'header
    `Authorization: Bearer …`. Se togli l'argomento `api_key` dal costruttore, l'SDK legge da solo la variabile
-   d'ambiente `OPENAI_API_KEY` (verificato: `OPENAI_API_KEY=segreta123 python …` passa).
+   d'ambiente `OPENAI_API_KEY`: `OPENAI_API_KEY=segreta123 python chat.py` passa.
 
 9. **Ferma il server** con ++ctrl+c++.
 

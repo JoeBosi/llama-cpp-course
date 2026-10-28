@@ -3,7 +3,6 @@
 <div class="meta" markdown>
 <span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/04-server-api/README.md">04: `llama serve`: server e API</a></span>
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 60 minuti</span>
-<span class="stato stato-verificato">verificato su b11046</span>
 </div>
 
 ## Obiettivo
@@ -129,7 +128,7 @@ eseguire la funzione e rimandare il risultato, è compito del client: cioè dell
 
 5. **Quando il modello non chiama lo strumento**. Cambia il prompt di sistema in
    `"Usa gli strumenti quando servono. Rispondi in italiano, in breve."` e rilancia `python agente_meteo.py`.
-   Risultato reale:
+   Risultato:
 
     ```
     Domanda: Che tempo fa a Bologna?  (meteo finto)
@@ -145,8 +144,8 @@ eseguire la funzione e rimandare il risultato, è compito del client: cioè dell
     python agente_meteo.py --forza
     ```
 
-    Con Qwen3.5-0.8B e il prompt "lungo" del punto 5 il modello ha ignorato l'obbligo e ha risposto a testo
-    (verificato: `"required"` non ha forzato la chiamata, come già notato nel modulo 04). Con modelli più grandi
+    Con Qwen3.5-0.8B e il prompt "lungo" del punto 5 il modello ignora l'obbligo e risponde a testo:
+    `"required"` non forza la chiamata, come già notato nel modulo 04. Con modelli più grandi
     o template diversi funziona: controllalo sempre sul tuo modello, non fidarti del nome del parametro.
 
 7. **Guarda cosa viaggia davvero**. Il costo dei tool è nel prompt: ripeti la domanda del punto 3 con `curl`

@@ -3,15 +3,14 @@
 <div class="meta" markdown>
 <span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/05-prestazioni/README.md">05: Prestazioni e ottimizzazione</a></span>
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 45 minuti</span>
-<span class="stato stato-verificato">verificato su b11046 (server e client sulla stessa macchina, CPU)</span> <span class="stato stato-bozza">due macchine con GPU: dalla documentazione</span>
 </div>
 
 ## Obiettivo
 
 Far girare un modello usando la memoria (e, se c'è, la GPU) di **un'altra macchina** attraverso il backend RPC di ggml:
 avviare `ggml-rpc-server` sull'host remoto, collegarlo con `--rpc`, verificare la distribuzione dei pesi e misurare il
-prezzo che si paga in velocità. Lo stesso esercizio funziona su una sola macchina con due terminali (o due container),
-che è il modo con cui è stato verificato per il corso.
+prezzo che si paga in velocità. Lo stesso esercizio funziona su una sola macchina con due terminali (o due container):
+è la forma usata negli esempi che seguono.
 
 ## Prerequisiti
 
@@ -55,7 +54,7 @@ Usage: ggml-rpc-server [options]
     $R/ggml-rpc-server -H 127.0.0.1 -p 50052 -t 3
     ```
 
-    Output verificato:
+    Output atteso:
 
     ```
     Starting RPC server v7.0.0
@@ -90,7 +89,7 @@ Usage: ggml-rpc-server [options]
     $R/llama-cli --rpc 127.0.0.1:50052 -m "$M" -st -p "ciao" -n 20 -t 3 -rea off
     ```
 
-    Output verificato sul VPS (macchina condivisa e carica):
+    Output su una macchina a 6 vCPU senza GPU:
 
     ```
     > ciao

@@ -3,7 +3,6 @@
 <div class="meta" markdown>
 <span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/03-modelli-gguf-quantizzazione/README.md">03: Modelli, GGUF e quantizzazione</a></span>
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 45 minuti (di cui 5-10 di calcolo)</span>
-<span class="stato stato-verificato">verificato su b11046</span>
 </div>
 
 ## Obiettivo
@@ -29,8 +28,7 @@ velocità del [modulo 00](../../moduli/00-introduzione/README.md).
 | [`testo-it.txt`](testo-it.txt): 384 parole di italiano generico (caffè, storia, preparazione) | in questa cartella | 2,5 KB |
 | [`quantizza-e-misura.sh`](quantizza-e-misura.sh): quantizza, misura e scrive `risultati.md` | in questa cartella | – |
 
-Partiamo da un `Q8_0` e non da un F16 per non scaricare 1,5 GB: `Q8_0` è quasi lossless (+0,003 di perplexity su un
-8 B), quindi l'esperimento resta valido. `llama quantize` però lo rifiuta di default: serve `--allow-requantize`.
+Il sorgente è il `Q8_0` già in cache: è quasi lossless (+0,003 di perplexity su un 8 B) e per un esperimento didattico è un punto di partenza corretto; per pubblicare un modello si parte dal F16. `llama quantize` però lo rifiuta di default: serve `--allow-requantize`.
 
 ## Procedura
 
@@ -42,7 +40,7 @@ Partiamo da un `Q8_0` e non da un F16 per non scaricare 1,5 GB: `Q8_0` è quasi 
     llama quantize --dry-run $SRC Q4_K_M 2>&1 | tail -4
     ```
 
-    Verificato (0,6 s):
+    Output (0,6 s):
 
     ```text
     llama_model_quantize_impl: model size  =   784.52 MiB (8.52 BPW)
@@ -57,7 +55,7 @@ Partiamo da un `Q8_0` e non da un F16 per non scaricare 1,5 GB: `Q8_0` è quasi 
     llama quantize $SRC ~/llama-lab/quant/Qwen3.5-0.8B-Q4_K_M.gguf Q4_K_M 4 2>&1 | tee ~/llama-lab/quant/quant-Q4_K_M.log | tail -5
     ```
 
-    Verificato: senza `--allow-requantize` si ferma subito con
+    Senza `--allow-requantize` si ferma subito con
     `llama_model_quantize: failed to quantize: requantizing from type q8_0 is disabled`. Aggiungilo:
 
     ```bash
@@ -77,7 +75,7 @@ Partiamo da un `Q8_0` e non da un F16 per non scaricare 1,5 GB: `Q8_0` è quasi 
     cat ~/llama-lab/quant/risultati.md
     ```
 
-    Risultato verificato sulla macchina del corso (6 vCPU condivise, 3 thread, quindi velocità **indicative**):
+    Risultato su una macchina a 6 vCPU senza GPU, 3 thread (le velocità sono indicative e dipendono dalla CPU):
 
     | Tipo | MiB | bpw | pp32 t/s | tg16 t/s | PPL (`-c 128`, 4 blocchi) |
     |---|---|---|---|---|---|
@@ -93,11 +91,9 @@ Partiamo da un `Q8_0` e non da un F16 per non scaricare 1,5 GB: `Q8_0` è quasi 
     - **Dimensione**: da 795 a 410 MiB, ma non "8 bit → 2 bit = un quarto": l'embedding da 248 320 × 1 024 resta a
       6 bit e da solo pesa 200 MiB. Su un 8 B (vocabolario proporzionalmente piccolo) `Q2_K` sarebbe 2,96 GB contro
       7,96 di `Q8_0`.
-    - **Perplexity**: `Q4_K_M` +9 % (accettabile), `Q4_0` +28 % (si sente), `Q2_K` ×13 (inutilizzabile). Con 4 blocchi
-      di 128 token le barre d'errore sono grandi, ma l'ordine è lo stesso che vedresti su Wikitext. Un modello da 0,8 B
+    - **Perplexity**: `Q4_K_M` +9 % (accettabile), `Q4_0` +28 % (si sente), `Q2_K` ×13 (inutilizzabile). Le barre d'errore (± nel log) dipendono dal numero di blocchi: con più testo si stringono, l'ordine fra i tipi non cambia. Un modello da 0,8 B
       soffre i pochi bit molto più di un 8 B (tabella del modulo: `Q2_K` su Llama-3-8B è +3,5, cioè +60 %).
-    - **Velocità**: su questa macchina condivisa i numeri ballano (ripetendo il bench il `Q4_0` è andato da 13 a 16 t/s
-      e il `Q8_0` da 1,7 a 10,6). Su una macchina tranquilla ti aspetti: generazione più veloce quanto più il file è
+    - **Velocità**: con `-r 1` ogni valore è una misura singola: le velocità in tabella vanno lette come ordine di grandezza, non confrontate al decimale. La tendenza da leggere: generazione più veloce quanto più il file è
       piccolo (banda di memoria) e `Q4_0` particolarmente rapido grazie al *repacking* dei kernel CPU; prompt processing
       meno sensibile al tipo. Ripeti con `-r 5` e `-t` = core fisici per numeri stabili ([modulo 05](../../moduli/05-prestazioni/README.md#2-misurare-llama-bench)).
 

@@ -11,9 +11,16 @@ laboratori, progetti finali). Pubblicato su https://corso-llamacpp.giuseppebosi.
 - `redazione/brief-scrittori.md`: struttura richiesta per moduli e lab.
 - `corso/versione.md`: build di riferimento (b11046). Cambiarla = rieseguire i lab e aggiornare la pagina.
 
+## Tono del corso (regola di Giuseppe, 28/10/2026)
+- **Ogni frase deve insegnare qualcosa.** Niente avvertenze, scuse o giustificazioni: niente badge "verificato/bozza",
+  niente "non testato", "da verificare", "scritto con l'aiuto dell'IA", note sull'autore o sulla macchina di prova
+  dentro le lezioni. Le parti non provate si scrivono come contenuto normale, al presente, con rimando alla
+  documentazione ufficiale. Regole complete: `redazione/regole-tono.md`. Lo stato di verifica resta solo nei file
+  interni di `redazione/` (fatti-verificati, piattaforme), mai nelle pagine del sito.
+
 ## Diciture e privacy (revisione del 28/10/2026, approvata da Giuseppe)
-- `corso/informazioni.md`: autore, licenza (testi CC BY-SA 4.0, codice MIT), marchi/non affiliazione, uso dell'IA,
-  privacy, contatti (info@giuseppebosi.com). Piè di pagina in `mkdocs.yml` (`copyright`). Tenerli coerenti.
+- `corso/informazioni.md`: solo autore, licenza (testi CC BY-SA 4.0, codice MIT) e crediti (marchi, strumenti,
+  nessun tracciamento). Contatti: info@giuseppebosi.com. Piè di pagina in `mkdocs.yml` (`copyright`). Tenerli coerenti.
 - Niente richieste a terzi dal browser: `font: false` (no Google Fonts) e Mermaid ospitato in
   `corso/assets/javascripts/mermaid.min.js` (11.17.2; per aggiornarlo: scaricare da unpkg e sostituire il file).
 - Data "Ultimo aggiornamento" per pagina dal plugin `git-revision-date-localized`: le pagine vanno committate.

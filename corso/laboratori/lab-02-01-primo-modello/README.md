@@ -3,7 +3,6 @@
 <div class="meta" markdown>
 <span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/02-primi-passi/README.md">02: Primi passi: `llama cli`</a></span>
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 40 minuti</span>
-<span class="stato stato-verificato">verificato su b11046</span>
 </div>
 
 ## Obiettivo
@@ -61,7 +60,7 @@ banner e la riga dei tempi, e trovare nel log verbose le righe che descrivono me
     ```
 
     - Chiedi «Spiega in una frase cos'è un token» e annota la riga `[ Prompt: … | Generation: … ]`.
-      Verificato: il modello risponde parlando di token *crittografici*, non linguistici. È normale per 0,8 B di
+      Il modello risponde parlando di token *crittografici*, non linguistici. È normale per 0,8 B di
       parametri senza contesto: lo sistemiamo al punto 5.
     - `/regen`: la risposta cambia? (Il seed è casuale: sì, quasi sempre.)
     - `/read appunti.txt` seguito da «Riassumi il file in tre punti»: il contenuto entra nel messaggio.
@@ -76,7 +75,7 @@ banner e la riga dei tempi, e trovare nel log verbose le righe che descrivono me
     ```
 
     Atteso: il primo comando stampa la risposta ed esce (`Exiting...`); il secondo consuma i 40 token dentro
-    `[Start thinking]` e non risponde (verificato). Riprova con `--reasoning-budget 25`: il pensiero viene
+    `[Start thinking]` e non risponde. Riprova con `--reasoning-budget 25`: il pensiero viene
     troncato con `[End thinking]` e arriva una risposta.
 
 5. **Prompt di sistema**. Ripeti la domanda sul token con un contesto:
@@ -87,7 +86,7 @@ banner e la riga dei tempi, e trovare nel log verbose le righe che descrivono me
       -p "Cos'è un token?"
     ```
 
-    Verificato: «Un token è una parte dell'input dell'LLM, che rappresenta una parte della sequenza dei caratteri.»
+    Risposta: «Un token è una parte dell'input dell'LLM, che rappresenta una parte della sequenza dei caratteri.»
     Stesso modello, stessa domanda, risposta giusta: il prompt di sistema conta più di quanto sembri.
 
 6. **Log verbose**. Lancia una domanda brevissima con `-v` e salva il log:
@@ -97,7 +96,7 @@ banner e la riga dei tempi, e trovare nel log verbose le righe che descrivono me
     grep -E "system_info|file type|n_ctx_train|model params|llama_kv_cache: size|memory breakdown|Host|chat template, thinking|sampler chain" log.txt
     ```
 
-    Atteso (valori della macchina di prova):
+    Atteso (valori su una macchina a 6 vCPU senza GPU):
 
     ```text
     system_info: n_threads = 4 (n_threads_batch = 4) / 6 | CPU : … AVX2 = 1 …

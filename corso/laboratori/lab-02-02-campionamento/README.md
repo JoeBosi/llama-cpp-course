@@ -3,7 +3,6 @@
 <div class="meta" markdown>
 <span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/02-primi-passi/README.md">02: Primi passi: `llama cli`</a></span>
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 45 minuti</span>
-<span class="stato stato-verificato">verificato su b11046</span>
 </div>
 
 ## Obiettivo
@@ -35,7 +34,7 @@ top-k, top-p, min-p e repeat penalty, e una regola personale su quali valori usa
     llama cli -hf ggml-org/Qwen3.5-0.8B-GGUF -st -p "Inventa un nome per un gatto." -n 12 -rea off -s 7 --temp 1.0 -t 4 2>&1 | sed -n '/^> /,/Prompt:/p'
     ```
 
-    Verificato: le prime due esecuzioni (`-s 42`) danno la stessa risposta parola per parola («Certamente! Ecco
+    Le prime due esecuzioni (`-s 42`) danno la stessa risposta parola per parola («Certamente! Ecco
     alcune idee per un nome gatto con»), la terza (`-s 7`) è diversa («Ecco un elenco di nomi per un gatto divisi»).
 
 2. **Greedy in tre modi**. Esegui la frase sul gatto con `--temp 0`, poi ancora con `--temp 0`, poi con
@@ -47,7 +46,7 @@ top-k, top-p, min-p e repeat penalty, e una regola personale su quali valori usa
     llama cli -hf ggml-org/Qwen3.5-0.8B-GGUF -st -p "$P" -n 25 -rea off -t 4 --top-k 1 --temp 1.0
     ```
 
-    Verificato: le tre risposte sono identiche («Il gatto è un animale di compagnia che si sente sempre più come un
+    Le tre risposte sono identiche («Il gatto è un animale di compagnia che si sente sempre più come un
     amico, un compagno di vita e un compagno di»). Temperatura 0 e top-k 1 sono due strade per lo stesso posto: il
     token più probabile, sempre.
 
@@ -57,7 +56,7 @@ top-k, top-p, min-p e repeat penalty, e una regola personale su quali valori usa
     llama cli -hf ggml-org/Qwen3.5-0.8B-GGUF -st -p "$P" -n 25 -rea off -t 4 -s 1 --temp 1.8 --top-k 0 --top-p 1 --min-p 0
     ```
 
-    Verificato: «Ukra bedaní震災 Hen.uuid Nin:on şəbilidad bra aba Hollowoi Sever spalle diesen—…». Con la
+    Risultato: «Ukra bedaní震災 Hen.uuid Nin:on şəbilidad bra aba Hollowoi Sever spalle diesen—…». Con la
     distribuzione appiattita e nessun filtro, la coda dei 248 000 token improbabili diventa raggiungibile.
 
 4. **min-p come rete**. Stessa temperatura, riaccendi solo min-p:
@@ -66,7 +65,7 @@ top-k, top-p, min-p e repeat penalty, e una regola personale su quali valori usa
     llama cli -hf ggml-org/Qwen3.5-0.8B-GGUF -st -p "$P" -n 25 -rea off -t 4 -s 1 --temp 1.8 --top-k 0 --top-p 1 --min-p 0.1
     ```
 
-    Verificato: «Il gatto è un vero e proprio animale spirituale: il sole che passa sotto i suoi occhi si sente
+    Risultato: «Il gatto è un vero e proprio animale spirituale: il sole che passa sotto i suoi occhi si sente
     un'altra». Un solo filtro relativo (scarta ciò che ha meno del 10 % della probabilità del token migliore)
     basta a rendere utilizzabile anche una temperatura estrema: è il motivo per cui min-p è oggi il filtro
     preferito. Nota che nell'ordine di default min-p si applica **prima** della temperatura, quindi filtra sulla
@@ -78,7 +77,7 @@ top-k, top-p, min-p e repeat penalty, e una regola personale su quali valori usa
     llama cli -hf ggml-org/Qwen3.5-0.8B-GGUF -st -p "Elenca 5 sinonimi di 'bello'." -n 40 -rea off -t 4 --temp 0 --repeat-penalty 1.3
     ```
 
-    Verificato: «Ecco i cinque sinonIMI più comuni…»: con 1.3 la penalità colpisce anche i token di *sinonimi*
+    Risultato: «Ecco i cinque sinonIMI più comuni…»: con 1.3 la penalità colpisce anche i token di *sinonimi*
     già visti nel prompt e il modello inventa una grafia. Ripeti con `1.1` e con il default `1.0` e confronta.
 
 6. **Tutte le prove in una volta**. Lo script esegue otto combinazioni e produce una tabella Markdown:

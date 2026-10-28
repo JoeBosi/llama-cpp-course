@@ -3,7 +3,6 @@
 <div class="meta" markdown>
 <span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/05-prestazioni/README.md">05: Prestazioni e ottimizzazione</a></span>
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 45 minuti</span>
-<span class="stato stato-verificato">verificato su b11046 (CPU)</span>
 </div>
 
 ## Obiettivo
@@ -45,7 +44,7 @@ M4=$(ls ~/.cache/huggingface/hub/models--ggml-org--Qwen3.5-0.8B-GGUF/snapshots/*
     llama bench -m "$M8" -p 64 -n 32 -r 2
     ```
 
-    Output atteso (VPS del corso, 6 vCPU AMD EPYC condivise):
+    Output atteso (macchina a 6 vCPU AMD EPYC, senza GPU):
 
     ```
     | model             |       size |   params | backend | threads | test |          t/s |
@@ -63,8 +62,8 @@ M4=$(ls ~/.cache/huggingface/hub/models--ggml-org--Qwen3.5-0.8B-GGUF/snapshots/*
     llama bench -m "$M8" -p 64 -n 32 -r 3 -t 1,2,4,6 --progress -o json > thread.json
     ```
 
-    Su una macchina scarica ci vogliono 2-4 minuti. Se hai fretta o la macchina è condivisa, usa `-p 32 -n 16 -r 1`
-    (è ciò che è stato fatto sul VPS del corso, un valore per volta):
+    Su una macchina scarica ci vogliono 2-4 minuti. Se hai fretta o la CPU è occupata da altri processi, usa
+    `-p 32 -n 16 -r 1`, un valore di thread per volta. Esempio su 6 vCPU con altri processi in esecuzione:
 
     ```
     | threads | test |   t/s |
@@ -103,8 +102,8 @@ M4=$(ls ~/.cache/huggingface/hub/models--ggml-org--Qwen3.5-0.8B-GGUF/snapshots/*
     ```
 
     Apri `thread.png`: due curve (pp e tg) con le barre di errore. Su una macchina scarica la curva sale fino ai
-    core fisici e poi si appiattisce (tg) o continua un po' (pp). Sul VPS condiviso crolla oltre i 2 thread: la CPU
-    è "oversaturata", esattamente il sintomo descritto nella guida ufficiale sulle prestazioni.
+    core fisici e poi si appiattisce (tg) o continua un po' (pp). Su una CPU già occupata da altri processi crolla oltre
+    i 2 thread: la CPU è "oversaturata", esattamente il sintomo descritto nella guida ufficiale sulle prestazioni.
 
 5. **Q8_0 contro Q4_0.** Con il numero di thread migliore trovato al passo 4 (qui `T=2`):
 

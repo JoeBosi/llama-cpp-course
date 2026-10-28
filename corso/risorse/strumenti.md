@@ -1,9 +1,5 @@
 # Strumenti del corso
 
-<div class="meta" markdown>
-<span class="stato stato-verificato">script provati su Ubuntu 24.04 · settembre 2026</span>
-</div>
-
 Due script bash nella cartella `scripts/` del repository del corso: uno per controllare che la macchina sia
 pronta, uno per scaricare in anticipo i modelli dei laboratori. Entrambi sono corti e leggibili: prima di
 lanciarli, leggili.
@@ -18,7 +14,7 @@ rilevate, strumenti di sviluppo presenti e se `llama` (o il vecchio `llama-cli`)
 bash scripts/verifica-ambiente.sh
 ```
 
-Output sul VPS del corso (6 vCPU AMD EPYC, nessuna GPU):
+Output su una macchina Linux a 6 vCPU AMD EPYC, senza GPU:
 
 ```
 == Sistema
@@ -138,7 +134,7 @@ Il testo completo:
 #   scripts/scarica-modelli-corso.sh --estesi   # base + modelli "16 GB" (~+9 GB)
 #   scripts/scarica-modelli-corso.sh --lista    # elenca senza scaricare
 #   scripts/scarica-modelli-corso.sh --si       # non chiedere conferma
-# Dimensioni verificate sull'API di Hugging Face il 23/09/2026 (MiB, mmproj incluso dove serve).
+# Dimensioni dei file GGUF (API di Hugging Face, settembre 2026) (MiB, mmproj incluso dove serve).
 set -euo pipefail
 
 # formato: "repo[:quant]|MiB|a cosa serve"

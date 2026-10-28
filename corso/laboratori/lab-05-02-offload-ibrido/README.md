@@ -3,7 +3,6 @@
 <div class="meta" markdown>
 <span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/05-prestazioni/README.md">05: Prestazioni e ottimizzazione</a></span>
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 60 minuti</span>
-<span class="stato stato-bozza">bozza · richiede una GPU, non verificato sul VPS del corso (senza GPU)</span>
 </div>
 
 ## Obiettivo

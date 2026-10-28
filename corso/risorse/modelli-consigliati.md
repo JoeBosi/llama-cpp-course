@@ -1,9 +1,5 @@
 # Modelli consigliati per i laboratori
 
-<div class="meta" markdown>
-<span class="stato stato-verificato">repository, file, dimensioni e licenze verificati sull'API di Hugging Face il 23/09/2026</span>
-</div>
-
 Per capire **quale** di questi scegliere in base alla tua macchina (RAM, GPU, Mac, Raspberry Pi): [Modulo 02b](../moduli/02b-scegliere-modello/README.md).
 
 Criteri: modelli **piccoli** che girano su CPU con 8-16 GB di RAM, licenza permissiva o chiaramente indicata,

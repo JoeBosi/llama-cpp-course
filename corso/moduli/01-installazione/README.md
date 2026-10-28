@@ -1,9 +1,5 @@
 # Modulo 01: Installazione su varie piattaforme
 
-<div class="meta" markdown>
-<span class="stato stato-verificato">verificato su b11046 · Linux x86_64</span> <span class="stato stato-bozza">macOS, Windows, GPU, ARM, Android: dalla documentazione ufficiale, non verificati</span>
-</div>
-
 Ci sono cinque modi per avere llama.cpp: l'installer di llama.app, un gestore di pacchetti, i binari
 precompilati della pagina release, Docker, la compilazione. Tutti danno gli stessi comandi (`llama cli`,
 `llama serve`, …). Questo modulo ti aiuta a scegliere quello giusto per la tua macchina, a capire quale
@@ -35,12 +31,8 @@ precompilati della pagina release, Docker, la compilazione. Tutti danno gli stes
 | Windows ARM64 (Snapdragon X) | — | — | CPU arm64, CUDA 13.4 arm64, `opencl-adreno-arm64` | — | ✅ preset arm64 | OpenCL (Adreno) |
 | Android | — (Termux: compila) | — | `android-arm64.tar.gz` | — | ✅ Termux o NDK | OpenCL (Adreno), Vulkan |
 
-La stessa matrice, con ciò che il corso ha verificato davvero (✅) e ciò che resta da provare (⬜), è nel file
-`redazione/piattaforme.md` del repository: le celle Linux x86_64 sono verificate sul VPS del corso, le altre
-vengono dalla documentazione ufficiale.
-
 !!! tip "In una frase"
-    Portatile o VPS senza GPU, Mac, Linux con NVIDIA: **installer**. Windows: **winget** o lo zip della release.
+    Portatile o server senza GPU, Mac, Linux con NVIDIA: **installer**. Windows: **winget** o lo zip della release.
     Server o CI: **Docker**. Backend esotici, patch, Android NDK: **compila**.
 
 ## 2. Via rapida: l'installer di llama.app
@@ -67,7 +59,7 @@ vengono dalla documentazione ufficiale.
     Lo script `install.sh` è per shell POSIX: su Windows usa winget (aggiornato a ogni release), lo zip
     della release (sezione 4) o WSL2 con le istruzioni Linux.
 
-Che cosa fa lo script (l'abbiamo letto): rileva `uname -s` / `uname -m`, chiede al bucket
+Che cosa fa lo script: rileva `uname -s` / `uname -m`, chiede al bucket
 `huggingface.co/buckets/ggml-org` l'ultima versione, poi su Linux **prova in ordine CUDA → ROCm → Vulkan →
 CPU** scaricando un piccolo eseguibile "probe" per ciascuno; su macOS prende direttamente il binario Metal.
 Il binario finisce in `~/.llama-app/llama` e viene copiato in `~/.local/bin/llama`. Non serve root.
@@ -88,7 +80,7 @@ flowchart TB
 Variabili d'ambiente utili: `LLAMA_VERSION=b11046` fissa una build (solo quelle presenti nel bucket),
 `SKIP_CUDA=1`, `SKIP_ROCM=1`, `SKIP_VULKAN=1` saltano un probe (utile se un driver rotto fa fallire il
 rilevamento), `SKIP_INSTALL=1` scarica in `~/.llama-app` senza copiare in `~/.local/bin`, `HF_TOKEN` per
-passare dal proxy di Hugging Face autenticati. Sul VPS del corso (Ubuntu 24.04, nessuna GPU):
+passare dal proxy di Hugging Face autenticati. Su una macchina Linux senza GPU (Ubuntu 24.04):
 
 ```text
 $ llama version
@@ -101,7 +93,7 @@ Available devices:
 
 "(none)" è corretto: la CPU non è elencata tra i device di offload.
 
-!!! warning "Gotcha verificato su Ubuntu 24.04: `SSL connection failed`"
+!!! warning "Su Ubuntu 24.04: `SSL connection failed`"
     Il binario dell'installer è **statico** (compilato con Clang 22) e non sa dove la tua distribuzione tiene
     i certificati TLS. Il primo `llama cli -hf …` può fallire con
     `E get_repo_commit: error: HTTPLIB failed: SSL connection failed`. Soluzione:
@@ -185,7 +177,7 @@ sistema × backend × architettura. I nomi reali (build b10964, schema identico 
     cd llama-$V; .\llama.exe version
     ```
 
-Il tarball Ubuntu (verificato, 61 file, 41 MB estratti) contiene **sia** `llama` **sia** i vecchi eseguibili
+Il tarball Ubuntu (61 file, 41 MB estratti) contiene **sia** `llama` **sia** i vecchi eseguibili
 `llama-cli`, `llama-server`, `llama-bench`, `llama-quantize`, `llama-perplexity`, `llama-imatrix`,
 `llama-gguf-split`, `llama-tokenize`, `llama-tts`, `llama-mtmd-cli`, `ggml-rpc-server`, più le librerie
 `libllama.so`, `libggml*.so`, `libmtmd.so`. I binari sono compilati su Ubuntu 22.04 con GCC 11 e usano le
@@ -209,7 +201,7 @@ Immagini ufficiali su `ghcr.io/ggml-org/llama.cpp:` + **variante** + eventuale s
 
 Suffissi: `-cuda` (CUDA 12), `-cuda13`, `-rocm`, `-musa`, `-intel` (SYCL), `-vulkan`, `-openvino`, `-s390x`.
 Esempio: `ghcr.io/ggml-org/llama.cpp:server-cuda`. Le immagini seguono le build notturne (il tag senza
-numero è l'ultima: verificato `light` → `build 11096`).
+numero è l'ultima: per esempio `light` → `build 11096`).
 
 ```bash
 # CLI interattiva (entrypoint di default: /app/llama-cli)
@@ -229,7 +221,7 @@ docker run --rm --device /dev/dri/renderD128:/dev/dri/renderD128 --device /dev/d
     -m /models/modello.gguf --host 0.0.0.0 --port 8080 -ngl 99
 ```
 
-Verificato sul VPS con il modello in cache montato (log del container):
+Log del container con il modello della cache Hugging Face montato:
 
 ```text
 srv    load_model: loading model '/models/37ae482d…814f'
@@ -261,14 +253,14 @@ services:
 ```
 
 Per costruire un'immagine con un CUDA diverso: `docker build -t local/llama.cpp:server-cuda --target server
--f .devops/cuda.Dockerfile .` dai sorgenti (`CUDA_VERSION` di default 12.8.1). Le immagini GPU sono costruite
-ma non testate dalla CI oltre la build.
+-f .devops/cuda.Dockerfile .` dai sorgenti (`CUDA_VERSION` di default 12.8.1). La CI del progetto costruisce le
+immagini GPU ma non le esegue: per i dettagli vedi [docs/docker.md](https://github.com/ggml-org/llama.cpp/blob/master/docs/docker.md).
 
 ## 6. Compilare dai sorgenti con CMake
 
 Serve quando vuoi un backend non distribuito (CANN, WebGPU, ZenDNN, KleidiAI…), quando devi applicare una
-patch o seguire `master`, o su piattaforme senza binari (Termux, RISC-V). Il corso non ti chiede di compilare
-sul VPS condiviso; sul tuo computer è questione di 5-15 minuti su CPU.
+patch o seguire `master`, o su piattaforme senza binari (Termux, RISC-V). Su un computer moderno la build CPU
+richiede 5-15 minuti.
 
 === "Linux"
     ```bash
@@ -358,7 +350,7 @@ operazione: per spegnerla del tutto `--device none`.
 `aarch64` → binario CPU o Vulkan), il tarball è `-ubuntu-arm64.tar.gz`, l'immagine Docker `arm64` è la
 stessa `ghcr.io/ggml-org/llama.cpp:server`. Compilando, `cmake -B build` rileva NEON e dotprod da solo;
 `-DGGML_CPU_KLEIDIAI=ON` aggiunge i micro-kernel Arm. Sul Pi 5 (8 GB) aspettati, con un modello 1-2B in Q4_0
-(il formato più veloce su ARM), una generazione dell'ordine di pochi token al secondo (non verificato dal corso).
+(il formato più veloce su ARM), una generazione dell'ordine di pochi token al secondo.
 
 **Android con Termux** (nessun root): Termux è un emulatore di terminale con un ambiente Linux. Da F-Droid
 o GitHub (la versione Play Store è sperimentale):
@@ -424,10 +416,10 @@ Il terzo scarica 785 MiB nella cache Hugging Face, stampa il banner (`build`, `m
 | Installer | `llama update` (ultima release) o rilanciare `install.sh` | `LLAMA_VERSION=bNNNNN curl -LsSf https://llama.app/install.sh \| sh` |
 | winget / brew / port / conda / nix | `winget upgrade llama.cpp`, `brew upgrade llama.cpp`, … | pin del gestore (`brew pin llama.cpp`) |
 | Tarball / zip | scaricare la nuova build in una nuova cartella | tenere le cartelle `llama-bNNNNN/` affiancate |
-| Docker | `docker pull` | usare il tag con il numero di build (`server-b11046`, verificato esistente) invece di `latest` |
+| Docker | `docker pull` | usare il tag con il numero di build (`server-b11046`) invece di `latest` |
 | Sorgenti | `git pull && cmake --build build` | `git checkout bNNNNN` (le build sono tag) o `git checkout v0.4.1` |
 
-Fissare la versione è quello che fa il corso: tutti i comandi sono provati sulla build in
+Fissare la versione è quello che fa il corso: tutti i comandi si riferiscono alla build in
 [Versione di riferimento](../../versione.md); se aggiorni e qualcosa cambia, guarda prima lì.
 
 ## Riepilogo
@@ -515,4 +507,4 @@ Fissare la versione è quello che fa il corso: tutti i comandi sono provati sull
 - Android: <https://github.com/ggml-org/llama.cpp/blob/master/docs/android.md>
 - OpenCL (Adreno): <https://github.com/ggml-org/llama.cpp/blob/master/docs/backend/OPENCL.md> ·
   SYCL (Intel): <https://github.com/ggml-org/llama.cpp/blob/master/docs/backend/SYCL.md>
-- [Versione di riferimento](../../versione.md) · matrice piattaforme: `redazione/piattaforme.md` nel repository
+- [Versione di riferimento](../../versione.md)

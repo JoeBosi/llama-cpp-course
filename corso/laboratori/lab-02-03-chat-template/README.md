@@ -3,7 +3,6 @@
 <div class="meta" markdown>
 <span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/02-primi-passi/README.md">02: Primi passi: `llama cli`</a></span>
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 45 minuti</span>
-<span class="stato stato-verificato">verificato su b11046</span>
 </div>
 
 ## Obiettivo
@@ -35,7 +34,7 @@ dello stesso modello sullo stesso input.
 
     Atteso: `init: chat template, example_format: '<|im_start|>system\n…<|im_end|>\n<|im_start|>user\n…<|im_start|>assistant\n…`.
     Il template completo (Jinja, 7 755 caratteri per Qwen3.5) è nella chiave `tokenizer.chat_template`; con il
-    pacchetto `gguf` (`pip install gguf`, verificato):
+    pacchetto `gguf` (`pip install gguf`):
 
     ```bash
     python3 - <<'EOF'
@@ -78,14 +77,14 @@ dello stesso modello sullo stesso input.
     llama cli -hf ggml-org/Qwen3.5-0.8B-GGUF -st -p "Ciao, chi sei?" -n 40 -rea off --chat-template gemma
     ```
 
-    Verificato con `llama2`: il modello risponde con un finto header di file sorgente («// llama2 // Copyright
+    Con `llama2` il modello risponde con un finto header di file sorgente («// llama2 // Copyright
     2016-2017 // All rights reserved…»): non riconoscendo `[INST]`, completa il testo come se fosse codice.
-    Verificato con `gemma`: la risposta è la parola «gemma» ripetuta riga dopo riga fino a esaurire `-n`. Il
+    Con `gemma` la risposta è la parola «gemma» ripetuta riga dopo riga fino a esaurire `-n`. Il
     modello ha visto `<start_of_turn>` senza conoscerlo e non trova mai l'EOS giusto: il **loop** è il sintomo
     classico del template sbagliato.
 
 4. **Il template giusto, esplicito**. `--chat-template chatml` è il formato di Qwen, e infatti la risposta torna
-   sensata, ma con una differenza (verificata): il template incorporato `chatml` non conosce `enable_thinking`,
+   sensata, ma con una differenza: il template incorporato `chatml` non conosce `enable_thinking`,
    quindi `-rea off` non ha effetto e il modello apre `<think>` **dentro il testo** («<think>\nOkay, the user
    asked in Italian "Ciao, chi sei?"…»). Solo il template Jinja del GGUF sa spegnere il ragionamento. Poi prova
    `--chat-template-file` con una copia del template originale (punto 1) modificata, ad esempio cambiando il
@@ -107,7 +106,7 @@ dello stesso modello sullo stesso input.
     done
     ```
 
-    Verificato con il prompt "esperto": «Un token è una parte dell'input dell'LLM, che rappresenta una parte della
+    Con il prompt "esperto" la risposta è: «Un token è una parte dell'input dell'LLM, che rappresenta una parte della
     sequenza dei caratteri.»; senza prompt di sistema lo stesso modello parla di token crittografici
     ([lab 02-01](../lab-02-01-primo-modello/README.md)). Con `--temp 0` il confronto è deterministico: l'unica
     variabile è il prompt di sistema.

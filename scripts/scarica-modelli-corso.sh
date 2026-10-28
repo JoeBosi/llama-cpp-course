@@ -8,7 +8,7 @@
 #   scripts/scarica-modelli-corso.sh --estesi   # base + modelli "16 GB" (~+9 GB)
 #   scripts/scarica-modelli-corso.sh --lista    # elenca senza scaricare
 #   scripts/scarica-modelli-corso.sh --si       # non chiedere conferma
-# Dimensioni verificate sull'API di Hugging Face il 23/09/2026 (MiB, mmproj incluso dove serve).
+# Dimensioni dei file GGUF (API di Hugging Face, settembre 2026) (MiB, mmproj incluso dove serve).
 set -euo pipefail
 
 # formato: "repo[:quant]|MiB|a cosa serve"

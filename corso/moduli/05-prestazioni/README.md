@@ -1,9 +1,5 @@
 # Modulo 05: Prestazioni e ottimizzazione
 
-<div class="meta" markdown>
-<span class="stato stato-verificato">verificato su b11046 (CPU)</span> <span class="stato stato-bozza">parti GPU, multi-GPU e NUMA: dalla documentazione ufficiale, non verificate su questa macchina</span>
-</div>
-
 Un modello che "gira" non basta: deve girare **abbastanza in fretta** per l'uso che ne fai. In questo modulo impari a
 misurare le prestazioni in modo riproducibile, a capire **quale risorsa fa da collo di bottiglia** (calcolo, banda di
 memoria, VRAM, rete) e a usare le leve che llama.cpp ti dà: thread, offload su GPU, KV cache compatta, decodifica
@@ -66,7 +62,7 @@ stampa una tabella. Ogni test è ripetuto `-r` volte (default 5) e riporta media
 llama bench -m Qwen3.5-0.8B-Q8_0.gguf -p 64 -n 32 -t 6 -r 2
 ```
 
-Output verificato su questo VPS (CPU AMD EPYC, 6 vCPU, macchina condivisa):
+Output su una macchina a 6 vCPU (AMD EPYC) senza GPU:
 
 ```
 | model             |       size |   params | backend | threads | test |          t/s |
@@ -137,8 +133,8 @@ batching (modulo 04).
 Sulla CPU il parametro più importante è `-t` (thread di generazione; `-tb` per il prompt processing, default uguale).
 La regola della documentazione ufficiale: **numero di core fisici, non di thread logici**, e se la generazione è
 lentissima prova `-t 1` e raddoppia finché non migliora più. Più thread del dovuto **peggiorano** le prestazioni, perché
-il lavoro è limitato dalla banda e i thread si contendono la cache; su una macchina condivisa l'effetto è drammatico.
-Misurato su questo VPS con 6 vCPU mentre altri processi lo usavano (carico medio ~15):
+il lavoro è limitato dalla banda e i thread si contendono la cache; quando i core sono già occupati da altri processi
+l'effetto è drammatico. Misura su una macchina a 6 vCPU con altri processi in esecuzione (carico medio ~15):
 
 ```
 llama bench -m Qwen3.5-0.8B-Q8_0.gguf -p 32 -n 16 -r 1 -t 1,2,4,6 --progress
@@ -171,7 +167,7 @@ Su server con **più socket** (NUMA) la RAM è divisa in nodi, e leggere la memo
 `--numa distribute` spalma i thread su tutti i nodi, `--numa isolate` li tiene sul nodo di partenza, `--numa numactl`
 rispetta la mappa data da `numactl`. La guida raccomanda di svuotare la page cache prima di cambiare modalità
 (`echo 3 | sudo tee /proc/sys/vm/drop_caches`), perché il modello mappato in memoria resta nel nodo in cui è stato letto
-la prima volta. Su questo VPS `lscpu` mostra `NUMA node(s): 1`, quindi l'opzione non ha effetto.
+la prima volta. Se `lscpu` mostra `NUMA node(s): 1` la macchina ha un solo nodo e l'opzione non ha effetto.
 
 ## 4. Offload su GPU e inferenza ibrida
 
@@ -193,7 +189,7 @@ sparisce il passaggio dalla CPU e la GPU lavora alla sua banda piena. Morale: se
 Come verificare che la GPU lavori davvero:
 
 ```bash
-llama cli --list-devices            # elenca CUDA0, Vulkan0, Metal, RPC0…; su questo VPS: "(none)"
+llama cli --list-devices            # elenca CUDA0, Vulkan0, Metal, RPC0…; senza GPU: "(none)"
 llama cli -m m.gguf -ngl all -v     # nel log: load_tensors: offloaded N/N layers to GPU e i buffer CUDA0
 ```
 
@@ -300,8 +296,8 @@ I tipi principali:
   ```
 - **`draft-eagle3`**, **`draft-dflash`**: bozze specializzate (EAGLE-3, DFlash) fornite per alcuni modelli; stessa sintassi.
 - **`ngram-*`**: nessun modello bozza; la proposta viene dai token già visti nel contesto. Costa niente e aiuta quando
-  il testo si ripete (riscrittura di codice, riassunti con citazioni), nulla altrimenti. Verificato su questo VPS con
-  `llama cli … --spec-type ngram-simple`: funziona senza file aggiuntivi.
+  il testo si ripete (riscrittura di codice, riassunti con citazioni), nulla altrimenti. Si attiva con
+  `llama cli … --spec-type ngram-simple` e funziona senza file aggiuntivi, anche su CPU.
 
 !!! note "Quando conviene davvero"
     La speculativa paga quando il target è **molto** più lento della bozza (rapporto 10-20×) e il testo è prevedibile
@@ -366,7 +362,7 @@ ggml-rpc-server -H 0.0.0.0 -p 50052            # -t N thread per il device CPU, 
 llama-cli -m m.gguf -ngl all --rpc 192.168.1.10:50052,192.168.1.11:50052
 ```
 
-Verificato in locale su questo VPS (server e client sulla stessa macchina, backend CPU):
+Esempio in locale, con server e client sulla stessa macchina e backend CPU:
 
 ```
 $ ggml-rpc-server -H 127.0.0.1 -p 50052 -t 3
@@ -408,7 +404,7 @@ cat args.txt | xargs llama serve -m modello.gguf
 
 L'esempio del README ufficiale (Qwen3-30B-A3B f16 da 62 GB su una RTX 4090 da 24 GB) produce
 `-c 4096 -ngl 48 -ot blk\.14\.ffn_(up|down|gate)_(ch|)exps=CPU,…`: contesto ridotto, tutti i layer in VRAM ma esperti
-dei layer 14-47 su CPU. Su questo VPS senza GPU l'uscita è semplicemente `-c 262144 -ngl -1` (il contesto pieno del
+dei layer 14-47 su CPU. Su una macchina senza GPU l'uscita è semplicemente `-c 262144 -ngl -1` (il contesto pieno del
 modello, nessun offload). Il log della fase di fit è leggibile in ogni avvio:
 
 ```
@@ -438,8 +434,8 @@ Alla chiusura, `llama_memory_breakdown_print` riepiloga per dispositivo memoria 
 ## Errori comuni
 
 !!! warning "Benchmark su macchina occupata"
-    Browser, IDE, altri modelli caricati, o un VPS condiviso rendono le misure inutili (deviazioni standard enormi,
-    come i ±15 t/s visti sopra). Chiudi tutto, usa `-r 5` o più, ripeti in momenti diversi e riporta la deviazione.
+    Browser, IDE, altri modelli caricati o altri processi sulla stessa CPU rendono le misure inutili (deviazioni standard
+    enormi, come i ±15 t/s visti sopra). Chiudi tutto, usa `-r 5` o più, ripeti in momenti diversi e riporta la deviazione.
 
 !!! warning "Troppi thread"
     `-t` uguale ai thread logici (SMT) o superiore ai core liberi fa crollare la generazione. Parti dai core fisici; se

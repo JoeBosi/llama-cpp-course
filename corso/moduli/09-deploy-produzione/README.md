@@ -1,9 +1,5 @@
 # Modulo 09: Messa in produzione
 
-<div class="meta" markdown>
-<span class="stato stato-verificato">verificato su b11046</span> · configurazioni Caddy, systemd e Nginx validate sul VPS del corso; Prometheus/Grafana descritti dalla documentazione ufficiale
-</div>
-
 Nei moduli precedenti hai avviato `llama serve` a mano, in un terminale, e lo hai chiuso con ++ctrl+c++.
 In produzione il server deve **partire da solo**, **ripartire se cade**, essere raggiungibile **solo da chi
 è autorizzato**, e dirti **come sta** senza che tu debba guardare il terminale. Questo modulo mette insieme
@@ -142,9 +138,9 @@ curl -s http://127.0.0.1:8080/health          # {"status":"ok"}  (503 finché ca
 journalctl -u llama-serve -f                  # log in tempo reale
 ```
 
-Output atteso di `systemd-analyze verify`: nessuna riga (silenzio = ok). Sul VPS del corso lo stesso file
-è stato verificato e l'unica segnalazione era che `/home/llama/.local/bin/llama` non esiste (l'utente `llama`
-non c'è su quella macchina). `systemd-analyze security llama-serve` ti dà un punteggio di esposizione: con
+Output atteso di `systemd-analyze verify`: nessuna riga (silenzio = ok). Se segnala che
+`/home/llama/.local/bin/llama` non esiste, l'utente `llama` o il binario non sono ancora stati creati: torna al
+blocco di installazione sopra. `systemd-analyze security llama-serve` ti dà un punteggio di esposizione: con
 le direttive sopra scende da "UNSAFE" a "EXPOSED/MEDIUM"; aggiungi `UMask=0077` e `ProtectProc=invisible`
 se vuoi stringere ancora.
 
@@ -208,7 +204,7 @@ volumes:
   caddy_data:
 ```
 
-1. Fissa **sempre** il tag alla build (`server-b11046`, `server-cuda-b11046`, …): il tag `server` da solo è "l'ultima build notturna" e cambia più volte al giorno. I tag per build esistono su ghcr.io (verificato per `server-b10964`, `server-b11046`, `server-b11096`).
+1. Fissa **sempre** il tag alla build (`server-b11046`, `server-cuda-b11046`, …): il tag `server` da solo è "l'ultima build notturna" e cambia più volte al giorno. Su ghcr.io esiste un tag per ogni build (`server-b10964`, `server-b11046`, `server-b11096`, …).
 2. Durante `start_period` i fallimenti del check non contano: il tempo di caricare il modello.
 3. Caddy parte solo quando `/health` risponde 200: niente 502 al primo utente.
 
@@ -289,8 +285,8 @@ che le porte 80 e 443 siano raggiungibili.
     Vantaggio: funziona con tutti gli SDK OpenAI senza configurazione extra; puoi avere una chiave per
     utente/applicazione e revocarla togliendola dal file (poi `systemctl restart`).
 
-Entrambi i Caddyfile sono stati validati sul VPS con `caddy validate --config Caddyfile --adapter caddyfile`
-(`Valid configuration`). Dopo ogni modifica: `sudo caddy validate --config /etc/caddy/Caddyfile && sudo systemctl reload caddy`.
+Controlla sempre la sintassi con `caddy validate --config Caddyfile --adapter caddyfile`: la risposta attesa è
+`Valid configuration`. Dopo ogni modifica: `sudo caddy validate --config /etc/caddy/Caddyfile && sudo systemctl reload caddy`.
 
 ??? note "Nginx equivalente"
     Nginx non ottiene i certificati da solo: usa `certbot --nginx` (o acme.sh). In compenso ha il rate
@@ -322,7 +318,7 @@ Entrambi i Caddyfile sono stati validati sul VPS con `caddy validate --config Ca
     }
     ```
 
-    Sintassi verificata sul VPS con `nginx -t` (fallisce solo se i file del certificato non esistono ancora).
+    Controlla la sintassi con `nginx -t`: fallisce solo se i file del certificato non esistono ancora.
     Per far passare la chiave API invece della password, togli le due righe `auth_basic*`.
 
 ### 2.2 Cosa cambia per la web UI
@@ -348,7 +344,7 @@ richieste in corso: in produzione o lo disabiliti o lo lasci solo dietro autenti
 ### 3.2 `/metrics` per Prometheus
 
 Con `--metrics` (o `LLAMA_ARG_ENDPOINT_METRICS=1`) il server espone `GET /metrics` in formato Prometheus.
-Senza il flag risponde 501. Metriche reali lette sul VPS del corso (build 11046):
+Senza il flag risponde 501. Le metriche esposte dalla build 11046:
 
 | Metrica | Tipo | Significato |
 |---|---|---|

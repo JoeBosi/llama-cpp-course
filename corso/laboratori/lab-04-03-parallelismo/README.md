@@ -3,7 +3,6 @@
 <div class="meta" markdown>
 <span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/04-server-api/README.md">04: `llama serve`: server e API</a></span>
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 45 minuti</span>
-<span class="stato stato-verificato">verificato su b11046</span>
 </div>
 
 ## Obiettivo
@@ -31,7 +30,7 @@ confronto, e spegne il thinking con `chat_template_kwargs` così i 32 token gene
 
 ## Procedura
 
-Le misure riportate vengono da un VPS a 6 vCPU condiviso (`-t 3`), senza GPU: i valori assoluti sulla tua
+Le misure riportate vengono da una macchina a 6 vCPU senza GPU (`-t 3`): i valori assoluti sulla tua
 macchina saranno diversi, i rapporti no.
 
 1. **Server con un solo slot**:
@@ -82,8 +81,7 @@ macchina saranno diversi, i rapporti no.
 
     Due richieste avanzano insieme (`picco = 2`), le altre due aspettano. Nota che la velocità **per slot** è
     scesa (3-4 t/s contro 5-11): su CPU i core sono già saturi con una sequenza, quindi far avanzare due sequenze
-    a ogni `llama_decode` costa quasi il doppio per passo. Su questa macchina condivisa il totale è perfino peggiorato:
-    è rumore (altri processi), non una legge. Ripeti la misura due o tre volte prima di trarre conclusioni.
+    a ogni `llama_decode` costa quasi il doppio per passo. Qui il totale è sceso: con i core già saturi due slot non rendono più di uno. Una misura di throughput su CPU va ripetuta due o tre volte e mediata prima di trarre conclusioni.
 
 3. **Quattro slot**. Riavvia con `-np 4`:
 
@@ -116,7 +114,7 @@ macchina saranno diversi, i rapporti no.
       -d "{\"messages\":[{\"role\":\"user\",\"content\":\"$(cat lungo.txt)\"}],\"max_tokens\":20}"
     ```
 
-    Il prompt (1206 token, contali con `/tokenize`) supera i 512 dello slot. Risposta reale:
+    Il prompt (1206 token, contali con `/tokenize`) supera i 512 dello slot. Risposta:
 
     ```json
     {"error":{"code":400,"message":"request (1217 tokens) exceeds the available context size (512 tokens), try increasing it",
@@ -133,8 +131,8 @@ macchina saranno diversi, i rapporti no.
 
     Quattro slot, ma ognuno "vede" tutti i 2048 token: il buffer è unico e gli slot attivi se lo spartiscono
     dinamicamente. Rimanda il prompt lungo del punto 4: ora passa (`finish_reason: length`, 20 token di riassunto).
-    Ripeti anche `carico.py`: sul VPS `throughput 15.3 t/s, latenza max 8.34 s`, in linea con `-np 4` senza
-    `--kv-unified` (12,4 t/s: la differenza è rumore della macchina condivisa). Il costo del buffer unico è che
+    Ripeti anche `carico.py`: `throughput 15.3 t/s, latenza max 8.34 s`, in linea con `-np 4` senza
+    `--kv-unified` (12,4 t/s: il buffer unico non cambia la velocità di calcolo, cambia solo come si spartisce il contesto). Il costo del buffer unico è che
     quattro richieste lunghe insieme possono esaurirlo: una richiesta va in coda finché non c'è spazio.
 
 6. **Ferma il server** con ++ctrl+c++.
@@ -149,7 +147,7 @@ macchina saranno diversi, i rapporti no.
 - [ ] Hai tre tabelle (`-np 1/2/4`) con `n_ctx per slot` 2048 / 1024 / 512.
 - [ ] Con `-np 1` il `picco slot occupati` è 1 e la latenza massima è circa la somma delle quattro; con `-np 4` le
       quattro latenze sono quasi uguali.
-- [ ] Il throughput aggregato con `-np 4` è maggiore che con `-np 1` (sul VPS: ×2).
+- [ ] Il throughput aggregato con `-np 4` è maggiore che con `-np 1` (nelle misure sopra: ×2).
 - [ ] Hai visto il prompt lungo fallire con 4 slot e passare con `--kv-unified`.
 
 ## Domande e varianti

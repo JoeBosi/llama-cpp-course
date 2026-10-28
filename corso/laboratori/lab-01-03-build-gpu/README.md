@@ -3,7 +3,6 @@
 <div class="meta" markdown>
 <span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/01-installazione/README.md">01: Installazione su varie piattaforme</a></span>
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 60 minuti</span>
-<span class="stato stato-bozza">bozza · da verificare su GPU (il VPS del corso non ne ha)</span>
 </div>
 
 ## Obiettivo

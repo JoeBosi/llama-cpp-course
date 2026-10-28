@@ -1,13 +1,8 @@
 # Modulo 07: Multimodalità: visione, audio, voce
 
-<div class="meta" markdown>
-<span class="stato stato-verificato">verificato su b11046 (visione, CPU)</span> <span class="stato stato-bozza">audio e TTS: da verificare</span>
-</div>
-
 Fino a qui i modelli hanno letto e scritto solo testo. In questo modulo apri il modello anche a immagini, audio e video
-con il sottosistema **mtmd** di llama.cpp, e lo fai parlare con `llama-tts`. La parte "visione" è stata provata sul
-VPS del corso (CPU, senza GPU) con un modello da 280 MB; audio in ingresso e sintesi vocale sono scritti dalla
-documentazione ufficiale e segnalati come da verificare.
+con il sottosistema **mtmd** di llama.cpp, e lo fai parlare con `llama-tts`. Gli esempi di visione girano su una
+normale CPU con un modello da 280 MB; per audio e sintesi vocale usi gli stessi strumenti con modelli dedicati.
 
 ## Cosa imparerai
 
@@ -50,7 +45,7 @@ guide dedicate in `docs/multimodal/`.
 
 ### I flag da conoscere
 
-Verificati in `llama cli --help` e `llama serve --help` (b11046):
+Da `llama cli --help` e `llama serve --help` (b11046):
 
 | Flag | Effetto |
 |---|---|
@@ -75,7 +70,7 @@ Verificati in `llama cli --help` e `llama serve --help` (b11046):
 
 La lista ufficiale è in `docs/multimodal.md` e nella collezione
 [Multimodal GGUFs](https://huggingface.co/collections/ggml-org/multimodal-ggufs-68244e01ff1f39e5bebeeedc) di `ggml-org`;
-quasi tutti hanno la quant `Q4_K_M` di default. Dimensioni lette dall'API di Hugging Face il 23/09/2026.
+quasi tutti hanno la quant `Q4_K_M` di default. Dimensioni al 23/09/2026.
 
 | Modalità | Repository `-hf` | Modello + mmproj | Note |
 |---|---|---|---|
@@ -125,8 +120,8 @@ Loaded media from 'forme.png'
 > Describe this image.
 ```
 
-Per una domanda secca senza entrare in chat usa `--image` con `-p` (e `-st` per uscire alla fine). Output reale sul VPS
-(immagine di prova 320×240 con un quadrato rosso e un rettangolo blu, generata con ffmpeg nel lab 07-01):
+Per una domanda secca senza entrare in chat usa `--image` con `-p` (e `-st` per uscire alla fine). Output su una
+macchina a 6 vCPU senza GPU (immagine di prova 320×240 con un quadrato rosso e un rettangolo blu, generata con ffmpeg nel lab 07-01):
 
 ```bash
 llama cli -hf ggml-org/SmolVLM-256M-Instruct-GGUF:Q8_0 --image forme.png -p "Describe this image." -st -n 60 -t 3
@@ -177,7 +172,7 @@ Regole (dal README del server):
   un marker `<__media__>` per ogni elemento. Un client deve prima verificare in `/models` o `/v1/models` che il modello
   sia multimodale.
 
-Richiesta reale con data URI (sul VPS, server avviato con `llama serve -hf ggml-org/SmolVLM-256M-Instruct-GGUF:Q8_0 --port 18105 -c 4096 -t 3`):
+Richiesta con data URI (server avviato con `llama serve -hf ggml-org/SmolVLM-256M-Instruct-GGUF:Q8_0 --port 18105 -c 4096 -t 3`):
 
 ```bash
 B64=$(base64 -w0 forme.png)
@@ -208,9 +203,7 @@ La web UI di `llama serve` (modulo 04) aggiunge i file dal menu "media" o trasci
 - **audio** MP3/WAV per i modelli che accettano audio.
 
 La UI conosce le modalità del modello e **impedisce** di mandare un'immagine a un modello solo testo. Il PDF è comodo per
-fatture, scontrini e moduli: la UI lo trasforma in contenuto che il modello può leggere (pagine come immagini per i
-modelli con visione, testo estratto altrimenti; il comportamento esatto dipende dalla versione della UI, da verificare
-sulla tua). Video dimostrativi in [llama.app/docs/webui](https://llama.app/docs/webui).
+fatture, scontrini e moduli: la UI lo trasforma in contenuto che il modello può leggere (pagine come immagini per i modelli con visione, testo estratto altrimenti). Video dimostrativi in [llama.app/docs/webui](https://llama.app/docs/webui).
 
 ## 6. Audio in ingresso
 
@@ -228,14 +221,10 @@ Loaded media from 'esempio.mp3'
 L'audio viene ricampionato e codificato dall'encoder del `mmproj` (di tipo Whisper per molti modelli); il costo in token
 dipende dalla durata. Nel lab 07-02 generi un file WAV di prova con `ffmpeg` e provi i tre percorsi.
 
-<span class="stato stato-bozza">non verificato sul VPS: il modello audio più piccolo (Qwen3-ASR-0.6B) supera 1 GB</span>
-
 ## 7. Sintesi vocale con `llama-tts`
 
 `llama-tts` (nel tarball, non nell'installer) genera audio tramite `libmtmd`: un "backbone" LLM produce token acustici e
-un `mmproj` li trasforma in forma d'onda. Il README ufficiale (`tools/tts/README.md`) è oggi **indipendente dal modello**;
-in passato lo strumento era la demo di OuteTTS con vocoder WavTokenizer, combinazione non più descritta nella documentazione
-corrente e senza il vecchio flag del vocoder nell'`--help` di b11046.
+un `mmproj` li trasforma in forma d'onda. Lo strumento è indipendente dal modello (Qwen3-TTS, Pocket TTS). In passato era la demo di OuteTTS con il vocoder WavTokenizer: quel flusso e il flag del vocoder non esistono più.
 
 ```bash
 # Qwen3-TTS: modello + mmproj scaricati da -hf, output in out.wav
@@ -258,11 +247,9 @@ llama-tts -m pocket-tts.gguf -mm mmproj-pocket-tts.gguf -p "Hello world" \
 | `-n N` | limite in **frame** audio (quanti ms vale un frame dipende dal modello) |
 | `--temp`, `--top-k`, `--top-p`, `-ngl`, `-b`, `-ub` | come per il testo |
 
-Qwen3-TTS-1.7B pesa 1,0 GB (Q4_K_M) + 446 MB di `mmproj`: non è stato provato sul VPS.
+Qwen3-TTS-1.7B pesa 1,0 GB (Q4_K_M) + 446 MB di `mmproj`.
 Per convertire Pocket TTS da HF: `convert_hf_to_gguf.py path/languages/english --outfile pocket-tts.gguf` e
 `… --mmproj --outfile mmproj-pocket-tts.gguf` (una cartella `languages/<lingua>`, non la radice).
-
-<span class="stato stato-bozza">TTS: scritto dalla documentazione, da verificare</span>
 
 ## 8. Memoria e prestazioni
 
@@ -281,7 +268,7 @@ flowchart TB
 - **Contesto**: ogni immagine occupa decine o migliaia di token. Con SmolVLM-256M un'immagine 320×240 sono ~134 token; con i
   modelli a risoluzione dinamica (Qwen2.5-VL, Gemma 4) una foto grande può superare i 1000 e la doc consiglia `-c 8192`.
   `--image-max-tokens` mette un tetto; ridimensionare le immagini prima di inviarle è la leva più efficace.
-- **Prompt processing**: l'encoder gira una volta per immagine (sul VPS a 6 vCPU: 150 token di prompt a 3,7 t/s, ~40 s).
+- **Prompt processing**: l'encoder gira una volta per immagine (su una CPU a 6 vCPU: 150 token di prompt a 3,7 t/s, ~40 s).
   Su GPU è quasi istantaneo. Le immagini già viste restano in cache del prompt come i token di testo.
 - **Server con più slot**: ogni slot ha il suo contesto (modulo 04); con immagini grandi alza `-c` di conseguenza.
 

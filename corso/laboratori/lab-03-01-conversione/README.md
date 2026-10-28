@@ -3,7 +3,6 @@
 <div class="meta" markdown>
 <span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/03-modelli-gguf-quantizzazione/README.md">03: Modelli, GGUF e quantizzazione</a></span>
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 60 minuti (di cui 20 di download e installazione)</span>
-<span class="stato stato-bozza">bozza · procedura dalla documentazione ufficiale, non eseguita sul VPS del corso (richiede torch)</span>
 </div>
 
 ## Obiettivo

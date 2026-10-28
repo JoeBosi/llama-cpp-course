@@ -3,7 +3,6 @@
 <div class="meta" markdown>
 <span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/03-modelli-gguf-quantizzazione/README.md">03: Modelli, GGUF e quantizzazione</a></span>
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 45 minuti</span>
-<span class="stato stato-verificato">verificato su b11046</span>
 </div>
 
 ## Obiettivo
@@ -51,7 +50,7 @@ centinaia di KB misti (Wikitext, codice, più lingue).
     $REL/llama-imatrix -m $SRC -f calibrazione-it.txt -o $Q/imatrix-it.gguf -c 128 -t 4
     ```
 
-    Verificato (20 s, 3 thread):
+    Output (20 s con 3 thread su CPU):
 
     ```text
     compute_imatrix: tokenizing the input ..
@@ -82,8 +81,8 @@ centinaia di KB misti (Wikitext, codice, più lingue).
     ls -la $Q/*.gguf
     ```
 
-    Verificato: stessa dimensione del `Q2_K` cieco a meno di 256 byte di metadati (429 768 736 contro 429 768 480:
-    la imatrix cambia i **valori** quantizzati, non il formato) e, nel log:
+    Il file ha la stessa dimensione del `Q2_K` cieco a meno di 256 byte di metadati (429 768 736 contro 429 768 480:
+    la imatrix cambia i **valori** quantizzati, non il formato) e nel log compare:
 
     ```text
     load_imatrix: imatrix datasets=['…/calibrazione-it.txt']
@@ -100,7 +99,7 @@ centinaia di KB misti (Wikitext, codice, più lingue).
     done
     ```
 
-    Verificato:
+    Risultato:
 
     | File | PPL |
     |---|---|
@@ -121,7 +120,7 @@ centinaia di KB misti (Wikitext, codice, più lingue).
     done
     ```
 
-    Verificato:
+    Risultato:
 
     | Misura | `Q2_K` | `Q2_K` + imatrix | (`Q4_K_M`, per confronto) |
     |---|---|---|---|
@@ -150,7 +149,7 @@ centinaia di KB misti (Wikitext, codice, più lingue).
 - Unisci due imatrix (`--in-file a.gguf --in-file b.gguf -o c.gguf`) e confronta.
 - `Q4_K_M` con e senza imatrix: qui il guadagno è piccolo (nella tabella del modulo, su Llama-3-8B, KLD 0,031 → 0,028).
   Misuralo: vale la pena?
-- `IQ3_M` senza imatrix: in questa build viene prodotto senza errori (verificato: 431 MiB, 4,68 bpw), ma i tipi `IQ`
+- `IQ3_M` senza imatrix: in questa build viene prodotto senza errori (431 MiB, 4,68 bpw), ma i tipi `IQ`
   sono progettati intorno all'imatrix. Misura la PPL con e senza: lo scarto è molto più grande che per `Q4_K_M`.
 - `--include-weights ffn_down --include-weights attn_v`: imatrix solo su alcuni tensori. Cambia qualcosa?
 - Variante lunga: `calibration_datav3.txt` di bartowski (pubblico su GitHub) con `-c 512` e il modello F16 del lab 03-01.

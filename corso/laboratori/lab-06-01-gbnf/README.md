@@ -3,7 +3,6 @@
 <div class="meta" markdown>
 <span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/06-output-strutturato/README.md">06: Output strutturato: grammatiche GBNF e JSON Schema</a></span>
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 60 minuti</span>
-<span class="stato stato-verificato">verificato su b11046</span>
 </div>
 
 ## Obiettivo
@@ -63,7 +62,7 @@ la grammatica garantisce la forma e non il senso.
       -p "Sono in cucina, fa buio e ho freddo in soggiorno: voglio 22 gradi."
     ```
 
-    Output reale:
+    Output:
 
     ```
     accendi ventola soggiorno
@@ -76,7 +75,7 @@ la grammatica garantisce la forma e non il senso.
     soggiorno` e `spegni luce camera` (nessuno l'ha chiesto); solo il termostato è giusto. La grammatica ha fatto
     il suo lavoro; il modello da 0,8B no. **Forma garantita, senso no.** Un modello da 4B+ qui ci prende quasi sempre.
 
-4. **Senza grammatica**, stesso prompt di sistema, togli `--grammar-file`. Output reale (accorciato):
+4. **Senza grammatica**, stesso prompt di sistema, togli `--grammar-file`. Output (accorciato):
 
     ````
     2. **Imposta termostato soggiorno 22**
@@ -133,7 +132,7 @@ la grammatica garantisce la forma e non il senso.
     print(d["choices"][0]["message"]["content"], d["choices"][0]["finish_reason"])
     ```
 
-    Output reale: le stesse tre righe del punto 3 e `finish_reason: stop` (stesso modello, stesso prompt, temperatura 0).
+    Output: le stesse tre righe del punto 3 e `finish_reason: stop` (stesso modello, stesso prompt, temperatura 0).
     Con una grammatica errata il server risponde `400 {"error":{"message":"Failed to initialize samplers: failed to parse grammar",…}}`.
 
 8. **Un vincolo minimo**: una grammatica inline per una risposta chiusa.

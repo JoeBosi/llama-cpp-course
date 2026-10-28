@@ -1,18 +1,13 @@
 # Versione di riferimento
 
-<div class="meta" markdown>
-<span class="stato stato-verificato">verificato il 22/09/2026</span> <span class="stato stato-bozza">confronto con le versioni successive aggiornato al 28/10/2026</span>
-</div>
-
-!!! warning "Attenzione: il corso è fermo alla v0.4.1, llama.cpp è già alla v0.7.0"
+!!! warning "Il corso usa la v0.4.1; llama.cpp è alla v0.7.0"
     Al 28/10/2026 l'ultima release stabile è la **v0.7.0** (15/10/2026) e l'ultima build è la `b11936`. Il cambiamento
-    che tocca il corso: **dalla v0.7.0 `llama serve` ascolta sulla porta 9931 invece di 8080** (le immagini Docker
-    restano su 8080 dentro il container). Nei comandi del corso sostituisci `8080` con `9931`, oppure aggiungi
-    `--port 8080` quando avvii il server. Novità non coperte dal corso: `--moe-cache-mib` (cache GPU per gli esperti
-    MoE tenuti in RAM), decodifica speculativa LiliCorr, ggml 0.27. L'aggiornamento del corso è previsto; fino ad allora
-    vale questa nota.
+    che tocca i comandi del corso: **dalla v0.7.0 `llama serve` ascolta sulla porta 9931 invece di 8080** (le immagini
+    Docker restano su 8080 dentro il container). Sostituisci `8080` con `9931`, oppure aggiungi `--port 8080` quando
+    avvii il server. Novità introdotte dopo la v0.4.1: `--moe-cache-mib` (cache GPU per gli esperti MoE tenuti in RAM),
+    decodifica speculativa LiliCorr, ggml 0.27; per queste vedi le [note di rilascio](https://github.com/ggml-org/llama.cpp/releases).
 
-llama.cpp pubblica **più build al giorno**. Per non inseguirle, il corso è scritto e provato su una versione precisa:
+llama.cpp pubblica **più build al giorno**. Per non inseguirle, il corso usa una versione precisa:
 
 | Campo | Valore |
 |---|---|
@@ -46,4 +41,4 @@ flowchart TB
 
 1. Installare la nuova build (`llama update`), annotare `llama version`.
 2. Rieseguire i laboratori 01, 02, 04 e 05 (sono quelli con più comandi).
-3. Aggiornare la tabella qui sopra e i badge di stato delle pagine toccate.
+3. Aggiornare la tabella qui sopra e le date di aggiornamento delle pagine toccate.

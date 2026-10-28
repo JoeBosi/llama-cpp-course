@@ -1,9 +1,5 @@
 # Progetti di fine corso
 
-<div class="meta" markdown>
-<span class="stato stato-verificato">tracce complete · settembre 2026</span>
-</div>
-
 Lo studente (o un gruppo di 2-3 persone) sceglie **un** progetto e lo porta a termine in **tre settimane**.
 Ogni progetto combina più moduli, produce qualcosa di usabile e va documentato in modo che un compagno possa
 riprodurlo seguendo il README. Le tracce sono volutamente aperte: i requisiti minimi sono il pavimento, le
@@ -40,7 +36,7 @@ flowchart TB
 - **Settimana 3**: pulizia, README riproducibile, relazione, demo.
 
 Ogni traccia riporta le tappe suggerite settimana per settimana, i modelli consigliati con le dimensioni,
-i criteri specifici di valutazione e le insidie che gli studenti degli anni scorsi hanno incontrato.
+i criteri specifici di valutazione e le insidie più frequenti in questo tipo di progetto.
 
 ## Consegna (comune a tutti)
 

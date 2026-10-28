@@ -3,7 +3,6 @@
 <div class="meta" markdown>
 <span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/01-installazione/README.md">01: Installazione su varie piattaforme</a></span>
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 40 minuti</span>
-<span class="stato stato-verificato">verificato su Linux x86_64 · immagini light/server b11096</span> <span class="stato stato-bozza">GPU passthrough non verificato</span>
 </div>
 
 ## Obiettivo
@@ -57,7 +56,8 @@ built with GNU 14.2.0 for Linux x86_64
 ```
 
 Il tag senza numero segue le build notturne: qui è la `b11096`, più recente della `b11046` del corso. Per
-fissare la build: `ghcr.io/ggml-org/llama.cpp:server-b11046` (esiste, verificato con `docker manifest inspect`).
+fissare la build: `ghcr.io/ggml-org/llama.cpp:server-b11046` (`docker manifest inspect` conferma che un tag esiste
+senza scaricarlo).
 
 ```bash
 docker run --rm --entrypoint /bin/sh ghcr.io/ggml-org/llama.cpp:light -c "ls /app"
@@ -107,7 +107,7 @@ docker stop lab-server
 1. `--host 0.0.0.0` è obbligatorio: dentro il container il default `127.0.0.1` non è raggiungibile da `-p`.
    `-p 127.0.0.1:18101:18101` pubblica solo sull'host (non su tutta la rete). `-a` dà un alias al modello.
 
-Output verificato:
+Output atteso:
 
 ```text
 {"status":"ok"}
@@ -168,8 +168,8 @@ si divide tra gli slot (modulo 00, errori comuni).
         -m /models/$F --host 0.0.0.0 --port 18101 -ngl 99
     ```
     `server-rocm` per HIP (serve il driver amdgpu sull'host, spesso anche `--group-add video`),
-    `server-intel` per SYCL. Le immagini GPU sono costruite ma non testate dalla CI: se non partono, la
-    compilazione locale (`docker build -f .devops/vulkan.Dockerfile --target server .`) è la via ufficiale.
+    `server-intel` per SYCL. La CI del progetto costruisce le immagini GPU senza eseguirle: se una non parte sul tuo
+    hardware, la compilazione locale (`docker build -f .devops/vulkan.Dockerfile --target server .`) è la via ufficiale.
 
 Verifica nel log: `ggml_cuda_init: found 1 CUDA devices` / `ggml_vulkan: Found 1 Vulkan devices` e
 `model buffer size` sul device.

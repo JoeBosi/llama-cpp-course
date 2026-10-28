@@ -3,7 +3,6 @@
 <div class="meta" markdown>
 <span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/01-installazione/README.md">01: Installazione su varie piattaforme</a></span>
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 30 minuti</span>
-<span class="stato stato-verificato">verificato su b11046 · Linux x86_64</span> <span class="stato stato-bozza">macOS / Windows non verificati</span>
 </div>
 
 ## Obiettivo
@@ -105,7 +104,7 @@ Marte
 [ Prompt: 3.3 t/s | Generation: 0.3 t/s ]
 ```
 
-Sì, sul VPS carico ha risposto "Marte": un modello da 0,8 B in modalità senza ragionamento sbaglia. Prova
+La risposta "Marte" è sbagliata: un modello da 0,8 B in modalità senza ragionamento sbaglia spesso. Prova
 senza `-rea off` e guarda la differenza (e il tempo). La riga `[ Prompt … | Generation … ]` è il tuo primo
 benchmark: annotala.
 

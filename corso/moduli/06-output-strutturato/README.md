@@ -1,9 +1,5 @@
 # Modulo 06: Output strutturato: grammatiche GBNF e JSON Schema
 
-<div class="meta" markdown>
-<span class="stato stato-verificato">verificato su b11046</span>
-</div>
-
 Un modello di linguaggio produce testo libero. Quando quel testo deve essere letto da un programma (un JSON da
 decodificare, un comando da eseguire, un "sì/no" da confrontare) il testo libero è un problema: un ` ```json `
 di troppo, una virgola mancante, un `"2"` al posto di `2` e il parser fallisce. llama.cpp risolve il problema
@@ -33,7 +29,7 @@ curl -s http://127.0.0.1:8080/v1/chat/completions -H "Content-Type: application/
   "temperature": 0, "max_tokens": 80, "chat_template_kwargs": {"enable_thinking": false}}'
 ```
 
-Contenuto reale della risposta: `` ```json\n[\n  {\n    "nome": "Giulia Ferri",\n    "eta": 24,\n    "citta": "Ferrara"\n  }\n]\n``` ``.
+Contenuto della risposta: `` ```json\n[\n  {\n    "nome": "Giulia Ferri",\n    "eta": 24,\n    "citta": "Ferrara"\n  }\n]\n``` ``.
 Tre problemi in una riga: il blocco Markdown attorno, un **array** invece di un oggetto, e `eta: 24` invece
 di 34. Con `response_format` e uno schema (§ 4) la stessa richiesta restituisce esattamente
 `{"nome": "Giulia Ferri", "eta": 24, "citta": "Ferrara"}`: sparisce la recinzione, sparisce l'array, ma **24
@@ -72,7 +68,7 @@ elenco di **regole** `nome ::= sequenza`; la regola `root` è il punto di parten
 | Commento | `# testo` | fino a fine riga |
 
 Le regole possono andare a capo **solo dentro parentesi** o subito dopo un `|`: una regola spezzata altrove dà
-`error parsing grammar: expecting ::= at …` (verificato scrivendo `domotica-json.gbnf` nel lab 06-01).
+`error parsing grammar: expecting ::= at …` (lo incontri scrivendo `domotica-json.gbnf` nel lab 06-01).
 
 ### Tre grammatiche di esempio
 
@@ -133,7 +129,7 @@ llama cli -hf ggml-org/Qwen3.5-0.8B-GGUF -st -rea off --temp 0 -n 40 --grammar-f
   "unit": "gradi"
 ```
 
-Entrambi verificati. Il secondo mostra due cose: il JSON è sintatticamente perfetto ma i **nomi dei campi li ha
+Il secondo esempio mostra due cose: il JSON è sintatticamente perfetto ma i **nomi dei campi li ha
 scelti il modello** (`city`, non `citta`: la grammatica JSON generica non li conosce), e `-n 40` ha tagliato
 l'output prima della `}` finale. Il vincolo non impedisce a `max_tokens` di troncare: dimensiona sempre il
 budget di token e controlla `finish_reason`. Per un formato di comandi tuo, con vocabolario chiuso, vedi il lab 06-01.
@@ -218,7 +214,7 @@ le fa rispettare. Se ti servono, valida il risultato nel client (un `jsonschema.
 {"type": "json_schema", "json_schema": {"name": "x", "schema": {…}}}   // forma OpenAI (quella che l'SDK produce)
 ```
 
-Richiesta reale con schema (stesso prompt del § 1):
+Richiesta con schema (stesso prompt del § 1):
 
 ```bash
 curl -s http://127.0.0.1:8080/v1/chat/completions -H "Content-Type: application/json" -d '{
@@ -248,9 +244,9 @@ dati = json.loads(r.choices[0].message.content)
 ```
 
 Sul CLI, `-j` e `-jf` sono documentati per `llama cli`, ma **sulla build b11046 falliscono** con
-`Error: Failed to initialize samplers: std::exception` (verificato con qualunque schema, anche `{"type":"object"}`,
-sia con il binario dell'installer sia con `llama-cli` del tarball). Funziona invece `llama completion -j …`
-(verificato: `{"citta": "Trento", "gradi": 17}`), e in chat resta `--grammar-file` con una grammatica JSON.
+`Error: Failed to initialize samplers: std::exception` con qualunque schema, anche `{"type":"object"}`,
+sia con il binario dell'installer sia con `llama-cli` del tarball. Funziona invece `llama completion -j …`
+(risposta: `{"citta": "Trento", "gradi": 17}`), e in chat resta `--grammar-file` con una grammatica JSON.
 Se vuoi lo schema in una sessione interattiva usa il server.
 
 Una grammatica malformata è un errore di richiesta, non di generazione:
@@ -269,9 +265,9 @@ nessuno è giusto: prevedi sempre un'uscita (`"altro"`, `null`) e controlla i va
 
 **Il modello può essere costretto in un vicolo cieco.** Una grammatica che parte con `{` vieta al modello di
 iniziare con `Ecco il JSON:` (bene) ma anche con il blocco `<think>` dei modelli "thinking", che così ragionano
-"dentro" il JSON o producono risultati peggiori. In tutte le prove di questo modulo il thinking è spento
+"dentro" il JSON o producono risultati peggiori. Negli esempi di questo modulo il thinking è spento
 (`enable_thinking: false`, `-rea off`); se ti serve il ragionamento, usa una grammatica a token che lo ammetta
-(§ 2) e verifica il comportamento con il tuo modello (non provato in questo corso).
+(§ 2) e controlla il comportamento con il tuo modello: ogni famiglia usa token di ragionamento diversi.
 
 **Costo.** A ogni token il sampler deve stabilire quali dei ~150k token del vocabolario sono compatibili con lo
 stato della grammatica; con grammatiche ambigue (molti percorsi possibili aperti insieme) l'insieme degli stati
@@ -280,9 +276,9 @@ esplode. Le regole d'oro del README ufficiale:
 - Ripetizioni **limitate**: `x{0,N}` e non `x? x? x? …` né `x*` su spazi bianchi (lo `ws` di `json.gbnf` usa
   `[ \t]{0,20}`; il lab 06-01 usa `[ \n]{0,4}`).
 - Meno alternanze aperte possibile; `additionalProperties: false` (il default) tiene la grammatica piccola.
-- Con il thinking spento e temperatura 0, nelle prove di questo modulo il vincolo non ha rallentato la
-  generazione in modo misurabile (8,5 t/s con schema contro 4,9 senza, sul VPS rumoroso: differenza dovuta al
-  carico, non al sampler). Diventa un costo con schemi di decine di campi annidati e stringhe lunghe.
+- Con il thinking spento e temperatura 0, su uno schema di tre campi il vincolo non rallenta la generazione in
+  modo misurabile: su una macchina a 6 vCPU senza GPU, 8,5 t/s con schema e 4,9 senza, una differenza che
+  rientra nella variabilità delle misure su CPU, non nel costo del sampler. Diventa un costo con schemi di decine di campi annidati e stringhe lunghe.
 
 **Diagnostica.** Il server rifiuta con 400 le grammatiche che non compilano; le feature dello schema non supportate
 invece passano senza avviso. Per capire cosa è stato generato davvero puoi convertire lo schema con lo script
@@ -361,8 +357,7 @@ invece passano senza avviso. Per capire cosa è stato generato davvero puoi conv
        il chat template inserisce nome, descrizione e schema dei parametri nel prompt.
     5. `false`: grammatica più piccola e veloce, meno chiavi allucinate. La specifica JSON Schema dice `true`.
     6. Sì: `minimum`/`maximum` sono applicati solo a `integer`; per `number` vengono ignorati in silenzio.
-    7. No. La grammatica garantisce che sia un intero (nell'intervallo, se indicato); il valore lo sceglie il
-       modello, che può sbagliare (nelle prove: 24). Serve validazione a valle o un modello migliore.
+    7. No. La grammatica garantisce che sia un intero (nell'intervallo, se indicato); il valore lo sceglie il modello, che può sbagliare (nell'esempio del § 1: 24). Serve validazione a valle o un modello migliore.
     8. Tool calling con `tool_choice: auto`: il modello può rispondere a testo o emettere una `tool_call` con
        argomenti già validi. Una grammatica JSON lo obbligherebbe sempre al JSON.
 

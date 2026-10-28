@@ -3,7 +3,6 @@
 <div class="meta" markdown>
 <span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/05-prestazioni/README.md">05: Prestazioni e ottimizzazione</a></span>
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 60 minuti</span>
-<span class="stato stato-verificato">metodi n-gram verificati su b11046 (CPU)</span> <span class="stato stato-bozza">coppie target+bozza: dalla documentazione, da verificare su GPU</span>
 </div>
 
 ## Obiettivo
@@ -61,8 +60,8 @@ EOF
     llama cli -m "$T" -md "$D" --spec-type draft-simple -ngl all -ngld all -st -f codice.txt -n 300 --temp 0 -s 42
     ```
 
-    Attesa (documentazione e esperienza della comunità, da confermare sulla tua GPU): sul codice la generazione sale di
-    1,5-2,5×, sulla prosa di 1,2-1,6×. Il testo prodotto a temperatura 0 deve essere **identico** a quello del passo 1.
+    Valori indicativi su GPU: sul codice la generazione sale di 1,5-2,5×, sulla prosa di 1,2-1,6×; il rapporto esatto
+    dipende dalla tua scheda. Il testo prodotto a temperatura 0 deve essere **identico** a quello del passo 1.
 
 3. **Quanti token proporre?** Ripeti il prompt di codice con `--spec-draft-n-max 2`, `4`, `8`, `16`:
 
@@ -90,8 +89,7 @@ EOF
     ```
 
 6. **Senza bozza: n-gram.** I metodi `ngram-*` propongono token già visti nel contesto: nessun secondo modello,
-    utili quando l'output ripete l'input (riscritture, ripetizioni). Verificato sul VPS del corso con il modello
-    da 0,8 miliardi:
+    utili quando l'output ripete l'input (riscritture, ripetizioni). Esempio su CPU con il modello da 0,8 miliardi:
 
     ```bash
     M=$(ls ~/.cache/huggingface/hub/models--ggml-org--Qwen3.5-0.8B-GGUF/snapshots/*/Qwen3.5-0.8B-Q8_0.gguf)
@@ -99,7 +97,7 @@ EOF
       -p "Scrivi la frase 'il gatto dorme sul divano' esattamente cinque volte, una per riga."
     ```
 
-    Output atteso: le cinque righe e `[ Prompt: 11.2 t/s | Generation: 6.0 t/s ]` (valori del VPS condiviso). Ripeti
+    Output atteso: le cinque righe e `[ Prompt: 11.2 t/s | Generation: 6.0 t/s ]` (su una macchina a 6 vCPU senza GPU). Ripeti
     senza `--spec-type` e confronta; poi prova un prompt senza ripetizioni e osserva che il guadagno sparisce.
 
 7. **Variante MTP (Gemma 4).** La bozza è una piccola testa nello stesso repository, il tipo è `draft-mtp`:

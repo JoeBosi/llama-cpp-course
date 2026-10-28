@@ -3,7 +3,6 @@
 <div class="meta" markdown>
 <span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/04-server-api/README.md">04: `llama serve`: server e API</a></span>
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 45 minuti</span>
-<span class="stato stato-verificato">verificato su b11046</span>
 </div>
 
 ## Obiettivo
@@ -81,7 +80,7 @@ Avviare `llama serve` con un modello piccolo, leggere i log di avvio, usare la w
     completamento, e il blocco `timings` con `prompt_per_second`, `predicted_per_second`, `cache_n: 0`.
 
 5. **Ripeti la stessa richiesta** e guarda `timings.cache_n` e `prompt_n`: ora il prompt è già in cache
-   (`cache_n` vicino al totale, `prompt_n` piccolo, `prompt_ms` molto più basso). Verificato: `cache_n 0 → 33`,
+   (`cache_n` vicino al totale, `prompt_n` piccolo, `prompt_ms` molto più basso): ad esempio `cache_n 0 → 33`,
    `prompt_ms 1259 → 227`.
 
 6. **Streaming**. Aggiungi `"stream": true` e usa `curl -N`:
@@ -145,8 +144,8 @@ Avviare `llama serve` con un modello piccolo, leggere i log di avvio, usare la w
 ## Domande e varianti
 
 - Avvia con `-np 1` e `-c 2048`: quanto vale `n_ctx_slot`? E con `-np 2 --kv-unified`? (guarda il log e `/props`)
-- Avvia con `--api-key segreta123`: cosa risponde `/v1/models` senza header? E `/health`? (verificato: `401 Invalid API Key`; `/health` resta `200`)
-- Avvia con `--no-webui`: `GET /` risponde `404` (verificato) ma l'API funziona. Quando ha senso?
+- Avvia con `--api-key segreta123`: cosa risponde `/v1/models` senza header? E `/health`? (`401 Invalid API Key`; `/health` resta `200`)
+- Avvia con `--no-webui`: `GET /` risponde `404` ma l'API funziona. Quando ha senso?
 - Manda una richiesta con `"max_tokens": 10` **senza** spegnere il thinking: cosa contiene `content`? Cosa vedi in `reasoning_content`?
 - Variante multimodale (se hai ≥ 8 GB liberi): `llama serve -hf ggml-org/gemma-3-4b-it-qat-GGUF` e allega un'immagine nella UI;
   `/props` ora riporta `"vision": true`.

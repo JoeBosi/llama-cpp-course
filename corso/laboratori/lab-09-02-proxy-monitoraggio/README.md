@@ -3,7 +3,6 @@
 <div class="meta" markdown>
 <span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/09-deploy-produzione/README.md">09: Messa in produzione</a></span>
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 90-120 minuti</span>
-<span class="stato stato-verificato">verificato su b11046</span> (Caddyfile e `compose.yaml` validati; metriche lette dal server reale)
 </div>
 
 ## Obiettivo

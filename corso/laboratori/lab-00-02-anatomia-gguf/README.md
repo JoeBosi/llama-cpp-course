@@ -3,7 +3,6 @@
 <div class="meta" markdown>
 <span class="meta-item">:material-book-open-page-variant:{ .meta-icon } Modulo <a href="../../moduli/00-introduzione/README.md">00: Introduzione a llama.cpp</a></span>
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 45 minuti</span>
-<span class="stato stato-verificato">verificato su b11046 · gguf 0.19.0</span>
 </div>
 
 ## Obiettivo
@@ -57,7 +56,7 @@ flowchart TB
     gguf-dump --help
     ```
 
-Versione verificata: `gguf 0.19.0`.
+Il corso usa `gguf 0.19.0`.
 
 ### 2. Trova il file
 
