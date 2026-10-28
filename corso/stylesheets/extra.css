@@ -150,16 +150,18 @@ html.mermaid-modal-open { overflow: hidden; }
 }
 
 /* ===== "Prof. Giuseppe Bosi" nella barra in alto (sempre visibile, anche su telefono) ===== */
-.md-header__inner .autore-header {
-  flex-shrink: 0; align-self: center;
-  margin: 0 .5rem 0 .2rem; padding: .2rem .55rem;
+.md-header__topic .autore-header {
+  display: inline-block; vertical-align: middle; margin-left: .6rem; padding: .15rem .55rem;
   border: 1px solid rgba(255,255,255,.55); border-radius: 1rem;
-  color: var(--md-primary-bg-color); font-size: .68rem; font-weight: 600; line-height: 1.2; white-space: nowrap;
+  color: var(--md-primary-bg-color); font-size: .62rem; font-weight: 600; line-height: 1.2; white-space: nowrap;
   text-decoration: none; opacity: .95;
 }
-.md-header__inner .autore-header:hover,
-.md-header__inner .autore-header:focus-visible { background: rgba(255,255,255,.18); opacity: 1; }
+.md-header__topic .autore-header:hover,
+.md-header__topic .autore-header:focus-visible { background: rgba(255,255,255,.18); opacity: 1; }
 @media screen and (max-width: 44.9375em) {
-  .md-header__inner .autore-header { font-size: .62rem; padding: .18rem .45rem; margin: 0 .2rem; }
-  .md-header__title { min-width: 0; }   /* il titolo del corso si accorcia con i puntini, l'autore resta intero */
+  /* telefono: titolo sulla prima riga, autore sulla seconda, nella stessa barra da 2.4rem */
+  .md-header__title { line-height: 1.1rem; padding-top: .3rem; }
+  .md-header__title .md-header__topic:first-child { position: static; display: block; font-size: .78rem; }
+  .md-header__title .md-header__topic:first-child .md-ellipsis { display: block; overflow: hidden; text-overflow: ellipsis; }
+  .md-header__topic .autore-header { display: block; margin: .1rem 0 0; padding: 0; border: none; font-size: .58rem; font-weight: 500; }
 }
