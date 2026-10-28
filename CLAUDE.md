@@ -1,8 +1,14 @@
 # Corso pratico di llama.cpp
 
 Sito MkDocs Material in **italiano** su https://github.com/ggml-org/llama.cpp (installazione, uso, produzione,
-laboratori, progetti finali). Pubblicato su https://corso-llamacpp.giuseppebosi.com/ (Caddy con basic auth, blocco `corso-llamacpp.giuseppebosi.com` in
+laboratori, progetti finali). Pubblicato su https://corso-llamacpp.giuseppebosi.com/ (blocco `corso-llamacpp.giuseppebosi.com` in
 `/etc/caddy/Caddyfile`, root `/srv/llamacorso`). Solo Markdown + script: llama.cpp non è nel repo.
+
+## Sito APERTO, senza password (decisione di Giuseppe, 28/10/2026)
+- Il corso è pubblico: i link stanno nel CV letto dalla commissione del Comune. Il Controller ha tolto `basic_auth`
+  (backup `/etc/caddy/Caddyfile.bak-2026-10-28-082417`). **Non rimetterla mai** e **non toccare Caddy** nelle pubblicazioni.
+- Dopo ogni `scripts/pubblica.sh` verificare che le pagine rispondano **200 senza password** (lo script lo fa da solo e
+  fallisce se non è così). Il contenuto è pubblico: niente dati personali, IP, chiavi o note interne nelle pagine.
 
 ## Da leggere prima di scrivere contenuti
 - `redazione/fatti-verificati.md`: versioni, comandi e output **provati** sul VPS (22/09/2026). Non inventare flag:
