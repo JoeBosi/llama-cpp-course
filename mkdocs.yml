@@ -53,6 +53,7 @@ extra_css:
 extra_javascript:
   - assets/javascripts/mermaid.min.js      # Mermaid 11.17.2 ospitato qui: Material non lo scarica più da unpkg.com
   - assets/javascripts/mermaid-lightbox.js
+  - assets/javascripts/autore-header.js    # 'Prof. Giuseppe Bosi' nella barra in alto
 
 plugins:
   - search:

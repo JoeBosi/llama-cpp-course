@@ -148,3 +148,18 @@ html.mermaid-modal-open { overflow: hidden; }
   .md-tabs__item { height: 2.2rem; padding: 0 .55rem; }
   .md-tabs__link { font-size: .68rem; margin-top: .6rem; }
 }
+
+/* ===== "Prof. Giuseppe Bosi" nella barra in alto (sempre visibile, anche su telefono) ===== */
+.md-header__inner .autore-header {
+  flex-shrink: 0; align-self: center;
+  margin: 0 .5rem 0 .2rem; padding: .2rem .55rem;
+  border: 1px solid rgba(255,255,255,.55); border-radius: 1rem;
+  color: var(--md-primary-bg-color); font-size: .68rem; font-weight: 600; line-height: 1.2; white-space: nowrap;
+  text-decoration: none; opacity: .95;
+}
+.md-header__inner .autore-header:hover,
+.md-header__inner .autore-header:focus-visible { background: rgba(255,255,255,.18); opacity: 1; }
+@media screen and (max-width: 44.9375em) {
+  .md-header__inner .autore-header { font-size: .62rem; padding: .18rem .45rem; margin: 0 .2rem; }
+  .md-header__title { min-width: 0; }   /* il titolo del corso si accorcia con i puntini, l'autore resta intero */
+}
