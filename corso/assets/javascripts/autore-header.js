@@ -1,4 +1,4 @@
-// "Prof. Giuseppe Bosi" nella barra in alto, accanto al titolo, su tutte le pagine (richiesta del 28/10/2026).
+// "Prof. Giuseppe Bosi" nella barra in alto, sotto il titolo, su tutte le pagine (richiesta del 28/10/2026).
 // La barra è fissa (sticky) e con la navigazione istantanea di Material non viene mai ricreata: basta inserirlo una volta.
 (function () {
   "use strict";
