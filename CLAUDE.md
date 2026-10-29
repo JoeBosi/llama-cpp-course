@@ -25,7 +25,7 @@ laboratori, progetti finali). Pubblicato su https://corso-llamacpp.giuseppebosi.
   interni di `redazione/` (fatti-verificati, piattaforme), mai nelle pagine del sito.
 
 ## Diciture e privacy (revisione del 28/10/2026, approvata da Giuseppe)
-- `corso/informazioni.md`: solo autore, licenza (testi CC BY-SA 4.0, codice MIT) e crediti (marchi, strumenti,
+- `corso/informazioni.md`: solo autore, licenza (testi CC BY 4.0, codice MIT) e crediti (marchi, strumenti,
   nessun tracciamento). Contatti: info@giuseppebosi.com. Piè di pagina in `mkdocs.yml` (`copyright`). Tenerli coerenti.
 - Niente richieste a terzi dal browser: `font: false` (no Google Fonts) e Mermaid ospitato in
   `corso/assets/javascripts/mermaid.min.js` (11.17.2; per aggiornarlo: scaricare da unpkg e sostituire il file).

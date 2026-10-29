@@ -41,7 +41,7 @@ Ambiente: `python3 -m venv .venv && .venv/bin/pip install -r requirements.txt`.
 
 ## Licenza
 
-Testi e schemi [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.it), codice dei laboratori MIT.
+Testi e schemi [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.it), codice dei laboratori MIT.
 
 ## Autore
 

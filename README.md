@@ -33,7 +33,7 @@ PYTHONPATH=$PWD .venv/bin/mkdocs serve -a 127.0.0.1:8000
 
 ## License
 
-Course text and diagrams: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Lab code: MIT.
+Course text and diagrams: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Lab code: MIT.
 llama.cpp is an MIT project by ggml-org; this course is not affiliated with it.
 
 ## Author

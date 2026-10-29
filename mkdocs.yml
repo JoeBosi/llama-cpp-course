@@ -6,7 +6,7 @@ docs_dir: corso
 hooks:
   - scripts/visibilita.py
 site_dir: site
-copyright: '© 2026 <a href="https://www.giuseppebosi.com">Prof. Giuseppe Bosi</a>, Dottore in Ingegneria Elettronica (V.O.), Professore di Scienze e Tecnologie Informatiche · <a href="https://www.linkedin.com/in/giuseppebosi">LinkedIn</a> · testi e schemi <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.it">CC BY-SA 4.0</a>, codice dei laboratori MIT · <a href="/informazioni/">Informazioni</a> · llama.cpp è un progetto MIT di ggml-org, non affiliato · <a href="https://github.com/JoeBosi/llama-cpp-course">Source code on GitHub</a> · Altri corsi: <a href="https://corso-api-json.giuseppebosi.com/">JSON & API</a>, <a href="https://corso-rag.giuseppebosi.com/">RAG</a>'
+copyright: '© 2026 <a href="https://www.giuseppebosi.com">Prof. Giuseppe Bosi</a>, Dottore in Ingegneria Elettronica (V.O.), Professore di Scienze e Tecnologie Informatiche · <a href="https://www.linkedin.com/in/giuseppebosi">LinkedIn</a> · testi e schemi <a href="https://creativecommons.org/licenses/by/4.0/deed.it">CC BY 4.0</a>, codice dei laboratori MIT · <a href="/informazioni/">Informazioni</a> · llama.cpp è un progetto MIT di ggml-org, non affiliato · <a href="https://github.com/JoeBosi/llama-cpp-course">Source code on GitHub</a> · Altri corsi: <a href="https://corso-api-json.giuseppebosi.com/">JSON & API</a>, <a href="https://corso-rag.giuseppebosi.com/">RAG</a>'
 
 theme:
   name: material

@@ -9,7 +9,7 @@ hide:
 <div class="hero" markdown>
 <p class="lead" markdown>Fai girare modelli linguistici (e visivi) **sul tuo computer**: portatile, PC, Mac, Raspberry Pi.
 Dall'installazione alla messa in produzione, con laboratori guidati e un progetto finale.
-Basato su [llama.cpp](https://github.com/ggml-org/llama.cpp) v0.4.1 (build b11046, settembre 2026). Di [Giuseppe Bosi](informazioni.md), licenza CC BY-SA 4.0.</p>
+Basato su [llama.cpp](https://github.com/ggml-org/llama.cpp) v0.4.1 (build b11046, settembre 2026). Di [Giuseppe Bosi](informazioni.md), licenza CC BY 4.0.</p>
 </div>
 
 !!! warning "Se installi llama.cpp v0.7.0 o successive"
