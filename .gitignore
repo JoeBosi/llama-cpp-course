@@ -10,3 +10,10 @@ __pycache__/
 .DS_Store
 redazione/upstream/
 site/
+
+# secrets and local files
+.env
+.env.*
+*.pem
+*.key
+scratch/
