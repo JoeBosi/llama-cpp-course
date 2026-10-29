@@ -10,6 +10,7 @@ La data di ultimo aggiornamento è in fondo a ogni pagina. Domande e segnalazion
 - **Codice dei laboratori** (script, file di configurazione, programmi di esempio): licenza [MIT](https://opensource.org/license/mit).
 
 ## Crediti
+- Codice sorgente del corso su GitHub: [JoeBosi/llama-cpp-course](https://github.com/JoeBosi/llama-cpp-course).
 - [llama.cpp](https://github.com/ggml-org/llama.cpp) e [ggml](https://github.com/ggml-org/ggml) sono progetti di ggml-org, licenza MIT.
   Il corso spiega come usarli; non li include e non è affiliato a ggml-org.
 - Il sito è costruito con [MkDocs](https://www.mkdocs.org/) e [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/);

@@ -1,12 +1,13 @@
-# llama.cpp Practical Course (Italian)
+# llama.cpp Course: Run Local LLMs from Install to Production
 
 🇬🇧 English · 🇮🇹 [Italiano](README.it.md)
 
-A hands-on course, written in Italian, on [llama.cpp](https://github.com/ggml-org/llama.cpp): installation on every
-platform, everyday use, models and quantization, server and OpenAI-compatible API, performance, structured output,
-multimodal models, embedding into C and Python programs, and production deployment, with labs and final projects.
+**A free, hands-on llama.cpp course and tutorial for running local LLMs on your own machine**, written in Italian:
+install llama.cpp on Windows, macOS, Linux and Android, pick and quantize GGUF models, serve an OpenAI-compatible API,
+tune CPU/GPU performance, get structured JSON output, build a local RAG chatbot in Python and C, and deploy to production.
+Includes step-by-step labs and final projects.
 
-**Live site:** https://corso-llamacpp.giuseppebosi.com/ (free and open, also available as
+**Live course:** https://corso-llamacpp.giuseppebosi.com/ (free and open, also available as
 [llms.txt](https://corso-llamacpp.giuseppebosi.com/llms.txt) for AI assistants)
 
 ## Structure
