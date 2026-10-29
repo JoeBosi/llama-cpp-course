@@ -3,11 +3,14 @@ site_url: https://corso-llamacpp.giuseppebosi.com/
 site_description: Guida e corso pratico su llama.cpp, dall'installazione alla produzione. Aggiornato a settembre 2026.
 site_author: Giuseppe Bosi
 docs_dir: corso
+hooks:
+  - scripts/visibilita.py
 site_dir: site
-copyright: '© 2026 Giuseppe Bosi · testi e schemi <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.it">CC BY-SA 4.0</a>, codice dei laboratori MIT · <a href="/informazioni/">Informazioni</a> · llama.cpp è un progetto MIT di ggml-org, non affiliato'
+copyright: '© 2026 <a href="https://www.giuseppebosi.com">Prof. Giuseppe Bosi</a>, Dottore in Ingegneria Elettronica (V.O.), Professore di Scienze e Tecnologie Informatiche · testi e schemi <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.it">CC BY-SA 4.0</a>, codice dei laboratori MIT · <a href="/informazioni/">Informazioni</a> · llama.cpp è un progetto MIT di ggml-org, non affiliato · Altri corsi: <a href="https://corso-api-json.giuseppebosi.com/">JSON & API</a>, <a href="https://corso-rag.giuseppebosi.com/">RAG</a>'
 
 theme:
   name: material
+  custom_dir: overrides
   language: it
   font: false                # niente Google Fonts: nessuna richiesta a terzi dal browser dei visitatori
   logo: assets/img/logo.svg

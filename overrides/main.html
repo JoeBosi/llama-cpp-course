@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block extrahead %}
+  {%- set descr = page.meta.description if page and page.meta and page.meta.description else config.site_description %}
+  {%- set titolo = (page.title ~ " · " ~ config.site_name) if page and page.title and not page.is_homepage else config.site_name %}
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="it_IT">
+  <meta property="og:site_name" content="{{ config.site_name }}">
+  <meta property="og:title" content="{{ titolo }}">
+  <meta property="og:description" content="{{ descr }}">
+  {%- if page and page.canonical_url %}<meta property="og:url" content="{{ page.canonical_url }}">{% endif %}
+  <meta name="twitter:card" content="summary">
+  <meta name="author" content="Prof. Giuseppe Bosi">
+  {%- if page and page.is_homepage %}
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Course","name":{{ config.site_name|tojson }},"description":{{ config.site_description|tojson }},
+   "url":{{ config.site_url|tojson }},"inLanguage":"it","isAccessibleForFree":true,
+   "license":"https://creativecommons.org/licenses/by-sa/4.0/",
+   "author":{"@type":"Person","name":"Prof. Giuseppe Bosi","url":"https://www.giuseppebosi.com",
+     "jobTitle":["Dottore in Ingegneria Elettronica (V.O.)","Professore di Scienze e Tecnologie Informatiche"]},
+   "provider":{"@type":"Person","name":"Giuseppe Bosi","url":"https://www.giuseppebosi.com"}}
+  </script>
+  {%- endif %}
+{% endblock %}
