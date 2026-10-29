@@ -43,7 +43,7 @@ def on_post_build(config):
             f.write(f"User-agent: {bot}\nAllow: /\n\n")
         f.write(f"Sitemap: {sito}sitemap.xml\n")
     righe = [f"# {config['site_name']}", "", f"> {config['site_description']}", "",
-             "Corso in italiano del Prof. Giuseppe Bosi (https://www.giuseppebosi.com). "
+             "Corso in italiano del Prof. Giuseppe Bosi (https://www.giuseppebosi.com, LinkedIn https://www.linkedin.com/in/giuseppebosi). "
              "Ogni pagina è disponibile anche in Markdown: aggiungere `index.md` all'indirizzo.", "",
              "## Pagine", ""]
     completo = [f"# {config['site_name']}", "", config["site_description"], ""]
