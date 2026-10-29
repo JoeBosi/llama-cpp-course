@@ -2,7 +2,7 @@
 import os
 import re
 
-_pagine = []
+_pagine = {}  # url -> (pagina, markdown); i18n costruisce una lingua alla volta, quindi si accumula
 
 
 def _riassunto(markdown):
@@ -25,39 +25,41 @@ def _riassunto(markdown):
 def on_page_markdown(markdown, page, config, files):
     if not page.meta.get("description"):
         page.meta["description"] = _riassunto(markdown) or config["site_description"]
-    _pagine.append((page, markdown))
+    _pagine[page.url] = (page, markdown)
     return markdown
-
-
-def on_pre_build(config):
-    _pagine.clear()
 
 
 def on_post_build(config):
     sito = config["site_url"].rstrip("/") + "/"
     out = config["site_dir"]
-    pagine = sorted(_pagine, key=lambda p: p[0].file.src_uri)
+    tutte = sorted(_pagine.values(), key=lambda p: p[0].url)
+    it = [p for p in tutte if not p[0].url.startswith("en/")]
+    en = [p for p in tutte if p[0].url.startswith("en/")]
     with open(os.path.join(out, "robots.txt"), "w") as f:
         f.write("# Tutti i motori di ricerca e i crawler IA sono benvenuti\n")
         for bot in ("*", "GPTBot", "ClaudeBot", "PerplexityBot", "Google-Extended"):
             f.write(f"User-agent: {bot}\nAllow: /\n\n")
         f.write(f"Sitemap: {sito}sitemap.xml\n")
-    righe = [f"# {config['site_name']}", "", f"> {config['site_description']}", "",
-             "Corso in italiano del Prof. Giuseppe Bosi (https://www.giuseppebosi.com, LinkedIn https://www.linkedin.com/in/giuseppebosi). "
-             "Ogni pagina è disponibile anche in Markdown: aggiungere `index.md` all'indirizzo.", "",
-             "## Pagine", ""]
-    completo = [f"# {config['site_name']}", "", config["site_description"], ""]
-    for page, md in pagine:
-        righe.append(f"- [{page.title}]({sito}{page.url}): {page.meta['description']}")
-        completo += ["", "---", "", f"Fonte: {sito}{page.url}", "", md.strip(), ""]
-        dest = os.path.join(out, page.url, "index.md") if page.url.endswith("/") or not page.url else None
-        if dest:
-            with open(dest, "w") as f:
+    for page, md in tutte:
+        if page.url.endswith("/") or not page.url:
+            with open(os.path.join(out, page.url, "index.md"), "w") as f:
                 f.write(md)
-    righe += ["", "## Altri corsi dello stesso autore", "",
-              "- [Corso JSON & API](https://corso-api-json.giuseppebosi.com/)",
-              "- [Costruisci la tua memoria AI (corso RAG)](https://corso-rag.giuseppebosi.com/)", ""]
+    elenco = lambda pagine: [f"- [{p.title}]({sito}{p.url}): {p.meta['description']}" for p, _ in pagine]
+    righe = ["# Corso pratico di llama.cpp / llama.cpp Practical Course", "",
+             "> Corso pratico su llama.cpp, dall'installazione alla produzione, in italiano e in inglese. "
+             "A hands-on llama.cpp course, from installation to production, in Italian and English.", "",
+             "Autore / author: Prof. Giuseppe Bosi (https://www.giuseppebosi.com, LinkedIn https://www.linkedin.com/in/giuseppebosi). "
+             "Ogni pagina è disponibile anche in Markdown aggiungendo `index.md` all'indirizzo "
+             "(every page is also available as Markdown by appending `index.md` to its URL).", "",
+             "## Pagine (italiano)", "", *elenco(it), "",
+             "## Pages (English)", "", *elenco(en), "",
+             "## Altri corsi dello stesso autore / Other courses by the same author", "",
+             "- [Corso JSON & API](https://corso-api-json.giuseppebosi.com/)",
+             "- [Costruisci la tua memoria AI (corso RAG)](https://corso-rag.giuseppebosi.com/)", ""]
     with open(os.path.join(out, "llms.txt"), "w") as f:
         f.write("\n".join(righe))
+    completo = [righe[0], "", righe[2][2:], ""]
+    for page, md in it + en:
+        completo += ["", "---", "", f"Fonte / source: {sito}{page.url}", "", md.strip(), ""]
     with open(os.path.join(out, "llms-full.txt"), "w") as f:
         f.write("\n".join(completo))

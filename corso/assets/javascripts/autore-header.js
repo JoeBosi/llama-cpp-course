@@ -7,9 +7,10 @@
     if (!titolo || document.querySelector(".autore-header")) return;
     var a = document.createElement("a");
     a.className = "autore-header";
-    a.href = "https://www.giuseppebosi.com";
-    a.textContent = "Prof. Giuseppe Bosi";
-    a.title = "Sito personale di Giuseppe Bosi";
+    var en = document.documentElement.lang === "en";
+    a.href = en ? "https://www.giuseppebosi.com/en/" : "https://www.giuseppebosi.com";
+    a.textContent = en ? "by Prof. Giuseppe Bosi" : "Prof. Giuseppe Bosi";
+    a.title = en ? "Giuseppe Bosi's personal website" : "Sito personale di Giuseppe Bosi";
     titolo.appendChild(a);
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", inserisci);

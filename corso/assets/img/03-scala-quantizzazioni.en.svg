@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" width="900" height="500" font-family="sans-serif">
+  <title>The quantization scale: bits per weight versus quality loss</title>
+  <rect x="0" y="0" width="900" height="500" rx="12" fill="#f3f4f6"/>
+  <text x="450" y="30" text-anchor="middle" font-size="19" font-weight="700" fill="#111827">Bits per weight versus quality loss (ΔPPL over F16, Llama-3-8B)</text>
+
+  <!-- fasce di qualità -->
+  <rect x="80" y="300" width="760" height="100" fill="#ccfbf1" opacity="0.7"/>
+  <rect x="80" y="200" width="760" height="100" fill="#fef3c7" opacity="0.7"/>
+  <rect x="80" y="70" width="760" height="130" fill="#fee2e2" opacity="0.7"/>
+  <g font-size="11" fill="#374151">
+    <text x="400" y="392">negligible loss (ΔPPL &lt; 0.1)</text>
+    <text x="835" y="292" text-anchor="end">visible loss (0.1 – 1)</text>
+    <text x="835" y="84" text-anchor="end">heavy degradation (&gt; 1): only with imatrix and large models</text>
+  </g>
+
+  <!-- assi -->
+  <line x1="80" y1="400" x2="840" y2="400" stroke="#111827" stroke-width="1.5"/>
+  <line x1="80" y1="70" x2="80" y2="400" stroke="#111827" stroke-width="1.5"/>
+  <g font-size="12" fill="#111827" text-anchor="middle">
+    <text x="165" y="418">2</text><text x="250" y="418">3</text><text x="335" y="418">4</text><text x="420" y="418">5</text>
+    <text x="505" y="418">6</text><text x="590" y="418">7</text><text x="675" y="418">8</text><text x="830" y="418">16</text>
+    <text x="460" y="440" font-weight="700">bits per weight (bpw)</text>
+  </g>
+  <g font-size="10" fill="#4b5563" text-anchor="middle">
+    <text x="165" y="432">1.9 GiB</text><text x="250" y="432">2.8</text><text x="335" y="432">3.7</text><text x="420" y="432">4.7</text>
+    <text x="505" y="432">5.6</text><text x="590" y="432">6.5</text><text x="675" y="432">7.5</text><text x="830" y="432">15 GiB</text>
+  </g>
+  <text x="640" y="440" font-size="10" fill="#4b5563" text-anchor="middle">(weight size for an 8 B model)</text>
+  <!-- interruzione asse -->
+  <path d="M770 396 l6 -8 l6 8" fill="none" stroke="#111827" stroke-width="1.5"/>
+  <path d="M782 404 l6 -8 l6 8" fill="none" stroke="#111827" stroke-width="1.5"/>
+  <g font-size="11" fill="#111827" text-anchor="end">
+    <text x="74" y="394">0</text>
+    <text x="74" y="322">0.02</text>
+    <text x="74" y="259">0.2</text>
+    <text x="74" y="200">1</text>
+    <text x="74" y="145">5</text>
+    <text x="74" y="88">50</text>
+  </g>
+  <text x="20" y="235" font-size="12" font-weight="700" fill="#111827" transform="rotate(-90 20 235)">ΔPPL (log): lower = better</text>
+
+  <!-- punti: legacy (arancio) -->
+  <g fill="#ea580c" stroke="#7c2d12" stroke-width="1">
+    <circle cx="378" cy="226" r="6"/>
+    <circle cx="718" cy="382" r="6"/>
+  </g>
+  <g font-size="11" fill="#7c2d12" font-weight="700">
+    <text x="386" y="229">Q4_0</text>
+    <text x="700" y="372">Q8_0</text>
+  </g>
+
+  <!-- punti: K-quants (teal) -->
+  <g fill="#0d9488" stroke="#134e4a" stroke-width="1">
+    <circle cx="264" cy="165" r="6"/>
+    <circle cx="304" cy="188" r="6"/>
+    <circle cx="335" cy="216" r="6"/>
+    <circle cx="392" cy="243" r="6"/>
+    <circle cx="411" cy="255" r="6"/>
+    <circle cx="468" cy="271" r="6"/>
+    <circle cx="480" cy="289" r="6"/>
+    <circle cx="553" cy="318" r="6"/>
+  </g>
+  <g font-size="11" fill="#134e4a" font-weight="700">
+    <text x="272" y="161">Q2_K</text>
+    <text x="312" y="184">Q3_K_S</text>
+    <text x="343" y="212">Q3_K_M</text>
+    <text x="400" y="240">Q4_K_S</text>
+    <text x="419" y="262">Q4_K_M</text>
+    <text x="476" y="268">Q5_K_S</text>
+    <text x="488" y="296">Q5_K_M</text>
+    <text x="561" y="315">Q6_K</text>
+  </g>
+
+  <!-- punti: IQ con imatrix (indaco) -->
+  <g fill="#4f46e5" stroke="#312e81" stroke-width="1">
+    <circle cx="165" cy="84" r="6"/>
+    <circle cx="178" cy="114" r="6"/>
+    <circle cx="197" cy="141" r="6"/>
+    <circle cx="244" cy="177" r="6"/>
+    <circle cx="271" cy="197" r="6"/>
+    <circle cx="315" cy="216" r="6"/>
+    <circle cx="374" cy="248" r="6"/>
+  </g>
+  <g font-size="11" fill="#312e81" font-weight="700">
+    <text x="173" y="80">IQ1_S</text>
+    <text x="186" y="110">IQ1_M</text>
+    <text x="205" y="137">IQ2_XXS</text>
+    <text x="236" y="181" text-anchor="end">IQ2_M</text>
+    <text x="263" y="211" text-anchor="end">IQ3_XXS</text>
+    <text x="318" y="232">IQ3_M</text>
+    <text x="330" y="256">IQ4_XS</text>
+  </g>
+
+  <!-- F16 -->
+  <circle cx="830" cy="390" r="6" fill="#6b7280" stroke="#111827" stroke-width="1"/>
+  <text x="812" y="380" font-size="11" fill="#111827" font-weight="700">F16/BF16</text>
+
+  <!-- legenda -->
+  <rect x="90" y="452" width="720" height="38" rx="6" fill="#e5e7eb" stroke="#6b7280"/>
+  <circle cx="108" cy="471" r="5" fill="#ea580c"/><text x="118" y="475" font-size="11" fill="#111827">legacy (32 blocks, F16 scale)</text>
+  <circle cx="300" cy="471" r="5" fill="#0d9488"/><text x="310" y="475" font-size="11" fill="#111827">K-quants (256 super-blocks, S/M/L = mix)</text>
+  <circle cx="560" cy="471" r="5" fill="#4f46e5"/><text x="570" y="475" font-size="11" fill="#111827">IQ (codebook, need imatrix)</text>
+  <circle cx="765" cy="471" r="5" fill="#6b7280"/><text x="775" y="475" font-size="11" fill="#111827">F16</text>
+</svg>

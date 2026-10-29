@@ -2,7 +2,7 @@
 
 🇬🇧 [English](README.md) · 🇮🇹 Italiano
 
-Guida e corso pratico, in italiano, su [llama.cpp](https://github.com/ggml-org/llama.cpp): installazione su tutte le
+Guida e corso pratico, in italiano e in inglese (/en/), su [llama.cpp](https://github.com/ggml-org/llama.cpp): installazione su tutte le
 piattaforme, uso, modelli e quantizzazione, server e API, prestazioni, output strutturato, multimodale, integrazione,
 produzione, con laboratori e progetti finali. Aggiornato a settembre 2026.
 

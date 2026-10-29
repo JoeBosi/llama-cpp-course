@@ -2,12 +2,12 @@
 
 🇬🇧 English · 🇮🇹 [Italiano](README.it.md)
 
-**A free, hands-on llama.cpp course and tutorial for running local LLMs on your own machine**, written in Italian:
+**A free, hands-on llama.cpp course and tutorial for running local LLMs on your own machine**, in English and Italian:
 install llama.cpp on Windows, macOS, Linux and Android, pick and quantize GGUF models, serve an OpenAI-compatible API,
 tune CPU/GPU performance, get structured JSON output, build a local RAG chatbot in Python and C, and deploy to production.
 Includes step-by-step labs and final projects.
 
-**Live course:** https://corso-llamacpp.giuseppebosi.com/ (free and open, also available as
+**Live course:** https://corso-llamacpp.giuseppebosi.com/en/ (English) · https://corso-llamacpp.giuseppebosi.com/ (Italian) (free and open, also available as
 [llms.txt](https://corso-llamacpp.giuseppebosi.com/llms.txt) for AI assistants)
 
 ## Structure

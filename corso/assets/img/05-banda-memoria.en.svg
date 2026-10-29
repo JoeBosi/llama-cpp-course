@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" width="900" height="470" font-family="sans-serif">
+  <title>Why token generation is limited by memory bandwidth</title>
+  <!-- sfondo pieno per leggibilità su tema chiaro e scuro -->
+  <rect x="0" y="0" width="900" height="470" rx="12" fill="#f3f4f6"/>
+
+  <text x="450" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#111827">One generated token = all weights read from memory</text>
+
+  <!-- Memoria con i pesi -->
+  <rect x="30" y="66" width="290" height="210" rx="10" fill="#e0e7ff" stroke="#312e81" stroke-width="2"/>
+  <text x="175" y="94" text-anchor="middle" font-size="16" font-weight="bold" fill="#312e81">Memory (RAM / VRAM)</text>
+  <g fill="#c7d2fe" stroke="#312e81" stroke-width="1">
+    <rect x="50" y="108" width="250" height="22" rx="4"/>
+    <rect x="50" y="136" width="250" height="22" rx="4"/>
+    <rect x="50" y="164" width="250" height="22" rx="4"/>
+    <rect x="50" y="192" width="250" height="22" rx="4"/>
+    <rect x="50" y="220" width="250" height="22" rx="4"/>
+  </g>
+  <g font-size="12" fill="#312e81">
+    <text x="175" y="124" text-anchor="middle">layer 0 · weights (Q4/Q8)</text>
+    <text x="175" y="152" text-anchor="middle">layer 1</text>
+    <text x="175" y="180" text-anchor="middle">…</text>
+    <text x="175" y="208" text-anchor="middle">layer N-1</text>
+    <text x="175" y="236" text-anchor="middle">output (lm_head)</text>
+  </g>
+  <text x="175" y="264" text-anchor="middle" font-size="13" font-weight="bold" fill="#312e81">model size = D bytes</text>
+
+  <!-- Freccia banda (poligono esplicito, nessun marker) -->
+  <polygon points="325,150 520,150 520,136 560,164 520,192 520,178 325,178" fill="#c2410c" stroke="#7c2d12" stroke-width="1.5"/>
+  <rect x="330" y="82" width="220" height="46" rx="8" fill="#ffedd5" stroke="#7c2d12" stroke-width="1.5"/>
+  <text x="440" y="102" text-anchor="middle" font-size="14" font-weight="bold" fill="#7c2d12">memory bandwidth B (GB/s)</text>
+  <text x="440" y="120" text-anchor="middle" font-size="12" fill="#7c2d12">the bottleneck</text>
+  <text x="440" y="222" text-anchor="middle" font-size="12" fill="#111827">for every token: a full</text>
+  <text x="440" y="240" text-anchor="middle" font-size="12" fill="#111827">read of D bytes</text>
+  <text x="440" y="258" text-anchor="middle" font-size="12" fill="#111827">(batch = 1 token)</text>
+
+  <!-- Unità di calcolo -->
+  <rect x="570" y="66" width="300" height="210" rx="10" fill="#ccfbf1" stroke="#134e4a" stroke-width="2"/>
+  <text x="720" y="94" text-anchor="middle" font-size="16" font-weight="bold" fill="#134e4a">Compute unit (CPU / GPU)</text>
+  <text x="720" y="122" text-anchor="middle" font-size="13" fill="#134e4a">vector × matrix matmul:</text>
+  <text x="720" y="142" text-anchor="middle" font-size="13" fill="#134e4a">few operations per byte read,</text>
+  <text x="720" y="162" text-anchor="middle" font-size="13" fill="#134e4a">the ALU waits for memory</text>
+  <rect x="590" y="182" width="260" height="76" rx="8" fill="#f3f4f6" stroke="#134e4a" stroke-width="1"/>
+  <text x="720" y="210" text-anchor="middle" font-size="16" font-weight="bold" fill="#111827">tg (token/s) ≈ B / D</text>
+  <text x="720" y="232" text-anchor="middle" font-size="11" fill="#111827">pp is compute-bound instead:</text>
+  <text x="720" y="248" text-anchor="middle" font-size="11" fill="#111827">many tokens per read of the weights</text>
+
+  <!-- Tabella esempi -->
+  <text x="450" y="310" text-anchor="middle" font-size="15" font-weight="bold" fill="#111827">Example: 7B model in Q4_K_M (D ≈ 4.4 GB)</text>
+  <g font-size="13">
+    <rect x="30" y="324" width="270" height="110" rx="8" fill="#e0e7ff" stroke="#312e81" stroke-width="1.5"/>
+    <text x="165" y="348" text-anchor="middle" font-weight="bold" fill="#312e81">Desktop PC, dual-channel DDR5</text>
+    <text x="165" y="372" text-anchor="middle" fill="#312e81">B ≈ 60 GB/s</text>
+    <text x="165" y="394" text-anchor="middle" fill="#312e81">60 / 4.4 ≈ 13 tokens/s (theoretical)</text>
+    <text x="165" y="416" text-anchor="middle" fill="#312e81">real: 8-11 t/s</text>
+
+    <rect x="315" y="324" width="270" height="110" rx="8" fill="#ffedd5" stroke="#7c2d12" stroke-width="1.5"/>
+    <text x="450" y="348" text-anchor="middle" font-weight="bold" fill="#7c2d12">Apple M3 Max (unified memory)</text>
+    <text x="450" y="372" text-anchor="middle" fill="#7c2d12">B ≈ 400 GB/s</text>
+    <text x="450" y="394" text-anchor="middle" fill="#7c2d12">400 / 4.4 ≈ 90 tokens/s (theoretical)</text>
+    <text x="450" y="416" text-anchor="middle" fill="#7c2d12">real: 60-75 t/s</text>
+
+    <rect x="600" y="324" width="270" height="110" rx="8" fill="#ccfbf1" stroke="#134e4a" stroke-width="1.5"/>
+    <text x="735" y="348" text-anchor="middle" font-weight="bold" fill="#134e4a">NVIDIA RTX 4090 (GDDR6X)</text>
+    <text x="735" y="372" text-anchor="middle" fill="#134e4a">B ≈ 1000 GB/s</text>
+    <text x="735" y="394" text-anchor="middle" fill="#134e4a">1000 / 4.4 ≈ 225 tokens/s (theoretical)</text>
+    <text x="735" y="416" text-anchor="middle" fill="#134e4a">real: 120-160 t/s</text>
+  </g>
+  <text x="450" y="458" text-anchor="middle" font-size="11" fill="#111827">Real speed is below theoretical (KV cache, kernel overhead, synchronization). Halving D through quantization roughly doubles tg.</text>
+</svg>

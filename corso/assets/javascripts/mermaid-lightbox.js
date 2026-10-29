@@ -6,6 +6,9 @@
 // di Material non ricarica mai questa pagina, quindi non serve rifare l'aggancio a ogni click.
 (function () {
   "use strict";
+  // Testi dell'interfaccia nella lingua della pagina (italiano o inglese sotto /en/)
+  var EN = document.documentElement.lang === "en";
+  function t(it, en) { return EN ? en : it; }
 
   function decodeSource(base64) {
     try {
@@ -31,7 +34,7 @@
     if (!diagramEl) return;
     diagramEl.setAttribute(
       "data-hint",
-      isFitted ? "Clic per vedere a grandezza naturale" : "Clic per adattare alla finestra"
+      isFitted ? t("Clic per vedere a grandezza naturale", "Click to view at actual size") : t("Clic per adattare alla finestra", "Click to fit to window")
     );
   }
 
@@ -73,11 +76,11 @@
     modal.className = "mermaid-modal";
     modal.setAttribute("role", "dialog");
     modal.setAttribute("aria-modal", "true");
-    modal.setAttribute("aria-label", "Diagramma a schermo intero");
+    modal.setAttribute("aria-label", t("Diagramma a schermo intero", "Full-screen diagram"));
     modal.innerHTML =
       '<div class="mermaid-modal__backdrop" data-mermaid-close></div>' +
       '<div class="mermaid-modal__panel">' +
-      '<button type="button" class="mermaid-modal__close" data-mermaid-close aria-label="Chiudi (Esc)">' +
+      '<button type="button" class="mermaid-modal__close" data-mermaid-close aria-label="' + t("Chiudi (Esc)", "Close (Esc)") + '">' +
       "&#10005;</button>" +
       '<div class="mermaid-modal__scroll"><div class="mermaid-modal__diagram"></div></div>' +
       "</div>";
@@ -123,7 +126,7 @@
     openModal(figure);
     diagramEl.setAttribute("aria-busy", "true");
     diagramEl.removeAttribute("data-hint");
-    diagramEl.textContent = "Disegno il diagramma…";
+    diagramEl.textContent = t("Disegno il diagramma…", "Drawing the diagram…");
     var id = "mermaid-lightbox-" + renderCount++;
     window.mermaid
       .render(id, code)
@@ -143,7 +146,7 @@
         }
       })
       .catch(function () {
-        diagramEl.textContent = "Non è stato possibile disegnare il diagramma.";
+        diagramEl.textContent = t("Non è stato possibile disegnare il diagramma.", "The diagram could not be drawn.");
       })
       .finally(function () {
         diagramEl.removeAttribute("aria-busy");

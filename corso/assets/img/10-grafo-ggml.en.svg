@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" width="900" height="500" font-family="sans-serif">
+  <title>ggml: context, tensors, compute graph, scheduler and backends</title>
+  <rect x="0" y="0" width="900" height="500" rx="12" fill="#f3f4f6"/>
+  <text x="450" y="32" text-anchor="middle" font-size="20" font-weight="bold" fill="#111827">ggml: from context to backend</text>
+
+  <!-- 1. Contesto -->
+  <rect x="30" y="60" width="250" height="180" rx="10" fill="#e0e7ff" stroke="#312e81" stroke-width="2"/>
+  <text x="155" y="86" text-anchor="middle" font-size="15" font-weight="bold" fill="#312e81">1 · ggml_context</text>
+  <text x="155" y="106" text-anchor="middle" font-size="11" fill="#312e81">ggml_init(mem_size, no_alloc)</text>
+  <g fill="#c7d2fe" stroke="#312e81">
+    <rect x="50" y="118" width="100" height="40" rx="4"/>
+    <rect x="160" y="118" width="100" height="40" rx="4"/>
+  </g>
+  <text x="100" y="135" text-anchor="middle" font-size="11" font-weight="bold" fill="#312e81">tensor a</text>
+  <text x="100" y="150" text-anchor="middle" font-size="10" fill="#312e81">F32 ne=[2, 4]</text>
+  <text x="210" y="135" text-anchor="middle" font-size="11" font-weight="bold" fill="#312e81">tensor b</text>
+  <text x="210" y="150" text-anchor="middle" font-size="10" fill="#312e81">F32 ne=[2, 3]</text>
+  <text x="155" y="180" text-anchor="middle" font-size="11" fill="#312e81">ne[] dimensions · nb[] stride</text>
+  <text x="155" y="196" text-anchor="middle" font-size="11" fill="#312e81">type · op · src[] · data</text>
+  <text x="155" y="222" text-anchor="middle" font-size="11" fill="#312e81">a single arena: zero malloc at runtime</text>
+
+  <!-- 2. Grafo -->
+  <rect x="325" y="60" width="250" height="180" rx="10" fill="#ffedd5" stroke="#7c2d12" stroke-width="2"/>
+  <text x="450" y="86" text-anchor="middle" font-size="15" font-weight="bold" fill="#7c2d12">2 · ggml_cgraph</text>
+  <text x="450" y="104" text-anchor="middle" font-size="11" fill="#7c2d12">r = ggml_mul_mat(ctx, a, b)</text>
+  <g fill="#fed7aa" stroke="#7c2d12">
+    <rect x="345" y="118" width="70" height="30" rx="15"/>
+    <rect x="485" y="118" width="70" height="30" rx="15"/>
+    <rect x="415" y="170" width="70" height="30" rx="15"/>
+  </g>
+  <text x="380" y="138" text-anchor="middle" font-size="11" fill="#7c2d12">a</text>
+  <text x="520" y="138" text-anchor="middle" font-size="11" fill="#7c2d12">b</text>
+  <text x="450" y="190" text-anchor="middle" font-size="11" font-weight="bold" fill="#7c2d12">MUL_MAT</text>
+  <line x1="390" y1="148" x2="440" y2="170" stroke="#7c2d12" stroke-width="2"/>
+  <line x1="510" y1="148" x2="460" y2="170" stroke="#7c2d12" stroke-width="2"/>
+  <text x="450" y="214" text-anchor="middle" font-size="11" fill="#7c2d12">ggml_build_forward_expand(gf, r)</text>
+  <text x="450" y="230" text-anchor="middle" font-size="11" fill="#7c2d12">DAG of nodes: no computation until executed</text>
+
+  <!-- 3. Scheduler -->
+  <rect x="620" y="60" width="250" height="180" rx="10" fill="#ccfbf1" stroke="#134e4a" stroke-width="2"/>
+  <text x="745" y="86" text-anchor="middle" font-size="15" font-weight="bold" fill="#134e4a">3 · ggml_backend_sched</text>
+  <text x="745" y="106" text-anchor="middle" font-size="11" fill="#134e4a">ggml_backend_sched_new(backends, …)</text>
+  <text x="745" y="130" text-anchor="middle" font-size="11" fill="#134e4a">alloc_graph: allocates the buffers</text>
+  <text x="745" y="148" text-anchor="middle" font-size="11" fill="#134e4a">assigns each node to a backend</text>
+  <text x="745" y="166" text-anchor="middle" font-size="11" fill="#134e4a">(weights in VRAM → node on GPU)</text>
+  <text x="745" y="184" text-anchor="middle" font-size="11" fill="#134e4a">splits the graph,</text>
+  <text x="745" y="202" text-anchor="middle" font-size="11" fill="#134e4a">copies tensors between devices</text>
+  <text x="745" y="226" text-anchor="middle" font-size="11" fill="#134e4a">graph_compute: runs in order</text>
+
+  <!-- frecce tra le fasi -->
+  <polygon points="282,145 306,145 306,137 322,150 306,163 306,155 282,155" fill="#111827"/>
+  <polygon points="577,145 601,145 601,137 617,150 601,163 601,155 577,155" fill="#111827"/>
+
+  <!-- frecce verso i backend -->
+  <polygon points="150,242 160,242 160,256 168,256 155,270 142,256 150,256" fill="#111827"/>
+  <polygon points="445,242 455,242 455,256 463,256 450,270 437,256 445,256" fill="#111827"/>
+  <polygon points="740,242 750,242 750,256 758,256 745,270 732,256 740,256" fill="#111827"/>
+  <text x="450" y="292" text-anchor="middle" font-size="15" font-weight="bold" fill="#111827">4 · Backends (ggml_backend_t) and buffers (ggml_backend_buffer_t)</text>
+
+  <g stroke-width="2">
+    <rect x="30" y="304" width="200" height="124" rx="10" fill="#ffedd5" stroke="#7c2d12"/>
+    <rect x="243" y="304" width="200" height="124" rx="10" fill="#ccfbf1" stroke="#134e4a"/>
+    <rect x="456" y="304" width="200" height="124" rx="10" fill="#e0e7ff" stroke="#312e81"/>
+    <rect x="669" y="304" width="200" height="124" rx="10" fill="#f3f4f6" stroke="#111827"/>
+  </g>
+  <g font-size="10.5">
+    <text x="130" y="328" text-anchor="middle" font-size="14" font-weight="bold" fill="#7c2d12">CPU</text>
+    <text x="130" y="350" text-anchor="middle" fill="#7c2d12">libggml-cpu-*.so chosen at runtime</text>
+    <text x="130" y="368" text-anchor="middle" fill="#7c2d12">(haswell, zen4, sapphirerapids…)</text>
+    <text x="130" y="386" text-anchor="middle" fill="#7c2d12">SIMD kernels AVX2 / AVX-512 / NEON</text>
+    <text x="130" y="404" text-anchor="middle" fill="#7c2d12">thread pool · buffer in RAM</text>
+
+    <text x="343" y="328" text-anchor="middle" font-size="13" font-weight="bold" fill="#134e4a">CUDA · HIP · Metal · Vulkan</text>
+    <text x="343" y="350" text-anchor="middle" fill="#134e4a">ggml-cuda, ggml-metal, ggml-vulkan…</text>
+    <text x="343" y="368" text-anchor="middle" fill="#134e4a">same ggml_backend_i interface</text>
+    <text x="343" y="386" text-anchor="middle" fill="#134e4a">buffers in VRAM · dedicated kernels</text>
+    <text x="343" y="404" text-anchor="middle" fill="#134e4a">unsupported op → falls back to CPU</text>
+
+    <text x="556" y="328" text-anchor="middle" font-size="14" font-weight="bold" fill="#312e81">RPC</text>
+    <text x="556" y="350" text-anchor="middle" fill="#312e81">ggml-rpc: the backend is a proxy</text>
+    <text x="556" y="368" text-anchor="middle" fill="#312e81">tensors and graph serialized</text>
+    <text x="556" y="386" text-anchor="middle" fill="#312e81">over TCP to ggml-rpc-server</text>
+    <text x="556" y="404" text-anchor="middle" fill="#312e81">which runs them on its devices</text>
+
+    <text x="769" y="328" text-anchor="middle" font-size="14" font-weight="bold" fill="#111827">Backend registry</text>
+    <text x="769" y="350" text-anchor="middle" fill="#111827">ggml_backend_load_all()</text>
+    <text x="769" y="368" text-anchor="middle" fill="#111827">loads the backend .so files</text>
+    <text x="769" y="386" text-anchor="middle" fill="#111827">ggml_backend_init_best()</text>
+    <text x="769" y="404" text-anchor="middle" fill="#111827">= what llama --list-devices sees</text>
+  </g>
+
+  <text x="450" y="452" text-anchor="middle" font-size="12" fill="#111827">llama.cpp builds a graph for each batch (llama_decode) and hands it to the scheduler:</text>
+  <text x="450" y="470" text-anchor="middle" font-size="12" fill="#111827">layers 0..ngl-1 have their weights in VRAM and run on the GPU, the others on the CPU.</text>
+  <text x="450" y="488" text-anchor="middle" font-size="12" fill="#111827">Data goes in and out with ggml_backend_tensor_set / ggml_backend_tensor_get.</text>
+</svg>

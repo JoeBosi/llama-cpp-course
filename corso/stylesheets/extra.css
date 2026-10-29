@@ -84,6 +84,7 @@
   opacity: 0; transition: opacity .15s;
   pointer-events: none;
 }
+html[lang="en"] .md-typeset .mermaid-figure::after { content: "⤢ Click to enlarge"; }
 .md-typeset .mermaid-figure:hover::after,
 .md-typeset .mermaid-figure:focus-visible::after { opacity: 1; }
 /* rete di sicurezza: se un diagramma resta comunque più largo della colonna, scorre
@@ -128,7 +129,7 @@
 html.mermaid-modal-open { overflow: hidden; }
 @media screen and (max-width: 44.9375em) {
   .mermaid-modal__panel { inset: 0; border-radius: 0; }
-  .md-typeset .mermaid-figure::after { content: "⤢"; padding: .35em .5em; }
+  .md-typeset .mermaid-figure::after, html[lang="en"] .md-typeset .mermaid-figure::after { content: "⤢"; padding: .35em .5em; }
 }
 @media (prefers-reduced-motion: reduce) {
   .md-typeset .mermaid-figure::after { transition: none; }

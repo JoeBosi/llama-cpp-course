@@ -57,11 +57,48 @@ extra_javascript:
   - assets/javascripts/mermaid.min.js      # Mermaid 11.17.2 ospitato qui: Material non lo scarica più da unpkg.com
   - assets/javascripts/mermaid-lightbox.js
   - assets/javascripts/autore-header.js    # 'Prof. Giuseppe Bosi' nella barra in alto
+  - assets/javascripts/language-switch.js  # selettore lingua sulla pagina corrispondente
 
 plugins:
   - search:
       lang: it
   - awesome-nav
+  - i18n:
+      docs_structure: suffix
+      fallback_to_default: true
+      reconfigure_material: false
+      reconfigure_search: true
+      languages:
+        - locale: it
+          default: true
+          name: Italiano
+          build: true
+        - locale: en
+          name: English
+          build: true
+          site_name: llama.cpp Practical Course
+          site_description: A hands-on llama.cpp course, from installation to production.
+          theme:
+            language: en
+          copyright: '© 2026 <a href="https://www.giuseppebosi.com/en/">Prof. Giuseppe Bosi</a>, Master''s-level degree in Electronic Engineering (5-year Italian Laurea, pre-reform, EQF level 7), Teacher of Computer Science and Technology · <a href="https://www.linkedin.com/in/giuseppebosi">LinkedIn</a> · text and diagrams <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, lab code MIT · <a href="/en/informazioni/">About</a> · llama.cpp is an MIT project by ggml-org, not affiliated · <a href="https://github.com/JoeBosi/llama-cpp-course">Source code on GitHub</a> · Other courses: <a href="https://corso-api-json.giuseppebosi.com/">JSON & API</a>, <a href="https://corso-rag.giuseppebosi.com/">RAG</a>'
+          nav_translations:
+            Home: Home
+            Il corso: Course
+            Progetti finali: Final projects
+            Risorse: Resources
+            Informazioni: About
+            "00 · Introduzione a llama.cpp": "00 · Introduction to llama.cpp"
+            "01 · Installazione su varie piattaforme": "01 · Installing on every platform"
+            "02 · Primi passi: llama cli": "02 · First steps: llama cli"
+            "02b · Scegliere il modello per la tua macchina": "02b · Choosing the model for your machine"
+            "03 · Modelli, GGUF e quantizzazione": "03 · Models, GGUF and quantization"
+            "04 · llama serve: server e API": "04 · llama serve: server and API"
+            "05 · Prestazioni e ottimizzazione": "05 · Performance and optimization"
+            "06 · Output strutturato: grammatiche GBNF e JSON Schema": "06 · Structured output: GBNF grammars and JSON Schema"
+            "07 · Multimodalità: visione, audio, voce": "07 · Multimodality: vision, audio, voice"
+            "08 · Integrare llama.cpp nelle applicazioni": "08 · Integrating llama.cpp into applications"
+            "09 · Messa in produzione": "09 · Going to production"
+            "10 · Approfondimenti: dentro ggml e llama.cpp": "10 · Deep dives: inside ggml and llama.cpp"
   - glightbox
   - git-revision-date-localized:           # "Ultimo aggiornamento" in fondo a ogni pagina, dalla data del commit
       type: date
@@ -100,6 +137,13 @@ markdown_extensions:
 
 extra:
   generator: false
+  alternate:                 # selettore lingua; language-switch.js porta alla stessa pagina nell'altra lingua
+    - name: Italiano
+      link: /
+      lang: it
+    - name: English
+      link: /en/
+      lang: en
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/ggml-org/llama.cpp

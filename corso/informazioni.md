@@ -5,8 +5,8 @@
 La data di ultimo aggiornamento è in fondo a ogni pagina. Domande e segnalazioni: **info@giuseppebosi.com**.
 
 ## Licenza
-- **Testi e schemi** (pagine, diagrammi, immagini SVG): [Creative Commons Attribuzione – Condividi allo stesso modo 4.0 (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/deed.it).
-  Puoi copiarli, usarli e modificarli, anche a scopo commerciale, citando l'autore e mantenendo la stessa licenza.
+- **Testi e schemi** (pagine, diagrammi, immagini SVG): [Creative Commons Attribuzione 4.0 (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/deed.it).
+  Puoi copiarli, usarli e modificarli, anche a scopo commerciale, citando l'autore.
 - **Codice dei laboratori** (script, file di configurazione, programmi di esempio): licenza [MIT](https://opensource.org/license/mit).
 
 ## Crediti

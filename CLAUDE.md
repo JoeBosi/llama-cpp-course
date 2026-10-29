@@ -44,3 +44,10 @@ laboratori, progetti finali). Pubblicato su https://corso-llamacpp.giuseppebosi.
 - Tarball release completo in `~/llama-lab/rel/llama-b11046/`; modello di prova `ggml-org/Qwen3.5-0.8B-GGUF` (785 MB) in cache HF.
 - Usare modelli ≤ 1 GB, `-t 3`, un processo llama alla volta; niente build dai sorgenti sul VPS.
 - GPU/macOS/Windows/Android non verificabili qui: badge `stato-bozza` e `redazione/piattaforme.md`.
+
+## Corso bilingue (29/10/2026)
+- Italiano = lingua principale (URL invariati), inglese sotto `/en/` con `mkdocs-static-i18n` (suffix: `pagina.en.md`
+  accanto a `pagina.md`, SVG tradotti come `nome.en.svg`; nelle pagine si linka sempre `nome.svg`).
+- Ogni modifica a una pagina va riportata nella sua `.en.md`. Glossario e regole di traduzione: `docs/glossary-en.md`.
+- Selettore lingua: `extra.alternate` + `corso/assets/javascripts/language-switch.js` (stessa pagina nell'altra lingua);
+  hreflang it/en/x-default in `overrides/main.html`; nav inglese con `nav_translations` in `mkdocs.yml`.
