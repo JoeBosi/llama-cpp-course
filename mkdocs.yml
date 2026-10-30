@@ -137,13 +137,9 @@ markdown_extensions:
 
 extra:
   generator: false
-  alternate:                 # selettore lingua; language-switch.js porta alla stessa pagina nell'altra lingua
-    - name: Italiano
-      link: /
-      lang: it
-    - name: English
-      link: /en/
-      lang: en
+  alternate:                 # attiva overrides/partials/alternate.html: bandierina IT/EN come su www.giuseppebosi.com
+    - {name: Italiano, link: /, lang: it}
+    - {name: English, link: /en/, lang: en}
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/ggml-org/llama.cpp

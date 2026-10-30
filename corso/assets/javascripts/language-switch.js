@@ -3,8 +3,8 @@
 (function () {
   "use strict";
   window.addEventListener("click", function (e) {
-    var a = e.target.closest && e.target.closest("a[hreflang]");
-    if (!a || !a.closest(".md-select")) return;
+    var a = e.target.closest && e.target.closest("a.lang");
+    if (!a) return;
     var path = location.pathname.replace(/^\/en(\/|$)/, "/");
     var dest = a.getAttribute("hreflang") === "en" ? "/en" + path : path;
     e.preventDefault();

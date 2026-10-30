@@ -162,3 +162,15 @@ html.mermaid-modal-open { overflow: hidden; }
 }
 .md-header__topic .autore-header:hover { text-decoration: underline; opacity: 1; }
 .md-header__topic .autore-header:focus-visible { outline: 1px solid rgba(255,255,255,.7); outline-offset: 2px; opacity: 1; }
+
+/* ===== Cambio lingua con bandierina (come www.giuseppebosi.com), visibile a ogni larghezza ===== */
+.md-header__option .lang {
+  display: inline-flex; align-items: center; gap: 6px; margin: 0 .4rem;
+  font: 600 .6rem/1 var(--md-code-font-family, monospace); color: var(--md-primary-bg-color);
+}
+.md-header__option .lang svg { border-radius: 2px; box-shadow: 0 0 0 1px #0003; }
+.md-header__option .lang:hover, .md-header__option .lang:focus-visible { text-decoration: underline; }
+@media screen and (max-width: 44.9375em) {
+  .md-header__option .lang { margin: 0 .15rem; gap: 4px; }
+  .md-header__title { min-width: 0; flex-shrink: 1; }
+}
