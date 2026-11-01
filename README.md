@@ -38,6 +38,6 @@ llama.cpp is an MIT project by ggml-org; this course is not affiliated with it.
 
 ## Author
 
-Giuseppe Bosi, Master's-level degree in Electronic Engineering (5-year Italian Laurea, pre-reform, EQF level 7),
+Giuseppe Bosi, Master's-level degree in Electronic Engineering (5-year Italian Laurea, EQF level 7),
 Teacher of Computer Science and Technology (EQF 7) ·
 [www.giuseppebosi.com](https://www.giuseppebosi.com) · [LinkedIn](https://www.linkedin.com/in/giuseppebosi)

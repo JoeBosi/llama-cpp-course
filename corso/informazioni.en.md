@@ -1,7 +1,7 @@
 # About
 
 ## Author
-**Prof. Giuseppe Bosi**, Master's-level degree in Electronic Engineering (5-year Italian Laurea, pre-reform, EQF level 7), Teacher of Computer Science and Technology ([www.giuseppebosi.com](https://www.giuseppebosi.com/en/)).
+**Prof. Giuseppe Bosi**, Master's-level degree in Electronic Engineering (5-year Italian Laurea, EQF level 7), Teacher of Computer Science and Technology ([www.giuseppebosi.com](https://www.giuseppebosi.com/en/)).
 Independent, free course, in Italian, on [llama.cpp](https://github.com/ggml-org/llama.cpp).
 The last updated date is at the bottom of every page. Questions and reports: **info@giuseppebosi.com**.
 

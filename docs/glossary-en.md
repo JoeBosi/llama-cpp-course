@@ -14,7 +14,7 @@ Use these terms every time. Rules for translators:
   thousands space becomes a comma (`8 192` → `8,192`) in prose only, never inside code or output.
 - File name: `pagina.md` → `pagina.en.md` next to it (`README.md` → `README.en.md`).
 - Author: "Prof. Giuseppe Bosi" in both languages. English degree: "Master's-level degree in Electronic Engineering
-  (5-year Italian Laurea, pre-reform, EQF level 7)". Never "M.Sc.", "Ing.", "licensed engineer".
+  (5-year Italian Laurea, EQF level 7)". Never "M.Sc.", "Ing.", "licensed engineer".
 - Personal site link in English pages: https://www.giuseppebosi.com/en/
 
 | Italiano | English |
