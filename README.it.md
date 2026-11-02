@@ -45,6 +45,6 @@ Testi e schemi [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.it),
 
 ## Autore
 
-Prof. Giuseppe Bosi, Dottore in Ingegneria Elettronica, Professore di Scienze e Tecnologie Informatiche ·
+Prof. Giuseppe Bosi, Scienze e Tecnologie Informatiche ·
 [www.giuseppebosi.com](https://www.giuseppebosi.com) · [LinkedIn](https://www.linkedin.com/in/giuseppebosi)
 
