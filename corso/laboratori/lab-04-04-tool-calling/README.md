@@ -5,6 +5,11 @@
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 60 minuti</span>
 </div>
 
+!!! tip "Provalo online, senza installare nulla"
+    [![Apri in Colab](../../assets/img/apri-in-colab.svg){ width=190 }](https://colab.research.google.com/github/JoeBosi/llama-cpp-course/blob/main/notebooks/lab-04-04-tool-calling.ipynb){ target=_blank }
+
+    Il notebook scarica i binari ufficiali e il modello piccolo, poi esegue nel cloud i passi di questo laboratorio. Per eseguire le celle serve un account Google.
+
 ## Obiettivo
 
 Costruire un agente minimo: il modello riceve la descrizione di una funzione `get_weather`, decide di chiamarla,
@@ -153,6 +158,15 @@ eseguire la funzione e rimandare il risultato, è compito del client: cioè dell
    del ciclo ripaga questo prezzo (la prompt cache riusa il prefisso, ma il primo giro lo paga per intero).
 
 8. **Ferma il server** con ++ctrl+c++.
+
+## Cosa dovresti vedere
+
+Eseguendo i passi, l'output assomiglia a questo (tempi e testi generati cambiano da una macchina all'altra).
+
+<figure class="schema" markdown>
+![Il modello chiama get_weather e riscrive il risultato in una frase](../../assets/img/cosa-vedere-lab-04-04-agente.png)
+<figcaption>Il modello chiama get_weather e riscrive il risultato in una frase</figcaption>
+</figure>
 
 ## Verifica del risultato
 

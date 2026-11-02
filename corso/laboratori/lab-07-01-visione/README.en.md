@@ -5,6 +5,11 @@
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 45 min</span>
 </div>
 
+!!! tip "Try it online, nothing to install"
+    [![Open in Colab](../../assets/img/open-in-colab.svg){ width=190 }](https://colab.research.google.com/github/JoeBosi/llama-cpp-course/blob/main/notebooks/lab-07-visione.en.ipynb){ target=_blank }
+
+    The notebook downloads the official binaries and the small model, then runs the steps of this lab in the cloud. A Google account is needed to run the cells.
+
 ## Objective
 
 Make a model "see" an image with llama.cpp in three ways: from the command line (`--image`), in chat (`/image`) and
@@ -33,7 +38,7 @@ A "synthetic" image has the advantage that you already know the right answer. Wi
 
 ```bash
 mkdir -p ~/lab07 && cd ~/lab07
-ffmpeg -loglevel error -y -f lavfi \
+ffmpeg -nostdin -loglevel error -y -f lavfi \
   -i "color=c=white:s=320x240:d=1,drawbox=x=40:y=40:w=120:h=120:color=red@1:t=fill,drawbox=x=200:y=60:w=80:h=140:color=blue@1:t=fill" \
   -frames:v 1 forme.png
 ```
@@ -135,6 +140,15 @@ llama serve -hf ggml-org/gemma-3-4b-it-GGUF --port 8080 -c 8192
 
 Take a photo of a receipt or a form (or use a sample invoice image). For guaranteed JSON, pair it with
 `response_format` and a schema (module 06). On GPU add `-ngl all`; with little VRAM, `--no-mmproj-offload`.
+
+## What you should see
+
+When you run the steps, the output looks like this (timings and generated text change from machine to machine).
+
+<figure class="schema" markdown>
+![The test image (a red and a blue rectangle) and the SmolVLM answer via the API](../../assets/img/cosa-vedere-lab-07-visione.png)
+<figcaption>The test image (a red and a blue rectangle) and the SmolVLM answer via the API</figcaption>
+</figure>
 
 ## Check the result
 

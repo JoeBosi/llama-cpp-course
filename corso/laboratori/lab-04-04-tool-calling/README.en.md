@@ -5,6 +5,11 @@
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 60 minutes</span>
 </div>
 
+!!! tip "Try it online, nothing to install"
+    [![Open in Colab](../../assets/img/open-in-colab.svg){ width=190 }](https://colab.research.google.com/github/JoeBosi/llama-cpp-course/blob/main/notebooks/lab-04-04-tool-calling.en.ipynb){ target=_blank }
+
+    The notebook downloads the official binaries and the small model, then runs the steps of this lab in the cloud. A Google account is needed to run the cells.
+
 ## Objective
 
 Build a minimal agent: the model receives the description of a `get_weather` function, decides to call it,
@@ -153,6 +158,15 @@ running the function and sending back the result, is the client's job: that is, 
    of the loop pays this price again (the prompt cache reuses the prefix, but the first turn pays it in full).
 
 8. **Stop the server** with ++ctrl+c++.
+
+## What you should see
+
+When you run the steps, the output looks like this (timings and generated text change from machine to machine).
+
+<figure class="schema" markdown>
+![The model calls get_weather and rewrites the result as a sentence](../../assets/img/cosa-vedere-lab-04-04-agente.png)
+<figcaption>The model calls get_weather and rewrites the result as a sentence</figcaption>
+</figure>
 
 ## Check the result
 

@@ -5,6 +5,11 @@
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 45 minutes (5-10 of them computing)</span>
 </div>
 
+!!! tip "Try it online, nothing to install"
+    [![Open in Colab](../../assets/img/open-in-colab.svg){ width=190 }](https://colab.research.google.com/github/JoeBosi/llama-cpp-course/blob/main/notebooks/lab-03-quantizzazione.en.ipynb){ target=_blank }
+
+    The notebook downloads the official binaries and the small model, then runs the steps of this lab in the cloud. A Google account is needed to run the cells.
+
 ## Objective
 
 Use `llama quantize` to produce three quantizations of the same model (`Q4_K_M`, `Q4_0`, `Q2_K`) starting from the `Q8_0`
@@ -110,6 +115,15 @@ The source is the `Q8_0` already in cache: it is nearly lossless (+0.003 perplex
     ```bash
     rm ~/llama-lab/quant/Qwen3.5-0.8B-Q4_K_M.gguf ~/llama-lab/quant/Qwen3.5-0.8B-Q4_0.gguf
     ```
+
+## What you should see
+
+When you run the steps, the output looks like this (timings and generated text change from machine to machine).
+
+<figure class="schema" markdown>
+![Sizes of the Q8_0 and Q4_K_M files and the answer of the quantized model](../../assets/img/cosa-vedere-lab-03-quant.png)
+<figcaption>Sizes of the Q8_0 and Q4_K_M files and the answer of the quantized model</figcaption>
+</figure>
 
 ## Check the result
 

@@ -5,6 +5,11 @@
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 45 min</span>
 </div>
 
+!!! tip "Try it online, nothing to install"
+    [![Open in Colab](../../assets/img/open-in-colab.svg){ width=190 }](https://colab.research.google.com/github/JoeBosi/llama-cpp-course/blob/main/notebooks/lab-08-rag-minimo.en.ipynb){ target=_blank }
+
+    The notebook downloads the official binaries and the small model, then runs the steps of this lab in the cloud. A Google account is needed to run the cells.
+
 ## Objective
 
 Build a complete but tiny RAG (*Retrieval-Augmented Generation*) with **only** two `llama serve` endpoints
@@ -216,6 +221,15 @@ depend on the model's goodwill.
 ### 7. Shutting down
 
 In the router terminal press ++ctrl+c++, or run `pkill -f "port 18105"`. The router also closes its child processes.
+
+## What you should see
+
+When you run the steps, the output looks like this (timings and generated text change from machine to machine).
+
+<figure class="schema" markdown>
+![Indexing, similarity search and answer with sources](../../assets/img/cosa-vedere-lab-08-rag.png)
+<figcaption>Indexing, similarity search and answer with sources</figcaption>
+</figure>
 
 ## Check the result
 

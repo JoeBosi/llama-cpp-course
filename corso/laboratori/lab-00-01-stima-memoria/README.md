@@ -5,6 +5,11 @@
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 45 minuti</span>
 </div>
 
+!!! tip "Provalo online, senza installare nulla"
+    [![Apri in Colab](../../assets/img/apri-in-colab.svg){ width=190 }](https://colab.research.google.com/github/JoeBosi/llama-cpp-course/blob/main/notebooks/lab-00-fondamenti.ipynb){ target=_blank }
+
+    Il notebook scarica i binari ufficiali e il modello piccolo, poi esegue nel cloud i passi di questo laboratorio. Per eseguire le celle serve un account Google.
+
 ## Obiettivo
 
 Calcolare, prima a mano e poi con lo script [`stima_memoria.py`](stima_memoria.py), la memoria necessaria a
@@ -123,6 +128,15 @@ common_memory_breakdown_print: |   - Host               |                  877 =
 Confronta con `python3 stima_memoria.py --preset qwen3.5-0.8b --quant q8_0 --ctx 4096`: pesi 783 MiB (log:
 763 di modello + una parte "unaccounted"), KV cache **48 MiB esatti**, overhead stimato 300 MiB contro 46 di
 buffer di calcolo + 19 di stato ricorrente. La stima è prudente: è quello che vuoi.
+
+## Cosa dovresti vedere
+
+Eseguendo i passi, l'output assomiglia a questo (tempi e testi generati cambiano da una macchina all'altra).
+
+<figure class="schema" markdown>
+![La stima della memoria di Qwen3 8B in Q4_K_M con contesto 8192, poi per un modello da 7,6 B](../../assets/img/cosa-vedere-lab-00-stima-memoria.png)
+<figcaption>La stima della memoria di Qwen3 8B in Q4_K_M con contesto 8192, poi per un modello da 7,6 B</figcaption>
+</figure>
 
 ## Verifica del risultato
 

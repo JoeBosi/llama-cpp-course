@@ -25,10 +25,10 @@ that is the setup used in the examples below.
 |---|---|---|
 | Test model | `ggml-org/Qwen3.5-0.8B-GGUF` → `Qwen3.5-0.8B-Q8_0.gguf` (Apache 2.0) | 795 MB |
 | Model "that does not fit" (variant) | `ggml-org/gemma-3-12b-it-GGUF:Q4_K_M` | 6.96 GB |
-| Binaries | release tarball in `~/llama-lab/rel/llama-b11046/` (contains `ggml-rpc-server`, `llama-cli`, `llama-server`, `llama-bench` and `libggml-rpc.so`) | 16 MB |
+| Binaries | release tarball in `~/llama-lab/llama-b11046/` (contains `ggml-rpc-server`, `llama-cli`, `llama-server`, `llama-bench` and `libggml-rpc.so`) | 16 MB |
 
 ```bash
-R=~/llama-lab/rel/llama-b11046
+R=~/llama-lab/llama-b11046
 $R/ggml-rpc-server --help
 ```
 

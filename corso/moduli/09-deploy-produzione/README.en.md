@@ -531,7 +531,7 @@ curl -sf http://127.0.0.1:8080/health && curl -s http://127.0.0.1:8080/v1/chat/c
   -d '{"messages":[{"role":"user","content":"ping"}],"max_tokens":8}' | jq .timings.predicted_per_second
 ```
 
-To **pin** a specific build (or go back): `LLAMA_VERSION=b11046 curl -LsSf https://llama.app/install.sh | sh`
+To **pin** a specific build (or go back): `curl -LsSf https://llama.app/install.sh | LLAMA_VERSION=b11046 sh`
 (only the builds present in the ggml-org bucket). Immediate rollback: `cp ~/.local/bin/llama-b11046 ~/.local/bin/llama && sudo systemctl restart llama-serve`.
 
 With **Docker**: change the tag in `compose.yaml`, `docker compose pull && docker compose up -d`; the old
@@ -605,7 +605,7 @@ Caddy will not send traffic until the new container is `healthy`.
     4. `/health`: it is public (no key), very lightweight, distinguishes "loading" (503) from "ready" (200) and does not reset the sleep timer. `/v1/models` requires the key, and `/metrics` is not public and produces heavier output.
     5. `llamacpp:requests_deferred` steadily > 0 (requests in the queue); `n_busy_slots_per_decode` close to `-np` confirms that the slots are saturated.
     6. `--cors-origins https://app.esempio.it` (instead of the default `*`); the key keeps traveling as a Bearer token.
-    7. `cp ~/.local/bin/llama-b11046 ~/.local/bin/llama` (the copy made before the update) or `LLAMA_VERSION=b11046 curl -LsSf https://llama.app/install.sh | sh`; `systemctl restart llama-serve`; `/health` + a test request; then read `journalctl` to understand what changed (usually a flag).
+    7. `cp ~/.local/bin/llama-b11046 ~/.local/bin/llama` (the copy made before the update) or `curl -LsSf https://llama.app/install.sh | LLAMA_VERSION=b11046 sh`; `systemctl restart llama-serve`; `/health` + a test request; then read `journalctl` to understand what changed (usually a flag).
     8. In the container `0.0.0.0` means "all the container's interfaces", which is reachable only from the internal Compose network (no published `ports:`); on the host it would mean exposing the port to the internet.
 
 ## References

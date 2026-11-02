@@ -5,6 +5,11 @@
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 45 minuti</span>
 </div>
 
+!!! tip "Provalo online, senza installare nulla"
+    [![Apri in Colab](../../assets/img/apri-in-colab.svg){ width=190 }](https://colab.research.google.com/github/JoeBosi/llama-cpp-course/blob/main/notebooks/lab-04-server.ipynb){ target=_blank }
+
+    Il notebook scarica i binari ufficiali e il modello piccolo, poi esegue nel cloud i passi di questo laboratorio. Per eseguire le celle serve un account Google.
+
 ## Obiettivo
 
 Avviare `llama serve` con un modello piccolo, leggere i log di avvio, usare la web UI dal browser

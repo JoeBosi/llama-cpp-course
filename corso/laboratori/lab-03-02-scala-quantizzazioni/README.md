@@ -5,6 +5,11 @@
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 45 minuti (di cui 5-10 di calcolo)</span>
 </div>
 
+!!! tip "Provalo online, senza installare nulla"
+    [![Apri in Colab](../../assets/img/apri-in-colab.svg){ width=190 }](https://colab.research.google.com/github/JoeBosi/llama-cpp-course/blob/main/notebooks/lab-03-quantizzazione.ipynb){ target=_blank }
+
+    Il notebook scarica i binari ufficiali e il modello piccolo, poi esegue nel cloud i passi di questo laboratorio. Per eseguire le celle serve un account Google.
+
 ## Obiettivo
 
 Produrre con `llama quantize` tre quantizzazioni dello stesso modello (`Q4_K_M`, `Q4_0`, `Q2_K`) partendo dal `Q8_0`
@@ -110,6 +115,15 @@ Il sorgente è il `Q8_0` già in cache: è quasi lossless (+0,003 di perplexity 
     ```bash
     rm ~/llama-lab/quant/Qwen3.5-0.8B-Q4_K_M.gguf ~/llama-lab/quant/Qwen3.5-0.8B-Q4_0.gguf
     ```
+
+## Cosa dovresti vedere
+
+Eseguendo i passi, l'output assomiglia a questo (tempi e testi generati cambiano da una macchina all'altra).
+
+<figure class="schema" markdown>
+![Dimensioni del file Q8_0 e del file Q4_K_M e risposta del modello quantizzato](../../assets/img/cosa-vedere-lab-03-quant.png)
+<figcaption>Dimensioni del file Q8_0 e del file Q4_K_M e risposta del modello quantizzato</figcaption>
+</figure>
 
 ## Verifica del risultato
 

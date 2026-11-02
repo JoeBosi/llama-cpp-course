@@ -5,6 +5,11 @@
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 40 minuti</span>
 </div>
 
+!!! tip "Provalo online, senza installare nulla"
+    [![Apri in Colab](../../assets/img/apri-in-colab.svg){ width=190 }](https://colab.research.google.com/github/JoeBosi/llama-cpp-course/blob/main/notebooks/lab-04-server.ipynb){ target=_blank }
+
+    Il notebook scarica i binari ufficiali e il modello piccolo, poi esegue nel cloud i passi di questo laboratorio. Per eseguire le celle serve un account Google.
+
 ## Obiettivo
 
 Parlare con `llama serve` da un programma tuo, senza `curl`: prima con l'SDK ufficiale `openai` in Python
@@ -138,6 +143,15 @@ sequenceDiagram
     S-->>P: data: {"finish_reason":"stop","timings":{…}}
     S-->>P: data: [DONE]
 ```
+
+## Cosa dovresti vedere
+
+Eseguendo i passi, l'output assomiglia a questo (tempi e testi generati cambiano da una macchina all'altra).
+
+<figure class="schema" markdown>
+![Risposta del client Python e di quello JavaScript a llama serve, con velocità di generazione](../../assets/img/cosa-vedere-lab-04-client.png)
+<figcaption>Risposta del client Python e di quello JavaScript a llama serve, con velocità di generazione</figcaption>
+</figure>
 
 ## Verifica del risultato
 

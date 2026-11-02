@@ -5,6 +5,11 @@
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 45 minuti</span>
 </div>
 
+!!! tip "Provalo online, senza installare nulla"
+    [![Apri in Colab](../../assets/img/apri-in-colab.svg){ width=190 }](https://colab.research.google.com/github/JoeBosi/llama-cpp-course/blob/main/notebooks/lab-05-benchmark.ipynb){ target=_blank }
+
+    Il notebook scarica i binari ufficiali e il modello piccolo, poi esegue nel cloud i passi di questo laboratorio. Per eseguire le celle serve un account Google.
+
 ## Obiettivo
 
 Misurare prompt processing (pp) e token generation (tg) con `llama bench` al variare del numero di thread e della
@@ -127,6 +132,15 @@ M4=$(ls ~/.cache/huggingface/hub/models--ggml-org--Qwen3.5-0.8B-GGUF/snapshots/*
     ```bash
     llama bench -m "$M8" -pg 128,64 -t "$T" -r 3
     ```
+
+## Cosa dovresti vedere
+
+Eseguendo i passi, l'output assomiglia a questo (tempi e testi generati cambiano da una macchina all'altra).
+
+<figure class="schema" markdown>
+![Velocità di prompt e generazione al variare dei thread, con il grafico](../../assets/img/cosa-vedere-lab-05-benchmark.png)
+<figcaption>Velocità di prompt e generazione al variare dei thread, con il grafico</figcaption>
+</figure>
 
 ## Verifica del risultato
 

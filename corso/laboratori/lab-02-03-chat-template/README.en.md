@@ -5,6 +5,11 @@
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 45 minutes</span>
 </div>
 
+!!! tip "Try it online, nothing to install"
+    [![Open in Colab](../../assets/img/open-in-colab.svg){ width=190 }](https://colab.research.google.com/github/JoeBosi/llama-cpp-course/blob/main/notebooks/lab-02-primi-passi.en.ipynb){ target=_blank }
+
+    The notebook downloads the official binaries and the small model, then runs the steps of this lab in the cloud. A Google account is needed to run the cells.
+
 ## Objective
 
 See with your own eyes the text that the chat template builds from the messages, understand why the

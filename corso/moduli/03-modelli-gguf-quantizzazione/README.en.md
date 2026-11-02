@@ -221,7 +221,7 @@ imatrix perplexity 155, with imatrix 34).
 `llama-imatrix` is not in the `llama` binary: it is in the release tarball (or in the built source).
 
 ```bash
-~/llama-lab/rel/llama-b11046/llama-imatrix -m modello-f16.gguf -f calibrazione.txt -o imatrix.gguf -c 512 -ngl 99
+~/llama-lab/llama-b11046/llama-imatrix -m modello-f16.gguf -f calibrazione.txt -o imatrix.gguf -c 512 -ngl 99
 ```
 
 ```text
@@ -295,9 +295,9 @@ Hugging Face limits single files to 50 GB: large models are published as **shard
 `llama-gguf-split` (tarball, not the `llama` binary):
 
 ```bash
-~/llama-lab/rel/llama-b11046/llama-gguf-split --split --split-max-size 200M Qwen3.5-0.8B-Q4_0.gguf q4split
-~/llama-lab/rel/llama-b11046/llama-gguf-split --split --split-max-tensors 128 modello.gguf out    # by number of tensors (default)
-~/llama-lab/rel/llama-b11046/llama-gguf-split --merge q4split-00001-of-00004.gguf riunito.gguf
+~/llama-lab/llama-b11046/llama-gguf-split --split --split-max-size 200M Qwen3.5-0.8B-Q4_0.gguf q4split
+~/llama-lab/llama-b11046/llama-gguf-split --split --split-max-tensors 128 modello.gguf out    # by number of tensors (default)
+~/llama-lab/llama-b11046/llama-gguf-split --merge q4split-00001-of-00004.gguf riunito.gguf
 ```
 
 On the test model the 513 MB `Q4_0` becomes 4 files (11 + 209 + 199 + 94 MB: the first holds metadata and
@@ -313,7 +313,7 @@ for some tensors and at runtime add `B·A × scale`. llama.cpp uses them in two 
 llama cli -m base-Q4_K_M.gguf --lora adattatore.gguf                    # at runtime, on the quantized model
 llama cli -m base.gguf --lora-scaled a.gguf:0.5,b.gguf:0.5               # several adapters with weights
 llama serve -m base.gguf --lora a.gguf --lora b.gguf                     # in the server: GET/POST /lora-adapters to enable and weight them on the fly
-~/llama-lab/rel/llama-b11046/llama-export-lora -m base-f16.gguf --lora adattatore.gguf -o fuso-f16.gguf   # merges and produces a new GGUF
+~/llama-lab/llama-b11046/llama-export-lora -m base-f16.gguf --lora adattatore.gguf -o fuso-f16.gguf   # merges and produces a new GGUF
 ```
 
 The adapter must be in GGUF format: `convert_lora_to_gguf.py` (source) converts it from PEFT

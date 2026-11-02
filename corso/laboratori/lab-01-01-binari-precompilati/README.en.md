@@ -5,6 +5,11 @@
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 30 minutes</span>
 </div>
 
+!!! tip "Try it online, nothing to install"
+    [![Open in Colab](../../assets/img/open-in-colab.svg){ width=190 }](https://colab.research.google.com/github/JoeBosi/llama-cpp-course/blob/main/notebooks/lab-02-primi-passi.en.ipynb){ target=_blank }
+
+    The notebook downloads the official binaries and the small model, then runs the steps of this lab in the cloud. A Google account is needed to run the cells.
+
 ## Objective
 
 Install llama.cpp **without building** on your platform with two methods (installer or package manager
@@ -39,7 +44,7 @@ flowchart TB
 
 === "Linux"
     ```bash
-    curl -LsSf https://llama.app/install.sh | sh
+    curl -LsSf https://llama.app/install.sh | LLAMA_VERSION=b11046 sh   # the course build; without LLAMA_VERSION it installs the latest
     export PATH="$HOME/.local/bin:$PATH"
     export SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt        # (1)!
     echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
@@ -51,7 +56,7 @@ flowchart TB
 
 === "macOS"
     ```bash
-    curl -LsSf https://llama.app/install.sh | sh
+    curl -LsSf https://llama.app/install.sh | LLAMA_VERSION=b11046 sh
     export PATH="$HOME/.local/bin:$PATH"
     echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
     ```
@@ -120,7 +125,7 @@ llama cli -cl            # list the cache: "1. ggml-org/Qwen3.5-0.8B-GGUF:Q8_0"
     V=b11046
     curl -LO https://github.com/ggml-org/llama.cpp/releases/download/$V/llama-$V-bin-ubuntu-x64.tar.gz
     tar -xzf llama-$V-bin-ubuntu-x64.tar.gz
-    ls llama-$V | wc -l                      # 61 files
+    ls llama-$V | wc -l                      # 60 files
     ls llama-$V | grep -vE "\.so"            # the executables
     ./llama-$V/llama-cli --version
     ```
@@ -182,7 +187,7 @@ CPU is loaded (with `-v`, look for `load_backend` in the log). The installer's b
 
 1. Why does `--list-devices` not list the CPU? What would it list on a laptop with an Intel iGPU and the Vulkan binary?
 2. Run the installer again with `SKIP_VULKAN=1 SKIP_CUDA=1 SKIP_ROCM=1`: does anything change on your machine? When is it useful?
-3. Variation: `LLAMA_VERSION=b11046 curl -LsSf https://llama.app/install.sh | sh` pins the build; if the bucket does not
+3. Variation: `curl -LsSf https://llama.app/install.sh | LLAMA_VERSION=b11046 sh` pins the build; if the bucket does not
    have that build, the script stops with `No version found`/a download error. Try with a recent build.
 4. Variation (with a GPU): repeat step 3 with `-ngl 99 -v 2>&1 | grep "model buffer size"` and check that the
    model buffer is on the GPU device.

@@ -5,6 +5,11 @@
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 45 minutes</span>
 </div>
 
+!!! tip "Try it online, nothing to install"
+    [![Open in Colab](../../assets/img/open-in-colab.svg){ width=190 }](https://colab.research.google.com/github/JoeBosi/llama-cpp-course/blob/main/notebooks/lab-00-fondamenti.en.ipynb){ target=_blank }
+
+    The notebook downloads the official binaries and the small model, then runs the steps of this lab in the cloud. A Google account is needed to run the cells.
+
 ## Objective
 
 Open a GGUF file with the official Python tools (`pip install gguf`), read metadata, tokenizer and
@@ -204,6 +209,15 @@ EOF
 It is a Jinja template: look for the `<|im_start|>`, `<|im_end|>` markers and the block that handles `enable_thinking`.
 It is exactly what `llama cli` and `llama serve` apply to messages (`--jinja` is on by default): you
 will use it in lab 02-03.
+
+## What you should see
+
+When you run the steps, the output looks like this (timings and generated text change from machine to machine).
+
+<figure class="schema" markdown>
+![Metadata and tensors of the Qwen3.5 0.8B GGUF file printed by anatomia_gguf.py](../../assets/img/cosa-vedere-lab-00-anatomia-gguf.png)
+<figcaption>Metadata and tensors of the Qwen3.5 0.8B GGUF file printed by anatomia_gguf.py</figcaption>
+</figure>
 
 ## Check
 

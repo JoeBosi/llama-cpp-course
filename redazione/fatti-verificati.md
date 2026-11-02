@@ -196,7 +196,7 @@ Maple 20B-A1B (MoE ternario), Tencent Hy 4, Spark2.5; `--fuse-qkv` in conversion
 
 ## Questo VPS
 Linux x86_64 Ubuntu 24.04, 6 vCPU AMD EPYC (AVX2, no AVX-512), 11 GB RAM (spesso ~4 liberi), nessuna GPU,
-Docker presente. `llama` in `~/.local/bin`, tarball release in `~/llama-lab/rel/llama-b11046/`, cache modelli HF.
+Docker presente. `llama` in `~/.local/bin`, tarball release in `~/llama-lab/llama-b11046/`, cache modelli HF.
 
 ## Aggiunte del 23/09/2026 (dagli scrittori)
 - `llama cli -j/--json-schema` su b11046 fallisce con `Error: Failed to initialize samplers: std::exception` con qualsiasi

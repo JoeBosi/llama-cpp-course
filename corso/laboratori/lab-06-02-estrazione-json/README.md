@@ -5,6 +5,11 @@
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 60 minuti</span>
 </div>
 
+!!! tip "Provalo online, senza installare nulla"
+    [![Apri in Colab](../../assets/img/apri-in-colab.svg){ width=190 }](https://colab.research.google.com/github/JoeBosi/llama-cpp-course/blob/main/notebooks/lab-06-output-strutturato.ipynb){ target=_blank }
+
+    Il notebook scarica i binari ufficiali e il modello piccolo, poi esegue nel cloud i passi di questo laboratorio. Per eseguire le celle serve un account Google.
+
 ## Obiettivo
 
 Trasformare tre annunci immobiliari scritti a mano libera in oggetti JSON con campi tipizzati, usando
@@ -136,6 +141,15 @@ flowchart TD
     F -- sì --> G[usa i dati]
     F -- no --> H["migliora prompt / modello<br/>valida a valle"]
 ```
+
+## Cosa dovresti vedere
+
+Eseguendo i passi, l'output assomiglia a questo (tempi e testi generati cambiano da una macchina all'altra).
+
+<figure class="schema" markdown>
+![Tre annunci trasformati in JSON valido grazie allo schema](../../assets/img/cosa-vedere-lab-06-estrazione.png)
+<figcaption>Tre annunci trasformati in JSON valido grazie allo schema</figcaption>
+</figure>
 
 ## Verifica del risultato
 

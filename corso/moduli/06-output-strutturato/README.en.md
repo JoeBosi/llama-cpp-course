@@ -119,6 +119,7 @@ llama cli -hf ggml-org/Qwen3.5-0.8B-GGUF -st -rea off --temp 0 -n 20 \
   --grammar 'root ::= ("sì" | "no")' -p "Bologna è in Italia? Rispondi sì o no."
 # → sì
 
+curl -sLO https://raw.githubusercontent.com/ggml-org/llama.cpp/b11046/grammars/json.gbnf   # the generic JSON grammar
 llama cli -hf ggml-org/Qwen3.5-0.8B-GGUF -st -rea off --temp 0 -n 40 --grammar-file json.gbnf \
   -sys "Estrai citta e gradi in JSON." -p "A Trento oggi ci sono 17 gradi."
 ```

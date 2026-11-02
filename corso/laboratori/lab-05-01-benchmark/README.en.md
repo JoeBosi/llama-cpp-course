@@ -5,6 +5,11 @@
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 45 minutes</span>
 </div>
 
+!!! tip "Try it online, nothing to install"
+    [![Open in Colab](../../assets/img/open-in-colab.svg){ width=190 }](https://colab.research.google.com/github/JoeBosi/llama-cpp-course/blob/main/notebooks/lab-05-benchmark.en.ipynb){ target=_blank }
+
+    The notebook downloads the official binaries and the small model, then runs the steps of this lab in the cloud. A Google account is needed to run the cells.
+
 ## Objective
 
 Measure prompt processing (pp) and token generation (tg) with `llama bench` while varying the number of threads and the
@@ -127,6 +132,15 @@ M4=$(ls ~/.cache/huggingface/hub/models--ggml-org--Qwen3.5-0.8B-GGUF/snapshots/*
     ```bash
     llama bench -m "$M8" -pg 128,64 -t "$T" -r 3
     ```
+
+## What you should see
+
+When you run the steps, the output looks like this (timings and generated text change from machine to machine).
+
+<figure class="schema" markdown>
+![Prompt and generation speed as threads change, with the chart](../../assets/img/cosa-vedere-lab-05-benchmark.png)
+<figcaption>Prompt and generation speed as threads change, with the chart</figcaption>
+</figure>
 
 ## Check the result
 

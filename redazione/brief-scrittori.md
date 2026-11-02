@@ -29,7 +29,7 @@ Puoi eseguire comandi reali: `export PATH=$HOME/.local/bin:$PATH SSL_CERT_FILE=/
 Usa SOLO il modello già in cache `ggml-org/Qwen3.5-0.8B-GGUF` (785 MB) o modelli ≤ 400 MB; la macchina ha ~4 GB liberi
 e nessuna GPU ed è condivisa con altri scrittori: un solo processo llama alla volta, `-n` ≤ 100, `-t 3`, porte server
 diverse da 18080 (usa quella indicata nel tuo incarico), e termina sempre i server che avvii (`pkill -f "port TUAPORTA"`).
-Tarball release con tutti i binari (imatrix, gguf-split, tokenize, tts, mtmd, rpc): `~/llama-lab/rel/llama-b11046/`.
+Tarball release con tutti i binari (imatrix, gguf-split, tokenize, tts, mtmd, rpc): `~/llama-lab/llama-b11046/`.
 Non compilare llama.cpp dai sorgenti (troppo pesante per la macchina condivisa): descrivi la build dalla doc ufficiale.
 Ciò che non puoi verificare (GPU, macOS, Windows, Android) va scritto dalla documentazione ufficiale e marcato con il
 contenuto normale al presente con rimando alla documentazione ufficiale (vedi `redazione/regole-tono.md`)

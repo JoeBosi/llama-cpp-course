@@ -16,7 +16,7 @@ report di KL-divergence.
 
 - Lab 03-02 completato: `~/llama-lab/quant/Qwen3.5-0.8B-Q2_K.gguf` presente (o rifallo: 1 minuto).
 - Il **tarball della release** scompattato (`llama-imatrix` non è nel binario `llama`), ad esempio
-  `~/llama-lab/rel/llama-b11046/` ([lab 01-01](../lab-01-01-binari-precompilati/README.md)).
+  `~/llama-lab/llama-b11046/` ([lab 01-01](../lab-01-01-binari-precompilati/README.md)).
 - ~1 GB di disco e ~2 GB di RAM libera.
 
 ## Materiale
@@ -38,7 +38,7 @@ centinaia di KB misti (Wikitext, codice, più lingue).
 
     ```bash
     SRC=$(ls ~/.cache/huggingface/hub/models--ggml-org--Qwen3.5-0.8B-GGUF/snapshots/*/Qwen3.5-0.8B-Q8_0.gguf)
-    REL=~/llama-lab/rel/llama-b11046
+    REL=~/llama-lab/llama-b11046
     Q=~/llama-lab/quant
     TESTO=../lab-03-02-scala-quantizzazioni/testo-it.txt
     $REL/llama-imatrix --help | head -3

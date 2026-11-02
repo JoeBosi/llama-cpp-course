@@ -39,14 +39,14 @@ binaries from the release page, Docker, and building from source. All of them gi
 
 === "Linux"
     ```bash
-    curl -LsSf https://llama.app/install.sh | sh
+    curl -LsSf https://llama.app/install.sh | LLAMA_VERSION=b11046 sh   # the course build; without LLAMA_VERSION it installs the latest
     export PATH="$HOME/.local/bin:$PATH"          # the script reminds you if it is missing
     llama version
     ```
 
 === "macOS"
     ```bash
-    curl -LsSf https://llama.app/install.sh | sh
+    curl -LsSf https://llama.app/install.sh | LLAMA_VERSION=b11046 sh
     export PATH="$HOME/.local/bin:$PATH"
     llama version                                  # Metal backend
     ```
@@ -177,14 +177,14 @@ system × backend × architecture combination. The real names (build b10964, sam
     cd llama-$V; .\llama.exe version
     ```
 
-The Ubuntu tarball (61 files, 41 MB extracted) contains **both** `llama` **and** the old executables
+The Ubuntu tarball (60 files, 41 MB extracted) contains **both** `llama` **and** the old executables
 `llama-cli`, `llama-server`, `llama-bench`, `llama-quantize`, `llama-perplexity`, `llama-imatrix`,
 `llama-gguf-split`, `llama-tokenize`, `llama-tts`, `llama-mtmd-cli`, `ggml-rpc-server`, plus the libraries
 `libllama.so`, `libggml*.so`, `libmtmd.so`. The binaries are built on Ubuntu 22.04 with GCC 11 and use the
 system libraries (OpenSSL): they work on Ubuntu 22.04+ and equivalent distributions.
 
 ```text
-$ ~/llama-lab/rel/llama-b11046/llama-cli --version
+$ ~/llama-lab/llama-b11046/llama-cli --version
 version: 0.4.1-dev (build 11046, commit 60081bb2b)
 built with GNU 11.4.0 for Linux x86_64
 ```
@@ -413,7 +413,7 @@ The third one downloads 785 MiB into the Hugging Face cache, prints the banner (
 
 | Method | Update | Pin |
 |---|---|---|
-| Installer | `llama update` (latest release) or rerun `install.sh` | `LLAMA_VERSION=bNNNNN curl -LsSf https://llama.app/install.sh \| sh` |
+| Installer | `llama update` (latest release) or rerun `install.sh` | `curl -LsSf https://llama.app/install.sh \| LLAMA_VERSION=bNNNNN sh` |
 | winget / brew / port / conda / nix | `winget upgrade llama.cpp`, `brew upgrade llama.cpp`, … | package manager pin (`brew pin llama.cpp`) |
 | Tarball / zip | download the new build into a new folder | keep the `llama-bNNNNN/` folders side by side |
 | Docker | `docker pull` | use the tag with the build number (`server-b11046`) instead of `latest` |
@@ -494,7 +494,7 @@ Pinning the version is what the course does: all commands refer to the build in
        loading fails. Mount `blobs/` or the entire cache.
     7. The PC's CPU is not the phone's CPU (no native optimizations); OpenSSL is not part of the NDK's stable native
        APIs, so you cannot link it.
-    8. `LLAMA_VERSION=b11046 curl -LsSf https://llama.app/install.sh | sh`; `git checkout b11046`; the image tag
+    8. `curl -LsSf https://llama.app/install.sh | LLAMA_VERSION=b11046 sh`; `git checkout b11046`; the image tag
        with the build number (`ghcr.io/ggml-org/llama.cpp:server-b11046`) instead of the `latest` tag.
 
 ## References

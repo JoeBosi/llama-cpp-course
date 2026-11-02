@@ -221,7 +221,7 @@ imatrix perplexity 155, con imatrix 34).
 `llama-imatrix` non è nel binario `llama`: è nel tarball della release (o nei sorgenti compilati).
 
 ```bash
-~/llama-lab/rel/llama-b11046/llama-imatrix -m modello-f16.gguf -f calibrazione.txt -o imatrix.gguf -c 512 -ngl 99
+~/llama-lab/llama-b11046/llama-imatrix -m modello-f16.gguf -f calibrazione.txt -o imatrix.gguf -c 512 -ngl 99
 ```
 
 ```text
@@ -295,9 +295,9 @@ Hugging Face limita i singoli file a 50 GB: i modelli grandi sono pubblicati in 
 `llama-gguf-split` (tarball, non binario `llama`):
 
 ```bash
-~/llama-lab/rel/llama-b11046/llama-gguf-split --split --split-max-size 200M Qwen3.5-0.8B-Q4_0.gguf q4split
-~/llama-lab/rel/llama-b11046/llama-gguf-split --split --split-max-tensors 128 modello.gguf out    # per numero di tensori (default)
-~/llama-lab/rel/llama-b11046/llama-gguf-split --merge q4split-00001-of-00004.gguf riunito.gguf
+~/llama-lab/llama-b11046/llama-gguf-split --split --split-max-size 200M Qwen3.5-0.8B-Q4_0.gguf q4split
+~/llama-lab/llama-b11046/llama-gguf-split --split --split-max-tensors 128 modello.gguf out    # per numero di tensori (default)
+~/llama-lab/llama-b11046/llama-gguf-split --merge q4split-00001-of-00004.gguf riunito.gguf
 ```
 
 Sul modello di prova il `Q4_0` da 513 MB diventa 4 file (11 + 209 + 199 + 94 MB: il primo contiene metadati e
@@ -313,7 +313,7 @@ per alcuni tensori e a runtime si somma `B·A × scala`. llama.cpp li usa in due
 llama cli -m base-Q4_K_M.gguf --lora adattatore.gguf                    # a runtime, sul modello quantizzato
 llama cli -m base.gguf --lora-scaled a.gguf:0.5,b.gguf:0.5               # più adattatori con pesi
 llama serve -m base.gguf --lora a.gguf --lora b.gguf                     # nel server: GET/POST /lora-adapters per attivarli e pesarli a caldo
-~/llama-lab/rel/llama-b11046/llama-export-lora -m base-f16.gguf --lora adattatore.gguf -o fuso-f16.gguf   # fonde e produce un nuovo GGUF
+~/llama-lab/llama-b11046/llama-export-lora -m base-f16.gguf --lora adattatore.gguf -o fuso-f16.gguf   # fonde e produce un nuovo GGUF
 ```
 
 L'adattatore deve essere in formato GGUF: `convert_lora_to_gguf.py` (sorgenti) lo converte da PEFT

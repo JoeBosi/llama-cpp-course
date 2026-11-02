@@ -5,6 +5,11 @@
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 45 minuti</span>
 </div>
 
+!!! tip "Provalo online, senza installare nulla"
+    [![Apri in Colab](../../assets/img/apri-in-colab.svg){ width=190 }](https://colab.research.google.com/github/JoeBosi/llama-cpp-course/blob/main/notebooks/lab-00-fondamenti.ipynb){ target=_blank }
+
+    Il notebook scarica i binari ufficiali e il modello piccolo, poi esegue nel cloud i passi di questo laboratorio. Per eseguire le celle serve un account Google.
+
 ## Obiettivo
 
 Aprire un file GGUF con gli strumenti Python ufficiali (`pip install gguf`), leggere metadati, tokenizer e
@@ -204,6 +209,15 @@ EOF
 È un template Jinja: cerca i marcatori `<|im_start|>`, `<|im_end|>` e il blocco che gestisce `enable_thinking`.
 È esattamente ciò che `llama cli` e `llama serve` applicano ai messaggi (`--jinja` è attivo di default): lo
 userai nel lab 02-03.
+
+## Cosa dovresti vedere
+
+Eseguendo i passi, l'output assomiglia a questo (tempi e testi generati cambiano da una macchina all'altra).
+
+<figure class="schema" markdown>
+![Metadati e tensori del file GGUF di Qwen3.5 0.8B stampati da anatomia_gguf.py](../../assets/img/cosa-vedere-lab-00-anatomia-gguf.png)
+<figcaption>Metadati e tensori del file GGUF di Qwen3.5 0.8B stampati da anatomia_gguf.py</figcaption>
+</figure>
 
 ## Verifica del risultato
 

@@ -161,8 +161,8 @@ catena: mai liberarli uno a uno), `llama_free(ctx)`, `llama_model_free(model)`, 
     ```bash
     curl -sLO https://raw.githubusercontent.com/ggml-org/llama.cpp/b11046/include/llama.h     # stesso tag del tarball!
     # servono anche ggml.h, ggml-backend.h, ggml-cpu.h, ggml-opt.h dalla cartella ggml/include dello stesso tag
-    g++ -std=c++17 -O2 -I include main.cpp -L ~/llama-lab/rel/llama-b11046 -lllama -lggml -lggml-base -o generatore
-    LD_LIBRARY_PATH=~/llama-lab/rel/llama-b11046 ./generatore modello.gguf "…" 32 3
+    g++ -std=c++17 -O2 -I include main.cpp -L ~/llama-lab/llama-b11046 -lllama -lggml -lggml-base -o generatore
+    LD_LIBRARY_PATH=~/llama-lab/llama-b11046 ./generatore modello.gguf "…" 32 3
     ```
     I backend sono `.so` separati che `ggml_backend_load_all()` cerca accanto all'eseguibile: se ottieni
     `no backends are loaded`, copia le `libggml-cpu-*.so` nella cartella del binario o usa `ggml_backend_load_all_from_path(dir)`.

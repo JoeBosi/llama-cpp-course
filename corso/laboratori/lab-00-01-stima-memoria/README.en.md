@@ -5,6 +5,11 @@
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 45 minutes</span>
 </div>
 
+!!! tip "Try it online, nothing to install"
+    [![Open in Colab](../../assets/img/open-in-colab.svg){ width=190 }](https://colab.research.google.com/github/JoeBosi/llama-cpp-course/blob/main/notebooks/lab-00-fondamenti.en.ipynb){ target=_blank }
+
+    The notebook downloads the official binaries and the small model, then runs the steps of this lab in the cloud. A Google account is needed to run the cells.
+
 ## Objective
 
 Calculate, first by hand and then with the [`stima_memoria.py`](stima_memoria.py) script, the memory needed by
@@ -123,6 +128,15 @@ common_memory_breakdown_print: |   - Host               |                  877 =
 Compare with `python3 stima_memoria.py --preset qwen3.5-0.8b --quant q8_0 --ctx 4096`: weights 783 MiB (log:
 763 of model + an "unaccounted" part), KV cache **exactly 48 MiB**, estimated overhead 300 MiB versus 46 of
 compute buffer + 19 of recurrent state. The estimate is conservative: that is what you want.
+
+## What you should see
+
+When you run the steps, the output looks like this (timings and generated text change from machine to machine).
+
+<figure class="schema" markdown>
+![The memory estimate for Qwen3 8B in Q4_K_M with an 8192 context, then for a 7.6 B model](../../assets/img/cosa-vedere-lab-00-stima-memoria.png)
+<figcaption>The memory estimate for Qwen3 8B in Q4_K_M with an 8192 context, then for a 7.6 B model</figcaption>
+</figure>
 
 ## Check
 

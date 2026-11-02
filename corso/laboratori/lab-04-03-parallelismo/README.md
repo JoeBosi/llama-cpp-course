@@ -5,6 +5,11 @@
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 45 minuti</span>
 </div>
 
+!!! tip "Provalo online, senza installare nulla"
+    [![Apri in Colab](../../assets/img/apri-in-colab.svg){ width=190 }](https://colab.research.google.com/github/JoeBosi/llama-cpp-course/blob/main/notebooks/lab-04-server.ipynb){ target=_blank }
+
+    Il notebook scarica i binari ufficiali e il modello piccolo, poi esegue nel cloud i passi di questo laboratorio. Per eseguire le celle serve un account Google.
+
 ## Obiettivo
 
 Misurare con uno script di carico che cosa succede quando 4 client interrogano insieme un server con
@@ -140,6 +145,15 @@ macchina saranno diversi, i rapporti no.
 <figure class="schema" markdown>
 ![Come -c si divide fra gli slot](../../assets/img/04-slot-contesto.svg)
 <figcaption>Stesso <code>-c 2048</code>: 1 slot da 2048, 2 da 1024 o 4 da 512. Il throughput aggregato sale con gli slot, il contesto per richiesta scende.</figcaption>
+</figure>
+
+## Cosa dovresti vedere
+
+Eseguendo i passi, l'output assomiglia a questo (tempi e testi generati cambiano da una macchina all'altra).
+
+<figure class="schema" markdown>
+![Latenza e throughput con 4 richieste su un server con un solo slot](../../assets/img/cosa-vedere-lab-04-parallelismo.png)
+<figcaption>Latenza e throughput con 4 richieste su un server con un solo slot</figcaption>
 </figure>
 
 ## Verifica del risultato

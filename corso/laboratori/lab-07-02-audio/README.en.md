@@ -15,7 +15,7 @@ file with `llama-tts`. The flow is the same as for images in lab 07-01: only the
 - Lab 07-01 completed (you already know what `mmproj` and content parts are).
 - `ffmpeg` to create/convert audio; a microphone or a voice file (MP3/WAV) of your own.
 - The **release tarball** for `llama-tts` (it is not in the installer binary, see module 01):
-  on Linux `~/llama-lab/rel/llama-b11046/llama-tts`, to run with `LD_LIBRARY_PATH` pointing to the same folder
+  on Linux `~/llama-lab/llama-b11046/llama-tts`, to run with `LD_LIBRARY_PATH` pointing to the same folder
   if it is not installed system-wide.
 - RAM: 3 GB for Qwen3-ASR 0.6B, 8 GB for Gemma 4 E4B or Qwen3-TTS.
 
@@ -39,14 +39,14 @@ Record 5-10 seconds of voice (`arecord`, QuickTime, your phone) and convert to m
 
 ```bash
 mkdir -p ~/lab07 && cd ~/lab07
-ffmpeg -loglevel error -y -i registrazione.m4a -ac 1 -ar 16000 voce.wav
+ffmpeg -nostdin -loglevel error -y -i registrazione.m4a -ac 1 -ar 16000 voce.wav
 ```
 
 If you have no microphone at hand, a synthetic tone at least checks that the chain works (the model
 will describe "a continuous sound"):
 
 ```bash
-ffmpeg -loglevel error -y -f lavfi -i "sine=frequency=440:duration=2" -ac 1 -ar 16000 tono.wav   # 64 KB
+ffmpeg -nostdin -loglevel error -y -f lavfi -i "sine=frequency=440:duration=2" -ac 1 -ar 16000 tono.wav   # 64 KB
 ```
 
 ### 2. Transcription from the command line

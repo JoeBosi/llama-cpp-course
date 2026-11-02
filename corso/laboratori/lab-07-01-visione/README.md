@@ -5,6 +5,11 @@
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 45 min</span>
 </div>
 
+!!! tip "Provalo online, senza installare nulla"
+    [![Apri in Colab](../../assets/img/apri-in-colab.svg){ width=190 }](https://colab.research.google.com/github/JoeBosi/llama-cpp-course/blob/main/notebooks/lab-07-visione.ipynb){ target=_blank }
+
+    Il notebook scarica i binari ufficiali e il modello piccolo, poi esegue nel cloud i passi di questo laboratorio. Per eseguire le celle serve un account Google.
+
 ## Obiettivo
 
 Far "vedere" un'immagine a un modello con llama.cpp in tre modi: da riga di comando (`--image`), in chat (`/image`) e
@@ -33,7 +38,7 @@ Un'immagine "sintetica" ha il vantaggio che sai già la risposta giusta. Con `ff
 
 ```bash
 mkdir -p ~/lab07 && cd ~/lab07
-ffmpeg -loglevel error -y -f lavfi \
+ffmpeg -nostdin -loglevel error -y -f lavfi \
   -i "color=c=white:s=320x240:d=1,drawbox=x=40:y=40:w=120:h=120:color=red@1:t=fill,drawbox=x=200:y=60:w=80:h=140:color=blue@1:t=fill" \
   -frames:v 1 forme.png
 ```
@@ -135,6 +140,15 @@ llama serve -hf ggml-org/gemma-3-4b-it-GGUF --port 8080 -c 8192
 
 Fotografa uno scontrino o un modulo (o usa l'immagine di una fattura di prova). Per un JSON garantito abbina
 `response_format` con uno schema (modulo 06). Su GPU aggiungi `-ngl all`; con poca VRAM `--no-mmproj-offload`.
+
+## Cosa dovresti vedere
+
+Eseguendo i passi, l'output assomiglia a questo (tempi e testi generati cambiano da una macchina all'altra).
+
+<figure class="schema" markdown>
+![L'immagine di prova (un rettangolo rosso e uno blu) e la risposta di SmolVLM via API](../../assets/img/cosa-vedere-lab-07-visione.png)
+<figcaption>L'immagine di prova (un rettangolo rosso e uno blu) e la risposta di SmolVLM via API</figcaption>
+</figure>
 
 ## Verifica del risultato
 

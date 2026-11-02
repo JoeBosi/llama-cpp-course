@@ -5,6 +5,11 @@
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 45 minutes</span>
 </div>
 
+!!! tip "Try it online, nothing to install"
+    [![Open in Colab](../../assets/img/open-in-colab.svg){ width=190 }](https://colab.research.google.com/github/JoeBosi/llama-cpp-course/blob/main/notebooks/lab-04-server.en.ipynb){ target=_blank }
+
+    The notebook downloads the official binaries and the small model, then runs the steps of this lab in the cloud. A Google account is needed to run the cells.
+
 ## Objective
 
 Use a load script to measure what happens when 4 clients query a server together with
@@ -140,6 +145,15 @@ machine will differ, the ratios will not.
 <figure class="schema" markdown>
 ![How -c is split among the slots](../../assets/img/04-slot-contesto.svg)
 <figcaption>Same <code>-c 2048</code>: 1 slot of 2048, 2 of 1024 or 4 of 512. Aggregate throughput rises with the slots, context per request falls.</figcaption>
+</figure>
+
+## What you should see
+
+When you run the steps, the output looks like this (timings and generated text change from machine to machine).
+
+<figure class="schema" markdown>
+![Latency and throughput with 4 requests on a one-slot server](../../assets/img/cosa-vedere-lab-04-parallelismo.png)
+<figcaption>Latency and throughput with 4 requests on a one-slot server</figcaption>
 </figure>
 
 ## Check the result

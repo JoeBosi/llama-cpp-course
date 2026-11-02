@@ -5,6 +5,11 @@
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 40 minutes</span>
 </div>
 
+!!! tip "Try it online, nothing to install"
+    [![Open in Colab](../../assets/img/open-in-colab.svg){ width=190 }](https://colab.research.google.com/github/JoeBosi/llama-cpp-course/blob/main/notebooks/lab-04-server.en.ipynb){ target=_blank }
+
+    The notebook downloads the official binaries and the small model, then runs the steps of this lab in the cloud. A Google account is needed to run the cells.
+
 ## Objective
 
 Talk to `llama serve` from your own program, without `curl`: first with the official `openai` SDK in Python
@@ -138,6 +143,15 @@ sequenceDiagram
     S-->>P: data: {"finish_reason":"stop","timings":{…}}
     S-->>P: data: [DONE]
 ```
+
+## What you should see
+
+When you run the steps, the output looks like this (timings and generated text change from machine to machine).
+
+<figure class="schema" markdown>
+![Answer of the Python and JavaScript clients to llama serve, with generation speed](../../assets/img/cosa-vedere-lab-04-client.png)
+<figcaption>Answer of the Python and JavaScript clients to llama serve, with generation speed</figcaption>
+</figure>
 
 ## Check the result
 

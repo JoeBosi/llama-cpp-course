@@ -5,6 +5,11 @@
 <span class="meta-item">:material-clock-outline:{ .meta-icon } 45 min</span>
 </div>
 
+!!! tip "Provalo online, senza installare nulla"
+    [![Apri in Colab](../../assets/img/apri-in-colab.svg){ width=190 }](https://colab.research.google.com/github/JoeBosi/llama-cpp-course/blob/main/notebooks/lab-08-rag-minimo.ipynb){ target=_blank }
+
+    Il notebook scarica i binari ufficiali e il modello piccolo, poi esegue nel cloud i passi di questo laboratorio. Per eseguire le celle serve un account Google.
+
 ## Obiettivo
 
 Costruire un RAG (*Retrieval-Augmented Generation*) completo ma minuscolo, con **solo** due endpoint di `llama serve`
@@ -216,6 +221,15 @@ dipende dalla buona volontà del modello.
 ### 7. Spegnere
 
 Nel terminale del router ++ctrl+c++, oppure `pkill -f "port 18105"`. Il router chiude anche i processi figli.
+
+## Cosa dovresti vedere
+
+Eseguendo i passi, l'output assomiglia a questo (tempi e testi generati cambiano da una macchina all'altra).
+
+<figure class="schema" markdown>
+![Indicizzazione, ricerca per somiglianza e risposta con le fonti](../../assets/img/cosa-vedere-lab-08-rag.png)
+<figcaption>Indicizzazione, ricerca per somiglianza e risposta con le fonti</figcaption>
+</figure>
 
 ## Verifica del risultato
 

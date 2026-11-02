@@ -12,7 +12,7 @@ llama.cpp publishes **several builds a day**. To avoid chasing them, the course 
 | Field | Value |
 |---|---|
 | Build used in the course | **`b11046`**: `llama version` prints `version: 0.4.1-dev (build 11046, commit 60081bb2b)` |
-| How to get it | official installer `curl -LsSf https://llama.app/install.sh \| sh` (it is the build the installer shipped on 09/22/2026); tarball [`llama-b11046-bin-*`](https://github.com/ggml-org/llama.cpp/releases/tag/b11046); sources: `git checkout b11046` |
+| How to get it | official installer `curl -LsSf https://llama.app/install.sh \| LLAMA_VERSION=b11046 sh` (without the variable the installer downloads the latest build); tarball [`llama-b11046-bin-*`](https://github.com/ggml-org/llama.cpp/releases/tag/b11046); sources: `git checkout b11046` |
 | Closest stable release | [`v0.4.1`](https://github.com/ggml-org/llama.cpp/releases/tag/v0.4.1) of 09/14/2026 (corresponds to build `b10964`) |
 | ggml | 0.24.0 |
 | Latest build seen when the course was written | `b11095` (09/22/2026) |

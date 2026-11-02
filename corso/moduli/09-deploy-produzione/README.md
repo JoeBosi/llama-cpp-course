@@ -531,7 +531,7 @@ curl -sf http://127.0.0.1:8080/health && curl -s http://127.0.0.1:8080/v1/chat/c
   -d '{"messages":[{"role":"user","content":"ping"}],"max_tokens":8}' | jq .timings.predicted_per_second
 ```
 
-Per **fissare** una build precisa (o tornare indietro): `LLAMA_VERSION=b11046 curl -LsSf https://llama.app/install.sh | sh`
+Per **fissare** una build precisa (o tornare indietro): `curl -LsSf https://llama.app/install.sh | LLAMA_VERSION=b11046 sh`
 (solo le build presenti nel bucket di ggml-org). Rollback immediato: `cp ~/.local/bin/llama-b11046 ~/.local/bin/llama && sudo systemctl restart llama-serve`.
 
 Con **Docker**: cambia il tag in `compose.yaml`, `docker compose pull && docker compose up -d`; la vecchia
@@ -605,7 +605,7 @@ Caddy non manderà traffico finché il nuovo container non è `healthy`.
     4. `/health`: è pubblico (niente chiave), leggerissimo, distingue "in caricamento" (503) da "pronto" (200) e non resetta il timer di sleep. `/v1/models` richiede la chiave e `/metrics` non è pubblico e produce output più pesante.
     5. `llamacpp:requests_deferred` stabilmente > 0 (richieste in coda); `n_busy_slots_per_decode` vicino a `-np` conferma che gli slot sono saturi.
     6. `--cors-origins https://app.esempio.it` (invece del default `*`); la chiave continua a viaggiare come Bearer.
-    7. `cp ~/.local/bin/llama-b11046 ~/.local/bin/llama` (la copia fatta prima dell'aggiornamento) o `LLAMA_VERSION=b11046 curl -LsSf https://llama.app/install.sh | sh`; `systemctl restart llama-serve`; `/health` + una richiesta di prova; poi leggi `journalctl` per capire cosa era cambiato (di solito un flag).
+    7. `cp ~/.local/bin/llama-b11046 ~/.local/bin/llama` (la copia fatta prima dell'aggiornamento) o `curl -LsSf https://llama.app/install.sh | LLAMA_VERSION=b11046 sh`; `systemctl restart llama-serve`; `/health` + una richiesta di prova; poi leggi `journalctl` per capire cosa era cambiato (di solito un flag).
     8. Nel container `0.0.0.0` significa "tutte le interfacce del container", che è raggiungibile solo dalla rete interna di Compose (nessun `ports:` pubblicato); sul host significherebbe esporre la porta su internet.
 
 ## Riferimenti
