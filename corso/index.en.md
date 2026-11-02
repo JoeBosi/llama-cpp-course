@@ -1,4 +1,5 @@
 ---
+description: "Free llama.cpp course: install and run large language models (LLM) locally with GGUF, quantization, llama-server and an OpenAI-compatible API, up to production."
 hide:
   - toc
   - navigation

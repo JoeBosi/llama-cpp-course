@@ -1,3 +1,7 @@
+---
+description: "Autore, licenza (testi CC BY 4.0, codice MIT) e crediti del corso pratico di llama.cpp di Giuseppe Bosi."
+---
+
 # Informazioni
 
 ## Autore

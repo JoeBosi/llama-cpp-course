@@ -1,4 +1,25 @@
 {% extends "base.html" %}
+{% block site_meta %}
+  {#- come base.html di Material, senza i link "alternate" relativi del selettore lingua: gli hreflang veri sono sotto -#}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  {%- if page.meta and page.meta.description %}
+  <meta name="description" content="{{ page.meta.description }}">
+  {%- elif config.site_description %}
+  <meta name="description" content="{{ config.site_description }}">
+  {%- endif %}
+  {%- if page.canonical_url %}
+  <link rel="canonical" href="{{ page.canonical_url }}">
+  {%- endif %}
+  {%- if page.previous_page %}
+  <link rel="prev" href="{{ page.previous_page.url | url }}">
+  {%- endif %}
+  {%- if page.next_page %}
+  <link rel="next" href="{{ page.next_page.url | url }}">
+  {%- endif %}
+  <link rel="icon" href="{{ config.theme.favicon | url }}">
+  <meta name="generator" content="mkdocs-{{ mkdocs_version }}, mkdocs-material">
+{% endblock %}
 {% block extrahead %}
   {%- set descr = page.meta.description if page and page.meta and page.meta.description else config.site_description %}
   {%- set titolo = (page.title ~ " · " ~ config.site_name) if page and page.title and page.url not in ["", "en/"] else config.site_name %}
@@ -13,16 +34,34 @@
   <meta property="og:title" content="{{ titolo }}">
   <meta property="og:description" content="{{ descr }}">
   {%- if page and page.canonical_url %}<meta property="og:url" content="{{ page.canonical_url }}">{% endif %}
-  <meta name="twitter:card" content="summary">
+  {%- set img = config.site_url ~ ("en/" if en else "") ~ "assets/img/og-corso.png" %}
+  <meta property="og:image" content="{{ img }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="{{ config.site_name }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ titolo }}">
+  <meta name="twitter:description" content="{{ descr }}">
+  <meta name="twitter:image" content="{{ img }}">
   <meta name="author" content="Prof. Giuseppe Bosi">
+  {%- set home = config.site_url ~ ("en/" if en else "") %}
+  {%- set autore = {"@type":"Person","name":"Giuseppe Bosi","url":"https://www.giuseppebosi.com" ~ ("/en/" if en else ""),
+       "sameAs":["https://www.giuseppebosi.com","https://www.linkedin.com/in/giuseppebosi","https://github.com/JoeBosi/llama-cpp-course"],
+       "jobTitle":(["Master's-level degree in Electronic Engineering (5-year Italian Laurea, EQF level 7)","Teacher of Computer Science and Technology"] if en else ["Dottore in Ingegneria Elettronica","Professore di Scienze e Tecnologie Informatiche"])} %}
+  {%- set corso = {"@type":"Course","@id":home ~ "#course","name":config.site_name,"description":config.site_description,"url":home,
+       "inLanguage":("en" if en else "it"),"isAccessibleForFree":true,"license":"https://creativecommons.org/licenses/by/4.0/",
+       "author":autore,"provider":{"@type":"Person","name":"Giuseppe Bosi","url":"https://www.giuseppebosi.com"},
+       "image":img,"sameAs":["https://github.com/JoeBosi/llama-cpp-course"]} %}
   {%- if page and page.url in ["", "en/"] %}
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Course","name":{{ config.site_name|tojson }},"description":{{ config.site_description|tojson }},
-   "url":{{ (config.site_url ~ ("en/" if en else ""))|tojson }},"inLanguage":"{{ 'en' if en else 'it' }}","isAccessibleForFree":true,
-   "license":"https://creativecommons.org/licenses/by/4.0/",
-   "author":{"@type":"Person","name":"Prof. Giuseppe Bosi","url":"https://www.giuseppebosi.com{{ '/en/' if en }}","sameAs":["https://www.linkedin.com/in/giuseppebosi"],
-     "jobTitle":{{ (["Master's-level degree in Electronic Engineering (5-year Italian Laurea, EQF level 7)","Teacher of Computer Science and Technology"] if en else ["Dottore in Ingegneria Elettronica","Professore di Scienze e Tecnologie Informatiche"])|tojson }}},
-   "provider":{"@type":"Person","name":"Giuseppe Bosi","url":"https://www.giuseppebosi.com"}}
-  </script>
+  {%- set dati = {"@context":"https://schema.org","@graph":[
+       {"@type":"WebSite","@id":home ~ "#website","name":config.site_name,"url":home,"inLanguage":("en" if en else "it"),"author":autore},
+       corso]} %}
+  {%- elif page %}
+  {%- set dati = {"@context":"https://schema.org","@type":"LearningResource","name":page.title,"description":descr,
+       "url":page.canonical_url,"inLanguage":("en" if en else "it"),"isAccessibleForFree":true,"author":autore,
+       "isPartOf":{"@type":"Course","@id":home ~ "#course","name":config.site_name,"url":home}} %}
+  {%- endif %}
+  {%- if dati is defined %}
+  <script type="application/ld+json">{{ dati|tojson }}</script>
   {%- endif %}
 {% endblock %}

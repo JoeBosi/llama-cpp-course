@@ -1,4 +1,5 @@
 ---
+description: "Corso gratuito di llama.cpp in italiano: installare ed eseguire modelli linguistici (LLM) in locale con GGUF, quantizzazione, llama-server e API compatibile OpenAI, fino alla produzione."
 hide:
   - toc
   - navigation
